@@ -1,0 +1,4835 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriveOps - إدارة التشغيلات</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f3f6fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#718096;
+    --border:#e5e9f2;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#d97706;
+    --sidebar:#111827;
+}
+
+body{
+    font-family:Tahoma,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at top right,#2563eb55,transparent 35%),
+        radial-gradient(circle at bottom left,#7c3aed44,transparent 35%),
+        #0f172a;
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    background:white;
+    border-radius:24px;
+    padding:35px;
+    box-shadow:0 30px 80px #0008;
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:bold;
+    margin:0 auto 18px;
+}
+
+.login-title{
+    text-align:center;
+    font-size:26px;
+    font-weight:800;
+}
+
+.login-subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin:8px 0 28px;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.form-control{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    background:#fafbfe;
+    transition:.2s;
+}
+
+.form-control:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px #2563eb15;
+}
+
+.btn{
+    border:0;
+    border-radius:11px;
+    padding:11px 16px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--primary-dark);
+}
+
+.btn-success{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.btn-danger{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.btn-warning{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.btn-secondary{
+    background:#eef2f7;
+    color:#334155;
+}
+
+.btn-block{
+    width:100%;
+}
+
+.login-error{
+    display:none;
+    background:#fee2e2;
+    color:#b91c1c;
+    padding:11px;
+    border-radius:10px;
+    margin-bottom:15px;
+    text-align:center;
+    font-size:14px;
+}
+
+/* =========================
+   APP
+========================= */
+
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:var(--sidebar);
+    color:white;
+    padding:20px 15px;
+    z-index:1000;
+    overflow-y:auto;
+}
+
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 10px 25px;
+    border-bottom:1px solid #ffffff14;
+    margin-bottom:20px;
+}
+
+.sidebar-logo{
+    width:45px;
+    height:45px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.brand-text{
+    font-size:18px;
+    font-weight:800;
+}
+
+.brand-small{
+    color:#94a3b8;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.nav-title{
+    color:#64748b;
+    font-size:11px;
+    margin:17px 10px 8px;
+}
+
+.nav-item{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#cbd5e1;
+    text-align:right;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:4px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-size:14px;
+}
+
+.nav-item:hover,
+.nav-item.active{
+    background:#2563eb;
+    color:white;
+}
+
+.main{
+    margin-right:260px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:75px;
+    background:white;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.page-title{
+    font-size:22px;
+    font-weight:800;
+}
+
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#dbeafe;
+    color:#1d4ed8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.mobile-menu{
+    display:none;
+    border:0;
+    background:#eef2ff;
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    font-size:20px;
+}
+
+.content{
+    padding:28px;
+}
+
+/* =========================
+   PAGES
+========================= */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.welcome{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 12px 30px #2563eb22;
+}
+
+.welcome h2{
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+.welcome p{
+    opacity:.9;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.stat-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    background:#eff6ff;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.stat-value{
+    font-size:24px;
+    font-weight:800;
+}
+
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:20px;
+    margin-bottom:22px;
+}
+
+.panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    gap:10px;
+}
+
+.panel-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.filters .form-control{
+    width:auto;
+    min-width:160px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    background:#f8fafc;
+    color:#64748b;
+    font-size:12px;
+    padding:13px;
+    text-align:right;
+    white-space:nowrap;
+}
+
+td{
+    padding:14px 13px;
+    border-top:1px solid var(--border);
+    font-size:13px;
+}
+
+tr:hover td{
+    background:#fafcff;
+}
+
+.badge{
+    display:inline-flex;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.badge-success{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.badge-danger{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.badge-warning{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.actions{
+    display:flex;
+    gap:6px;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:17px;
+}
+
+.form-grid .full{
+    grid-column:1/-1;
+}
+
+.form-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+/* =========================
+   REPORTS
+========================= */
+
+.report-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.report-box{
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+}
+
+.report-box h3{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.report-box strong{
+    font-size:27px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:650px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#f1f5f9;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    font-size:18px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:40px 15px;
+}
+
+.empty-icon{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:25px;
+    bottom:25px;
+    background:#111827;
+    color:white;
+    padding:13px 18px;
+    border-radius:12px;
+    z-index:5000;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    text-align:center;
+    color:#64748b;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.35px;
+    padding:28px 0 8px;
+}
+
+.footer strong{
+    font-weight:900;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .report-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:800px){
+
+    .sidebar{
+        transform:translateX(100%);
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-right:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .content{
+        padding:16px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:19px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .report-grid{
+        grid-template-columns:1fr;
+    }
+
+    .page-title{
+        font-size:17px;
+    }
+
+    .user-box span{
+        display:none;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .login-box{
+        padding:25px 18px;
+    }
+
+    .welcome{
+        padding:20px;
+    }
+
+    .welcome h2{
+        font-size:20px;
+    }
+
+    .panel{
+        padding:15px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<section id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="logo">DO</div>
+
+        <div class="login-title">
+            DriveOps
+        </div>
+
+        <div class="login-subtitle">
+            نظام إدارة التشغيلات والسيولة
+        </div>
+
+        <div id="loginError" class="login-error">
+            البريد الإلكتروني أو كلمة المرور غير صحيحة
+        </div>
+
+        <div class="form-group">
+
+            <label>البريد الإلكتروني</label>
+
+            <input
+                id="loginUsername"
+                type="email"
+                class="form-control"
+                placeholder="admin1@gmail.com"
+                autocomplete="email"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>كلمة المرور</label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                class="form-control"
+                placeholder="ادخل كلمة المرور"
+                autocomplete="current-password"
+            >
+
+        </div>
+
+        <button
+            class="btn btn-primary btn-block"
+            onclick="login()"
+        >
+            تسجيل الدخول
+        </button>
+
+        <div style="text-align:center;margin-top:15px;color:#94a3b8;font-size:12px">
+            استخدم البريد الإلكتروني المسجل في Firebase
+        </div>
+
+    </div>
+
+</section>
+
+
+<div id="app">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="sidebar-logo">
+                DO
+            </div>
+
+            <div>
+
+                <div class="brand-text">
+                    DriveOps
+                </div>
+
+                <div class="brand-small">
+                    Operations Manager
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="nav-title">
+            الرئيسية
+        </div>
+
+        <button
+            class="nav-item active"
+            onclick="showPage('dashboard',this)"
+        >
+            📊
+            <span>لوحة التحكم</span>
+        </button>
+
+        <div class="nav-title">
+            التشغيلات
+        </div>
+
+        <button
+            class="nav-item"
+            onclick="showPage('operations',this)"
+        >
+            🚗
+            <span>التشغيلات</span>
+        </button>
+
+        <button
+            class="nav-item"
+            onclick="openOperationModal()"
+        >
+            ➕
+            <span>إضافة تشغيلة</span>
+        </button>
+
+        <div class="nav-title">
+            المالية
+        </div>
+
+        <button
+            class="nav-item"
+            onclick="showPage('expenses',this)"
+        >
+            💸
+            <span>المصروفات</span>
+        </button>
+
+        <button
+            class="nav-item"
+            onclick="showPage('reports',this)"
+        >
+            📈
+            <span>التقارير</span>
+        </button>
+
+        <div class="nav-title">
+            النظام
+        </div>
+
+        <button
+            class="nav-item"
+            onclick="showPage('settings',this)"
+        >
+            ⚙️
+            <span>الإعدادات</span>
+        </button>
+
+        <button
+            class="nav-item"
+            onclick="logout()"
+        >
+            🚪
+            <span>تسجيل الخروج</span>
+        </button>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div style="display:flex;align-items:center;gap:12px">
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()"
+                >
+                    ☰
+                </button>
+
+                <div
+                    class="page-title"
+                    id="pageTitle"
+                >
+                    لوحة التحكم
+                </div>
+
+            </div>
+
+            <div class="user-box">
+
+                <span id="topUsername">
+                    admin1@gmail.com
+                </span>
+
+                <div
+                    class="avatar"
+                    id="avatar"
+                >
+                    A
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <section
+                id="dashboard"
+                class="page active"
+            >
+
+                <div class="welcome">
+
+                    <h2>
+                        أهلاً بيك 👋
+                    </h2>
+
+                    <p>
+                        هنا تقدر تتابع كل التشغيلات والدخل والمصروفات وصافي الربح.
+                    </p>
+
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div>
+
+                            <div class="stat-label">
+                                إجمالي التشغيلات
+                            </div>
+
+                            <div
+                                class="stat-value"
+                                id="statOperations"
+                            >
+                                0
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            🚗
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div>
+
+                            <div class="stat-label">
+                                إجمالي الدخل
+                            </div>
+
+                            <div
+                                class="stat-value"
+                                id="statIncome"
+                            >
+                                0 ج
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            💰
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div>
+
+                            <div class="stat-label">
+                                المصروفات
+                            </div>
+
+                            <div
+                                class="stat-value"
+                                id="statExpenses"
+                            >
+                                0 ج
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            💸
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div>
+
+                            <div class="stat-label">
+                                صافي الربح
+                            </div>
+
+                            <div
+                                class="stat-value"
+                                id="statProfit"
+                            >
+                                0 ج
+                            </div>
+
+                        </div>
+
+                        <div class="stat-icon">
+                            📈
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+                            آخر التشغيلات
+                        </div>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="showPage('operations')"
+                        >
+                            عرض الكل
+                        </button>
+
+                    </div>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>التاريخ</th>
+                                    <th>العميل</th>
+                                    <th>من</th>
+                                    <th>إلى</th>
+                                    <th>السعر</th>
+                                    <th>الحالة</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="recentOperations"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <div class="footer">
+                    <strong>Made with ❤️ by Engineer Thomas Malak</strong>
+                </div>
+
+            </section>
+
+
+            <section
+                id="operations"
+                class="page"
+            >
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <div class="panel-title">
+                                إدارة التشغيلات
+                            </div>
+
+                            <div style="color:#94a3b8;font-size:12px;margin-top:4px">
+                                سجل كل تشغيلاتك وراجع إجماليها بسهولة.
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="openOperationModal()"
+                        >
+                            + إضافة تشغيلة
+                        </button>
+
+                    </div>
+
+
+                    <div class="filters">
+
+                        <input
+                            id="operationSearch"
+                            class="form-control"
+                            placeholder="🔎 بحث بالعميل أو الطريق..."
+                            oninput="renderOperations()"
+                        >
+
+                        <input
+                            id="operationFrom"
+                            type="date"
+                            class="form-control"
+                            onchange="renderOperations()"
+                        >
+
+                        <input
+                            id="operationTo"
+                            type="date"
+                            class="form-control"
+                            onchange="renderOperations()"
+                        >
+
+                        <select
+                            id="operationStatus"
+                            class="form-control"
+                            onchange="renderOperations()"
+                        >
+                            <option value="">كل الحالات</option>
+                            <option value="paid">مدفوع</option>
+                            <option value="unpaid">آجل</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>التاريخ</th>
+                                    <th>العميل</th>
+                                    <th>من</th>
+                                    <th>إلى</th>
+                                    <th>نوع التشغيل</th>
+                                    <th>السعر</th>
+                                    <th>الحالة</th>
+                                    <th>إجراءات</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="operationsTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section
+                id="expenses"
+                class="page"
+            >
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+                            المصروفات
+                        </div>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="openExpenseModal()"
+                        >
+                            + إضافة مصروف
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>التاريخ</th>
+                                    <th>النوع</th>
+                                    <th>الوصف</th>
+                                    <th>المبلغ</th>
+                                    <th>إجراء</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="expensesTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section
+                id="reports"
+                class="page"
+            >
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+                            التقارير المالية
+                        </div>
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="window.print()"
+                        >
+                            🖨️ طباعة
+                        </button>
+
+                    </div>
+
+
+                    <div class="filters">
+
+                        <input
+                            id="reportMonth"
+                            type="month"
+                            class="form-control"
+                            onchange="renderReports()"
+                        >
+
+                    </div>
+
+
+                    <div class="report-grid">
+
+                        <div class="report-box">
+                            <h3>عدد التشغيلات</h3>
+                            <strong id="reportCount">0</strong>
+                        </div>
+
+                        <div class="report-box">
+                            <h3>إجمالي التشغيلات</h3>
+                            <strong id="reportIncome">0 ج</strong>
+                        </div>
+
+                        <div class="report-box">
+                            <h3>إجمالي المصروفات</h3>
+                            <strong id="reportExpenses">0 ج</strong>
+                        </div>
+
+                        <div class="report-box">
+                            <h3>المدفوع</h3>
+                            <strong id="reportPaid">0 ج</strong>
+                        </div>
+
+                        <div class="report-box">
+                            <h3>الآجل</h3>
+                            <strong id="reportUnpaid">0 ج</strong>
+                        </div>
+
+                        <div class="report-box">
+                            <h3>صافي الربح</h3>
+                            <strong id="reportProfit">0 ج</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-title" style="margin-bottom:18px">
+                        كشف حساب التشغيلات
+                    </div>
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>التاريخ</th>
+                                    <th>العميل</th>
+                                    <th>الطريق</th>
+                                    <th>السعر</th>
+                                    <th>الحالة</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="reportOperationsTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section
+                id="settings"
+                class="page"
+            >
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div class="panel-title">
+                            إعدادات الحساب
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                البريد الإلكتروني
+                            </label>
+
+                            <input
+                                id="settingsUsername"
+                                type="email"
+                                class="form-control"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                كلمة المرور الجديدة
+                            </label>
+
+                            <input
+                                id="settingsPassword"
+                                type="password"
+                                class="form-control"
+                                placeholder="اتركها فارغة إذا لم ترد تغييرها"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="saveAccountSettings()"
+                        >
+                            حفظ بيانات الحساب
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-title" style="margin-bottom:20px">
+                        بيانات العربية
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                اسم العربية
+                            </label>
+
+                            <input
+                                id="carName"
+                                class="form-control"
+                                placeholder="مثال: BYD F3"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                رقم اللوحة
+                            </label>
+
+                            <input
+                                id="carPlate"
+                                class="form-control"
+                                placeholder="رقم اللوحة"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="saveCarSettings()"
+                        >
+                            حفظ بيانات العربية
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-title" style="margin-bottom:15px">
+                        إدارة البيانات
+                    </div>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="clearAllData()"
+                    >
+                        ⚠️ حذف كل البيانات
+                    </button>
+
+                </div>
+
+
+                <div class="footer">
+                    <strong>Made with ❤️ by Engineer Thomas Malak</strong>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div
+    class="modal"
+    id="operationModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="panel-title">
+
+                <span id="operationModalTitle">
+                    إضافة تشغيلة جديدة
+                </span>
+
+            </div>
+
+            <button
+                class="close"
+                onclick="closeOperationModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <input
+            type="hidden"
+            id="operationId"
+        >
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>التاريخ</label>
+
+                <input
+                    id="operationDate"
+                    type="date"
+                    class="form-control"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>العميل</label>
+
+                <input
+                    id="operationClient"
+                    class="form-control"
+                    placeholder="اسم العميل"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>من</label>
+
+                <input
+                    id="operationFromPlace"
+                    class="form-control"
+                    placeholder="مكان البداية"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>إلى</label>
+
+                <input
+                    id="operationToPlace"
+                    class="form-control"
+                    placeholder="مكان الوصول"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>نوع التشغيل</label>
+
+                <select
+                    id="operationType"
+                    class="form-control"
+                >
+
+                    <option value="مشوار">مشوار</option>
+                    <option value="مطار">مطار</option>
+                    <option value="انتظار">انتظار</option>
+                    <option value="رحلة">رحلة</option>
+                    <option value="أخرى">أخرى</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>السعر</label>
+
+                <input
+                    id="operationPrice"
+                    type="number"
+                    min="0"
+                    class="form-control"
+                    placeholder="0"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>الحالة</label>
+
+                <select
+                    id="operationPayment"
+                    class="form-control"
+                >
+
+                    <option value="paid">مدفوع</option>
+                    <option value="unpaid">آجل</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>ملاحظات</label>
+
+                <textarea
+                    id="operationNotes"
+                    class="form-control"
+                    rows="3"
+                    placeholder="أي ملاحظات..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="btn btn-primary"
+                onclick="saveOperation()"
+            >
+                حفظ التشغيلة
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeOperationModal()"
+            >
+                إلغاء
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="modal"
+    id="expenseModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="panel-title">
+                إضافة مصروف
+            </div>
+
+            <button
+                class="close"
+                onclick="closeExpenseModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>التاريخ</label>
+
+            <input
+                id="expenseDate"
+                type="date"
+                class="form-control"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>نوع المصروف</label>
+
+            <select
+                id="expenseType"
+                class="form-control"
+            >
+
+                <option value="بنزين">بنزين</option>
+                <option value="صيانة">صيانة</option>
+                <option value="غسيل">غسيل</option>
+                <option value="أكل وشرب">أكل وشرب</option>
+                <option value="أخرى">أخرى</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>الوصف</label>
+
+            <input
+                id="expenseDescription"
+                class="form-control"
+                placeholder="وصف المصروف"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>المبلغ</label>
+
+            <input
+                id="expenseAmount"
+                type="number"
+                min="0"
+                class="form-control"
+                placeholder="0"
+            >
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="btn btn-primary"
+                onclick="saveExpense()"
+            >
+                حفظ المصروف
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeExpenseModal()"
+            >
+                إلغاء
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updatePassword,
+    updateEmail,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    setDoc,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAM6s61Gyrn_FK9JFs11NhSI_2WGRZ2R-k",
+    authDomain: "driveops-b1c74.firebaseapp.com",
+    projectId: "driveops-b1c74",
+    storageBucket: "driveops-b1c74.firebasestorage.app",
+    messagingSenderId: "468738900505",
+    appId: "1:468738900505:web:a01130301f18c76069e088",
+    measurementId: "G-Z4SH9EC1J6"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let operations = [];
+let expenses = [];
+
+let account = {
+    email:"",
+    username:""
+};
+
+let car = {
+    name:"",
+    plate:""
+};
+
+let currentUser = null;
+let dataReady = false;
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        setTodayDefaults();
+
+        const reportMonth =
+            document.getElementById("reportMonth");
+
+        if(reportMonth){
+
+            reportMonth.value =
+                new Date()
+                .toISOString()
+                .slice(0,7);
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async(user)=>{
+
+        currentUser =
+            user || null;
+
+        if(user){
+
+            try{
+
+                await loadUserData();
+
+                dataReady = true;
+
+                openApp();
+
+                refreshAll();
+
+            }catch(error){
+
+                console.error(error);
+
+                showLoginError(
+                    "حصل خطأ أثناء تحميل بيانات الحساب. تأكد من إعداد Firestore."
+                );
+
+                await signOut(auth);
+
+            }
+
+        }else{
+
+            dataReady = false;
+
+            document.getElementById(
+                "loginScreen"
+            ).style.display="flex";
+
+            document.getElementById(
+                "app"
+            ).style.display="none";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTH HELPERS
+========================================================= */
+
+function normalizeEmail(email){
+
+    return String(email || "")
+        .trim()
+        .toLowerCase();
+
+}
+
+
+function isValidEmail(email){
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
+
+}
+
+
+function friendlyFirebaseError(error){
+
+    const code =
+        error?.code || "";
+
+
+    if(
+        code.includes("invalid-credential") ||
+        code.includes("wrong-password") ||
+        code.includes("user-not-found")
+    ){
+
+        return "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+
+    }
+
+
+    if(
+        code.includes("invalid-email")
+    ){
+
+        return "اكتب بريد إلكتروني صحيح مثل admin1@gmail.com";
+
+    }
+
+
+    if(
+        code.includes("email-already-in-use")
+    ){
+
+        return "هذا البريد الإلكتروني مستخدم بالفعل";
+
+    }
+
+
+    if(
+        code.includes("weak-password")
+    ){
+
+        return "كلمة المرور ضعيفة. استخدم 6 أحرف أو أكثر.";
+
+    }
+
+
+    if(
+        code.includes("operation-not-allowed")
+    ){
+
+        return "فعّل Email/Password من Firebase Authentication أولاً.";
+
+    }
+
+
+    if(
+        code.includes("network-request-failed")
+    ){
+
+        return "مشكلة في الإنترنت. حاول مرة أخرى.";
+
+    }
+
+
+    if(
+        code.includes("permission-denied")
+    ){
+
+        return "صلاحيات Firestore غير مضبوطة.";
+
+    }
+
+
+    if(
+        code.includes("requires-recent-login")
+    ){
+
+        return "لأسباب أمنية، سجّل خروج ثم ادخل مرة أخرى.";
+
+    }
+
+
+    return "حصل خطأ. تأكد من إعداد Firebase ثم حاول مرة أخرى.";
+
+}
+
+
+function showLoginError(message){
+
+    const el =
+        document.getElementById(
+            "loginError"
+        );
+
+    el.textContent =
+        message;
+
+    el.style.display =
+        "block";
+
+}
+
+
+function hideLoginError(){
+
+    const el =
+        document.getElementById(
+            "loginError"
+        );
+
+    el.style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(){
+
+    const email =
+        normalizeEmail(
+            document.getElementById(
+                "loginUsername"
+            ).value
+        );
+
+
+    const password =
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+
+    hideLoginError();
+
+
+    if(
+        !email ||
+        !password
+    ){
+
+        showLoginError(
+            "اكتب البريد الإلكتروني وكلمة المرور"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !isValidEmail(email)
+    ){
+
+        showLoginError(
+            "اكتب بريد إلكتروني صحيح مثل admin1@gmail.com"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        showToast(
+            "تم تسجيل الدخول بنجاح ✅"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        /*
+          إنشاء حساب المدير لأول مرة
+          البريد:
+          admin1@gmail.com
+
+          كلمة المرور:
+          admin123456
+        */
+
+        if(
+            email === "admin1@gmail.com" &&
+            password === "admin123456"
+        ){
+
+            try{
+
+                const credential =
+                    await createUserWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+
+                await createInitialUserData(
+                    credential.user,
+                    email,
+                    "admin"
+                );
+
+
+                showToast(
+                    "تم إنشاء حساب المدير بنجاح 👑"
+                );
+
+
+                return;
+
+            }catch(createError){
+
+                console.error(
+                    createError
+                );
+
+
+                if(
+                    createError.code ===
+                    "auth/email-already-in-use"
+                ){
+
+                    showLoginError(
+                        "حساب admin1@gmail.com موجود بالفعل. تأكد من كلمة المرور."
+                    );
+
+                }else{
+
+                    showLoginError(
+                        friendlyFirebaseError(
+                            createError
+                        )
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+        }
+
+
+        showLoginError(
+            friendlyFirebaseError(error)
+        );
+
+    }
+
+}
+
+
+document.getElementById(
+    "loginPassword"
+)?.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "Enter"
+        ){
+
+            login();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CREATE USER DATA
+========================================================= */
+
+async function createInitialUserData(
+    user,
+    email,
+    role="driver"
+){
+
+    const userRef =
+        doc(
+            db,
+            "users",
+            user.uid
+        );
+
+
+    await setDoc(
+        userRef,
+        {
+
+            email:
+                normalizeEmail(email),
+
+            username:
+                normalizeEmail(email),
+
+            role:role,
+
+            car:{
+                name:"",
+                plate:""
+            },
+
+            createdAt:
+                serverTimestamp(),
+
+            updatedAt:
+                serverTimestamp()
+
+        },
+        {
+            merge:true
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD USER DATA
+========================================================= */
+
+async function loadUserData(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const userRef =
+        doc(
+            db,
+            "users",
+            currentUser.uid
+        );
+
+
+    let userSnap =
+        await getDoc(
+            userRef
+        );
+
+
+    if(
+        !userSnap.exists()
+    ){
+
+        await createInitialUserData(
+            currentUser,
+            currentUser.email ||
+            "user",
+            currentUser.email ===
+            "admin1@gmail.com"
+                ? "admin"
+                : "driver"
+        );
+
+    }
+
+
+    const freshSnap =
+        await getDoc(
+            userRef
+        );
+
+
+    const profile =
+        freshSnap.data() || {};
+
+
+    account = {
+
+        email:
+            currentUser.email || "",
+
+        username:
+            profile.email ||
+            currentUser.email ||
+            "user"
+
+    };
+
+
+    car = {
+
+        name:
+            profile.car?.name || "",
+
+        plate:
+            profile.car?.plate || ""
+
+    };
+
+
+    const operationsSnap =
+        await getDocs(
+
+            collection(
+                db,
+                "users",
+                currentUser.uid,
+                "operations"
+            )
+
+        );
+
+
+    operations =
+        operationsSnap.docs.map(
+            d=>({
+
+                id:d.id,
+
+                ...d.data()
+
+            })
+        );
+
+
+    operations.sort(
+        (a,b)=>
+
+            String(
+                b.createdAt ||
+                b.date ||
+                ""
+            ).localeCompare(
+
+                String(
+                    a.createdAt ||
+                    a.date ||
+                    ""
+                )
+
+            )
+    );
+
+
+    const expensesSnap =
+        await getDocs(
+
+            collection(
+                db,
+                "users",
+                currentUser.uid,
+                "expenses"
+            )
+
+        );
+
+
+    expenses =
+        expensesSnap.docs.map(
+            d=>({
+
+                id:d.id,
+
+                ...d.data()
+
+            })
+        );
+
+
+    expenses.sort(
+        (a,b)=>
+
+            String(
+                b.createdAt ||
+                b.date ||
+                ""
+            ).localeCompare(
+
+                String(
+                    a.createdAt ||
+                    a.date ||
+                    ""
+                )
+
+            )
+    );
+
+
+    await migrateOldLocalDataIfNeeded();
+
+}
+
+
+/* =========================================================
+   OLD LOCAL DATA MIGRATION
+========================================================= */
+
+async function migrateOldLocalDataIfNeeded(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const migrationKey =
+        `driveops_firebase_migrated_${currentUser.uid}`;
+
+
+    if(
+        localStorage.getItem(
+            migrationKey
+        ) === "1"
+    ){
+
+        return;
+
+    }
+
+
+    const oldOperations =
+        JSON.parse(
+            localStorage.getItem(
+                "drive_operations"
+            ) || "[]"
+        );
+
+
+    const oldExpenses =
+        JSON.parse(
+            localStorage.getItem(
+                "drive_expenses"
+            ) || "[]"
+        );
+
+
+    if(
+        oldOperations.length === 0 &&
+        oldExpenses.length === 0
+    ){
+
+        localStorage.setItem(
+            migrationKey,
+            "1"
+        );
+
+        return;
+
+    }
+
+
+    for(
+        const op of oldOperations
+    ){
+
+        const copy =
+            {...op};
+
+
+        delete copy.id;
+
+
+        const ref =
+            await addDoc(
+
+                collection(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "operations"
+                ),
+
+                {
+
+                    ...copy,
+
+                    migratedFromLocalStorage:
+                        true,
+
+                    createdAt:
+                        copy.createdAt ||
+                        new Date().toISOString()
+
+                }
+
+            );
+
+
+        operations.push({
+
+            id:ref.id,
+
+            ...copy
+
+        });
+
+    }
+
+
+    for(
+        const expense of oldExpenses
+    ){
+
+        const copy =
+            {...expense};
+
+
+        delete copy.id;
+
+
+        const ref =
+            await addDoc(
+
+                collection(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "expenses"
+                ),
+
+                {
+
+                    ...copy,
+
+                    migratedFromLocalStorage:
+                        true,
+
+                    createdAt:
+                        new Date().toISOString()
+
+                }
+
+            );
+
+
+        expenses.push({
+
+            id:ref.id,
+
+            ...copy
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        migrationKey,
+        "1"
+    );
+
+
+    showToast(
+        "تم نقل بياناتك القديمة إلى Firebase ☁️"
+    );
+
+}
+
+
+/* =========================================================
+   OPEN APP
+========================================================= */
+
+function openApp(){
+
+    document.getElementById(
+        "loginScreen"
+    ).style.display="none";
+
+
+    document.getElementById(
+        "app"
+    ).style.display="block";
+
+
+    const email =
+        currentUser?.email ||
+        account.email ||
+        "";
+
+
+    document.getElementById(
+        "topUsername"
+    ).textContent =
+        email;
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        email
+        .charAt(0)
+        .toUpperCase();
+
+
+    loadSettings();
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+    try{
+
+        await signOut(auth);
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "تعذر تسجيل الخروج"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(
+    pageId,
+    button=null
+){
+
+    document.querySelectorAll(
+        ".page"
+    ).forEach(
+        p=>
+            p.classList.remove(
+                "active"
+            )
+    );
+
+
+    const page =
+        document.getElementById(
+            pageId
+        );
+
+
+    if(page){
+
+        page.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const titles={
+
+        dashboard:"لوحة التحكم",
+
+        operations:"التشغيلات",
+
+        expenses:"المصروفات",
+
+        reports:"التقارير",
+
+        settings:"الإعدادات"
+
+    };
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titles[pageId] ||
+        "DriveOps";
+
+
+    document.querySelectorAll(
+        ".nav-item"
+    ).forEach(
+        n=>
+            n.classList.remove(
+                "active"
+            )
+    );
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document.getElementById(
+        "sidebar"
+    ).classList.remove(
+        "open"
+    );
+
+
+    refreshAll();
+
+}
+
+
+function toggleSidebar(){
+
+    document.getElementById(
+        "sidebar"
+    ).classList.toggle(
+        "open"
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function setTodayDefaults(){
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    [
+        "operationDate",
+        "expenseDate"
+    ].forEach(
+        id=>{
+
+            const el =
+                document.getElementById(
+                    id
+                );
+
+
+            if(el){
+
+                el.value =
+                    today;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   OPERATION MODAL
+========================================================= */
+
+function openOperationModal(
+    id=null
+){
+
+    document.getElementById(
+        "operationModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    if(id){
+
+        const op =
+            operations.find(
+                x=>x.id===id
+            );
+
+
+        if(!op){
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "operationModalTitle"
+        ).textContent =
+            "تعديل التشغيلة";
+
+
+        document.getElementById(
+            "operationId"
+        ).value =
+            op.id;
+
+
+        document.getElementById(
+            "operationDate"
+        ).value =
+            op.date;
+
+
+        document.getElementById(
+            "operationClient"
+        ).value =
+            op.client;
+
+
+        document.getElementById(
+            "operationFromPlace"
+        ).value =
+            op.from;
+
+
+        document.getElementById(
+            "operationToPlace"
+        ).value =
+            op.to;
+
+
+        document.getElementById(
+            "operationType"
+        ).value =
+            op.type;
+
+
+        document.getElementById(
+            "operationPrice"
+        ).value =
+            op.price;
+
+
+        document.getElementById(
+            "operationPayment"
+        ).value =
+            op.payment;
+
+
+        document.getElementById(
+            "operationNotes"
+        ).value =
+            op.notes || "";
+
+    }else{
+
+        resetOperationForm();
+
+    }
+
+}
+
+
+function closeOperationModal(){
+
+    document.getElementById(
+        "operationModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+function resetOperationForm(){
+
+    document.getElementById(
+        "operationModalTitle"
+    ).textContent =
+        "إضافة تشغيلة جديدة";
+
+
+    document.getElementById(
+        "operationId"
+    ).value="";
+
+
+    document.getElementById(
+        "operationClient"
+    ).value="";
+
+
+    document.getElementById(
+        "operationFromPlace"
+    ).value="";
+
+
+    document.getElementById(
+        "operationToPlace"
+    ).value="";
+
+
+    document.getElementById(
+        "operationType"
+    ).value="مشوار";
+
+
+    document.getElementById(
+        "operationPrice"
+    ).value="";
+
+
+    document.getElementById(
+        "operationPayment"
+    ).value="paid";
+
+
+    document.getElementById(
+        "operationNotes"
+    ).value="";
+
+
+    document.getElementById(
+        "operationDate"
+    ).value =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+}
+
+
+/* =========================================================
+   SAVE OPERATION
+========================================================= */
+
+async function saveOperation(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const date =
+        document.getElementById(
+            "operationDate"
+        ).value;
+
+
+    const client =
+        document.getElementById(
+            "operationClient"
+        ).value.trim();
+
+
+    const from =
+        document.getElementById(
+            "operationFromPlace"
+        ).value.trim();
+
+
+    const to =
+        document.getElementById(
+            "operationToPlace"
+        ).value.trim();
+
+
+    const type =
+        document.getElementById(
+            "operationType"
+        ).value;
+
+
+    const price =
+        Number(
+            document.getElementById(
+                "operationPrice"
+            ).value
+        );
+
+
+    const payment =
+        document.getElementById(
+            "operationPayment"
+        ).value;
+
+
+    const notes =
+        document.getElementById(
+            "operationNotes"
+        ).value.trim();
+
+
+    if(
+        !date ||
+        !client ||
+        !from ||
+        !to ||
+        !price
+    ){
+
+        alert(
+            "من فضلك أكمل البيانات الأساسية"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const id =
+            document.getElementById(
+                "operationId"
+            ).value;
+
+
+        if(id){
+
+            const payload={
+
+                date,
+
+                client,
+
+                from,
+
+                to,
+
+                type,
+
+                price,
+
+                payment,
+
+                notes,
+
+                updatedAt:
+                    new Date().toISOString()
+
+            };
+
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "operations",
+                    id
+                ),
+
+                payload
+
+            );
+
+
+            const index =
+                operations.findIndex(
+                    x=>x.id===id
+                );
+
+
+            if(
+                index !== -1
+            ){
+
+                operations[index]={
+
+                    ...operations[index],
+
+                    ...payload
+
+                };
+
+            }
+
+
+            showToast(
+                "تم تعديل التشغيلة ✏️"
+            );
+
+        }else{
+
+            const payload={
+
+                date,
+
+                client,
+
+                from,
+
+                to,
+
+                type,
+
+                price,
+
+                payment,
+
+                notes,
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            const ref =
+                await addDoc(
+
+                    collection(
+                        db,
+                        "users",
+                        currentUser.uid,
+                        "operations"
+                    ),
+
+                    payload
+
+                );
+
+
+            operations.unshift({
+
+                id:ref.id,
+
+                ...payload
+
+            });
+
+
+            showToast(
+                "تمت إضافة التشغيلة وحفظها أونلاين ☁️"
+            );
+
+        }
+
+
+        closeOperationModal();
+
+        refreshAll();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            friendlyFirebaseError(
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER OPERATIONS
+========================================================= */
+
+function renderOperations(){
+
+    const tbody =
+        document.getElementById(
+            "operationsTable"
+        );
+
+
+    if(!tbody){
+
+        return;
+
+    }
+
+
+    const search =
+        (
+            document.getElementById(
+                "operationSearch"
+            )?.value || ""
+        ).toLowerCase();
+
+
+    const fromDate =
+        document.getElementById(
+            "operationFrom"
+        )?.value || "";
+
+
+    const toDate =
+        document.getElementById(
+            "operationTo"
+        )?.value || "";
+
+
+    const status =
+        document.getElementById(
+            "operationStatus"
+        )?.value || "";
+
+
+    const filtered =
+        operations.filter(
+            op=>{
+
+                const text =
+                    `${op.client} ${op.from} ${op.to} ${op.type} ${op.notes || ""}`
+                    .toLowerCase();
+
+
+                if(
+                    search &&
+                    !text.includes(search)
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    fromDate &&
+                    op.date < fromDate
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    toDate &&
+                    op.date > toDate
+                ){
+
+                    return false;
+
+                }
+
+
+                if(
+                    status &&
+                    op.payment !== status
+                ){
+
+                    return false;
+
+                }
+
+
+                return true;
+
+            }
+        );
+
+
+    if(
+        filtered.length === 0
+    ){
+
+        tbody.innerHTML=`
+
+            <tr>
+
+                <td colspan="9">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            🚗
+                        </div>
+
+                        لا توجد تشغيلات
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        filtered.map(
+            (op,index)=>`
+
+            <tr>
+
+                <td>${index+1}</td>
+
+                <td>
+                    ${formatDate(op.date)}
+                </td>
+
+                <td>
+                    <strong>
+                        ${escapeHTML(op.client)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${escapeHTML(op.from)}
+                </td>
+
+                <td>
+                    ${escapeHTML(op.to)}
+                </td>
+
+                <td>
+                    ${escapeHTML(op.type)}
+                </td>
+
+                <td>
+                    <strong>
+                        ${money(op.price)}
+                    </strong>
+                </td>
+
+                <td>
+
+                    ${
+                        op.payment==="paid"
+
+                        ? `<span class="badge badge-success">
+                            مدفوع
+                           </span>`
+
+                        : `<span class="badge badge-warning">
+                            آجل
+                           </span>`
+                    }
+
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="openOperationModal('${op.id}')"
+                        >
+                            ✏️
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="deleteOperation('${op.id}')"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   DELETE OPERATION
+========================================================= */
+
+async function deleteOperation(id){
+
+    const op =
+        operations.find(
+            x=>x.id===id
+        );
+
+
+    if(
+        !op ||
+        !currentUser
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            `هل تريد حذف تشغيلة ${op.client} بقيمة ${money(op.price)}؟`
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "users",
+                currentUser.uid,
+                "operations",
+                id
+            )
+
+        );
+
+
+        operations =
+            operations.filter(
+                x=>x.id!==id
+            );
+
+
+        showToast(
+            "تم حذف التشغيلة 🗑️"
+        );
+
+
+        refreshAll();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            friendlyFirebaseError(
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   EXPENSE MODAL
+========================================================= */
+
+function openExpenseModal(){
+
+    document.getElementById(
+        "expenseModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.getElementById(
+        "expenseDate"
+    ).value =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+}
+
+
+function closeExpenseModal(){
+
+    document.getElementById(
+        "expenseModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   SAVE EXPENSE
+========================================================= */
+
+async function saveExpense(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const date =
+        document.getElementById(
+            "expenseDate"
+        ).value;
+
+
+    const type =
+        document.getElementById(
+            "expenseType"
+        ).value;
+
+
+    const description =
+        document.getElementById(
+            "expenseDescription"
+        ).value.trim();
+
+
+    const amount =
+        Number(
+            document.getElementById(
+                "expenseAmount"
+            ).value
+        );
+
+
+    if(
+        !date ||
+        !amount
+    ){
+
+        alert(
+            "من فضلك أدخل التاريخ والمبلغ"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const payload={
+
+            date,
+
+            type,
+
+            description,
+
+            amount,
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        const ref =
+            await addDoc(
+
+                collection(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "expenses"
+                ),
+
+                payload
+
+            );
+
+
+        expenses.unshift({
+
+            id:ref.id,
+
+            ...payload
+
+        });
+
+
+        document.getElementById(
+            "expenseDescription"
+        ).value="";
+
+
+        document.getElementById(
+            "expenseAmount"
+        ).value="";
+
+
+        closeExpenseModal();
+
+
+        showToast(
+            "تمت إضافة المصروف وحفظه أونلاين ☁️"
+        );
+
+
+        refreshAll();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            friendlyFirebaseError(
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER EXPENSES
+========================================================= */
+
+function renderExpenses(){
+
+    const tbody =
+        document.getElementById(
+            "expensesTable"
+        );
+
+
+    if(!tbody){
+
+        return;
+
+    }
+
+
+    if(
+        expenses.length === 0
+    ){
+
+        tbody.innerHTML=`
+
+            <tr>
+
+                <td colspan="6">
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            💸
+                        </div>
+
+                        لا توجد مصروفات
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        expenses.map(
+            (expense,index)=>`
+
+            <tr>
+
+                <td>${index+1}</td>
+
+                <td>
+                    ${formatDate(expense.date)}
+                </td>
+
+                <td>
+                    ${escapeHTML(expense.type)}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        expense.description || "-"
+                    )}
+                </td>
+
+                <td>
+                    <strong>
+                        ${money(expense.amount)}
+                    </strong>
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="deleteExpense('${expense.id}')"
+                    >
+                        🗑️ حذف
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   DELETE EXPENSE
+========================================================= */
+
+async function deleteExpense(id){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "هل تريد حذف هذا المصروف؟"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "users",
+                currentUser.uid,
+                "expenses",
+                id
+            )
+
+        );
+
+
+        expenses =
+            expenses.filter(
+                x=>x.id!==id
+            );
+
+
+        showToast(
+            "تم حذف المصروف"
+        );
+
+
+        refreshAll();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            friendlyFirebaseError(
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+    const totalIncome =
+        operations.reduce(
+            (sum,op)=>
+                sum +
+                Number(
+                    op.price || 0
+                ),
+            0
+        );
+
+
+    const totalExpenses =
+        expenses.reduce(
+            (sum,e)=>
+                sum +
+                Number(
+                    e.amount || 0
+                ),
+            0
+        );
+
+
+    const profit =
+        totalIncome -
+        totalExpenses;
+
+
+    document.getElementById(
+        "statOperations"
+    ).textContent =
+        operations.length;
+
+
+    document.getElementById(
+        "statIncome"
+    ).textContent =
+        money(totalIncome);
+
+
+    document.getElementById(
+        "statExpenses"
+    ).textContent =
+        money(totalExpenses);
+
+
+    document.getElementById(
+        "statProfit"
+    ).textContent =
+        money(profit);
+
+
+    const recent =
+        document.getElementById(
+            "recentOperations"
+        );
+
+
+    const list =
+        operations.slice(
+            0,
+            7
+        );
+
+
+    if(
+        list.length === 0
+    ){
+
+        recent.innerHTML=`
+
+            <tr>
+
+                <td colspan="6">
+
+                    <div class="empty">
+                        لا توجد تشغيلات حتى الآن
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    recent.innerHTML =
+        list.map(
+            op=>`
+
+        <tr>
+
+            <td>
+                ${formatDate(op.date)}
+            </td>
+
+            <td>
+                ${escapeHTML(op.client)}
+            </td>
+
+            <td>
+                ${escapeHTML(op.from)}
+            </td>
+
+            <td>
+                ${escapeHTML(op.to)}
+            </td>
+
+            <td>
+                <strong>
+                    ${money(op.price)}
+                </strong>
+            </td>
+
+            <td>
+
+                ${
+                    op.payment==="paid"
+
+                    ? `<span class="badge badge-success">
+                        مدفوع
+                       </span>`
+
+                    : `<span class="badge badge-warning">
+                        آجل
+                       </span>`
+                }
+
+            </td>
+
+        </tr>
+
+    `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   REPORTS
+========================================================= */
+
+function renderReports(){
+
+    const month =
+        document.getElementById(
+            "reportMonth"
+        )?.value || "";
+
+
+    let ops =
+        operations;
+
+
+    let exps =
+        expenses;
+
+
+    if(month){
+
+        ops =
+            operations.filter(
+                op=>
+                    op.date.startsWith(
+                        month
+                    )
+            );
+
+
+        exps =
+            expenses.filter(
+                e=>
+                    e.date.startsWith(
+                        month
+                    )
+            );
+
+    }
+
+
+    const income =
+        ops.reduce(
+            (sum,op)=>
+                sum +
+                Number(
+                    op.price || 0
+                ),
+            0
+        );
+
+
+    const exp =
+        exps.reduce(
+            (sum,e)=>
+                sum +
+                Number(
+                    e.amount || 0
+                ),
+            0
+        );
+
+
+    const paid =
+        ops
+        .filter(
+            op=>
+                op.payment === "paid"
+        )
+        .reduce(
+            (sum,op)=>
+                sum +
+                Number(
+                    op.price || 0
+                ),
+            0
+        );
+
+
+    const unpaid =
+        ops
+        .filter(
+            op=>
+                op.payment === "unpaid"
+        )
+        .reduce(
+            (sum,op)=>
+                sum +
+                Number(
+                    op.price || 0
+                ),
+            0
+        );
+
+
+    document.getElementById(
+        "reportCount"
+    ).textContent =
+        ops.length;
+
+
+    document.getElementById(
+        "reportIncome"
+    ).textContent =
+        money(income);
+
+
+    document.getElementById(
+        "reportExpenses"
+    ).textContent =
+        money(exp);
+
+
+    document.getElementById(
+        "reportPaid"
+    ).textContent =
+        money(paid);
+
+
+    document.getElementById(
+        "reportUnpaid"
+    ).textContent =
+        money(unpaid);
+
+
+    document.getElementById(
+        "reportProfit"
+    ).textContent =
+        money(
+            income-exp
+        );
+
+
+    const tbody =
+        document.getElementById(
+            "reportOperationsTable"
+        );
+
+
+    if(
+        ops.length === 0
+    ){
+
+        tbody.innerHTML=`
+
+            <tr>
+
+                <td colspan="5">
+
+                    <div class="empty">
+                        لا توجد بيانات في الفترة المحددة
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        ops.map(
+            op=>`
+
+        <tr>
+
+            <td>
+                ${formatDate(op.date)}
+            </td>
+
+            <td>
+                ${escapeHTML(op.client)}
+            </td>
+
+            <td>
+
+                ${escapeHTML(op.from)}
+
+                →
+
+                ${escapeHTML(op.to)}
+
+            </td>
+
+            <td>
+
+                <strong>
+                    ${money(op.price)}
+                </strong>
+
+            </td>
+
+            <td>
+
+                ${
+                    op.payment==="paid"
+
+                    ? `<span class="badge badge-success">
+                        مدفوع
+                       </span>`
+
+                    : `<span class="badge badge-warning">
+                        آجل
+                       </span>`
+                }
+
+            </td>
+
+        </tr>
+
+    `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function loadSettings(){
+
+    document.getElementById(
+        "settingsUsername"
+    ).value =
+        currentUser?.email ||
+        account.email ||
+        "";
+
+
+    document.getElementById(
+        "carName"
+    ).value =
+        car.name || "";
+
+
+    document.getElementById(
+        "carPlate"
+    ).value =
+        car.plate || "";
+
+}
+
+
+async function saveAccountSettings(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const oldEmail =
+        currentUser.email;
+
+
+    const newEmail =
+        normalizeEmail(
+            document.getElementById(
+                "settingsUsername"
+            ).value
+        );
+
+
+    const newPassword =
+        document.getElementById(
+            "settingsPassword"
+        ).value;
+
+
+    if(!newEmail){
+
+        alert(
+            "البريد الإلكتروني مطلوب"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !isValidEmail(newEmail)
+    ){
+
+        alert(
+            "اكتب بريد إلكتروني صحيح مثل admin1@gmail.com"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        newPassword &&
+        newPassword.length < 6
+    ){
+
+        alert(
+            "كلمة المرور يجب أن تكون 6 أحرف أو أكثر."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        if(
+            newEmail !== oldEmail
+        ){
+
+            await updateEmail(
+                currentUser,
+                newEmail
+            );
+
+        }
+
+
+        if(newPassword){
+
+            await updatePassword(
+                currentUser,
+                newPassword
+            );
+
+        }
+
+
+        account.email =
+            newEmail;
+
+
+        account.username =
+            newEmail;
+
+
+        await setDoc(
+
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            ),
+
+            {
+
+                email:newEmail,
+
+                username:newEmail,
+
+                updatedAt:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        document.getElementById(
+            "topUsername"
+        ).textContent =
+            newEmail;
+
+
+        document.getElementById(
+            "avatar"
+        ).textContent =
+            newEmail
+            .charAt(0)
+            .toUpperCase();
+
+
+        document.getElementById(
+            "settingsPassword"
+        ).value="";
+
+
+        showToast(
+            "تم تحديث بيانات الحساب ✅"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+
+        if(
+            error.code ===
+            "auth/requires-recent-login"
+        ){
+
+            alert(
+                "لأسباب أمنية، سجّل خروج ثم ادخل مرة أخرى وبعدها غيّر البريد أو كلمة المرور."
+            );
+
+        }else{
+
+            alert(
+                friendlyFirebaseError(
+                    error
+                )
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CAR SETTINGS
+========================================================= */
+
+async function saveCarSettings(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    car.name =
+        document.getElementById(
+            "carName"
+        ).value.trim();
+
+
+    car.plate =
+        document.getElementById(
+            "carPlate"
+        ).value.trim();
+
+
+    try{
+
+        await setDoc(
+
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            ),
+
+            {
+
+                car,
+
+                updatedAt:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        showToast(
+            "تم حفظ بيانات العربية أونلاين 🚗☁️"
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            friendlyFirebaseError(
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR DATA
+========================================================= */
+
+async function clearAllData(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const answer =
+        prompt(
+            "اكتب DELETE لتأكيد حذف جميع التشغيلات والمصروفات"
+        );
+
+
+    if(
+        answer !== "DELETE"
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        for(
+            const op of operations
+        ){
+
+            await deleteDoc(
+
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "operations",
+                    op.id
+                )
+
+            );
+
+        }
+
+
+        for(
+            const expense of expenses
+        ){
+
+            await deleteDoc(
+
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "expenses",
+                    expense.id
+                )
+
+            );
+
+        }
+
+
+        operations=[];
+
+        expenses=[];
+
+
+        showToast(
+            "تم حذف جميع البيانات من Firebase"
+        );
+
+
+        refreshAll();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            friendlyFirebaseError(
+                error
+            )
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshAll(){
+
+    if(
+        !dataReady &&
+        !currentUser
+    ){
+
+        return;
+
+    }
+
+
+    renderDashboard();
+
+    renderOperations();
+
+    renderExpenses();
+
+    renderReports();
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function money(value){
+
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "ar-EG"
+    ) + " ج";
+
+}
+
+
+function formatDate(date){
+
+    if(!date){
+
+        return "-";
+
+    }
+
+
+    const parts =
+        date.split("-");
+
+
+    if(
+        parts.length !== 3
+    ){
+
+        return date;
+
+    }
+
+
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+}
+
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+document.getElementById(
+    "operationModal"
+)
+.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target === this
+        ){
+
+            closeOperationModal();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "expenseModal"
+)
+.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            e.target === this
+        ){
+
+            closeExpenseModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key === "Escape"
+        ){
+
+            closeOperationModal();
+
+            closeExpenseModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   GLOBAL FUNCTIONS
+========================================================= */
+
+Object.assign(
+    window,
+    {
+
+        login,
+
+        logout,
+
+        showPage,
+
+        toggleSidebar,
+
+        openOperationModal,
+
+        closeOperationModal,
+
+        saveOperation,
+
+        deleteOperation,
+
+        openExpenseModal,
+
+        closeExpenseModal,
+
+        saveExpense,
+
+        deleteExpense,
+
+        saveAccountSettings,
+
+        saveCarSettings,
+
+        clearAllData,
+
+        renderOperations,
+
+        renderReports
+
+    }
+);
+
+</script>
+
+</body>
+</html>

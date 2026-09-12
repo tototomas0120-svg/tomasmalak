@@ -783,6 +783,14 @@ tr:hover td{
             تسجيل الدخول
         </button>
 
+        <button
+            class="btn btn-secondary btn-block"
+            style="margin-top:10px"
+            onclick="forgotPassword()"
+        >
+            نسيت كلمة المرور؟ إرسال رابط استعادة 📧
+        </button>
+
         <div style="text-align:center;margin-top:15px;color:#94a3b8;font-size:12px">
             استخدم البريد الإلكتروني المسجل في Firebase
         </div>
@@ -1478,6 +1486,36 @@ tr:hover td{
                 <div class="panel">
 
                     <div class="panel-title" style="margin-bottom:15px">
+                        النسخ الاحتياطي واسترجاع البيانات 💾
+                    </div>
+
+                    <p style="color:var(--muted);line-height:1.8;margin-bottom:15px">
+                        حمّل نسخة من تشغيلاتك ومصروفاتك وبيانات العربية على جهازك، ويمكنك استرجاعها لاحقًا من نفس الحساب.
+                    </p>
+
+                    <div class="form-actions" style="display:flex;gap:10px;flex-wrap:wrap">
+                        <button class="btn btn-primary" onclick="downloadBackup()">📥 تنزيل نسخة احتياطية</button>
+                        <button class="btn btn-secondary" onclick="document.getElementById('backupFile').click()">📤 استرجاع نسخة احتياطية</button>
+                        <input id="backupFile" type="file" accept="application/json,.json" style="display:none" onchange="restoreBackup(event)">
+                    </div>
+
+                    <div style="margin-top:15px;padding:12px;border-radius:10px;background:#eff6ff;color:#1e40af;line-height:1.7;font-size:13px">
+                        عند الاسترجاع سيتم إضافة بيانات الملف إلى الحساب، ولن يتم حذف البيانات الموجودة.
+                    </div>
+
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title" style="margin-bottom:15px">أمان الحساب 💌</div>
+                    <button class="btn btn-secondary" onclick="sendVerificationEmailNow()">📧 إرسال رسالة تأكيد البريد الإلكتروني</button>
+                    <div style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:13px">
+                        Firebase يدعم استعادة كلمة المرور ورسالة تأكيد البريد مباشرة. أما الرسالة الترحيبية المخصصة باسم DriveOps فتحتاج خدمة بريد إضافية لاحقًا.
+                    </div>
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-title" style="margin-bottom:15px">
                         إدارة البيانات
                     </div>
 
@@ -1808,6 +1846,8 @@ import {
     getAuth,
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    sendEmailVerification,
     updatePassword,
     updateEmail,
     onAuthStateChanged,
@@ -2078,6 +2118,23 @@ function hideLoginError(){
     el.style.display =
         "none";
 
+}
+
+
+async function forgotPassword(){
+    const email = normalizeEmail(document.getElementById("loginUsername")?.value);
+    if(!isValidEmail(email)){
+        showLoginError("اكتب بريدك الإلكتروني أولاً ثم اضغط نسيت كلمة المرور.");
+        return;
+    }
+    try{
+        await sendPasswordResetEmail(auth,email);
+        hideLoginError();
+        alert("تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني 📧");
+    }catch(error){
+        console.error(error);
+        showLoginError(friendlyFirebaseError(error));
+    }
 }
 
 
@@ -4422,6 +4479,51 @@ async function saveAccountSettings(){
 
 
 /* =========================================================
+   BACKUP / RESTORE
+========================================================= */
+
+async function downloadBackup(){
+    if(!currentUser){ alert("سجّل الدخول أولاً"); return; }
+    try{
+        const payload={
+            app:"DriveOps", version:1, exportedAt:new Date().toISOString(),
+            account:{email:currentUser.email||"",username:account.username||currentUser.email||""},
+            car:car||{}, operations:operations||[], expenses:expenses||[]
+        };
+        const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});
+        const url=URL.createObjectURL(blob); const a=document.createElement("a");
+        a.href=url; a.download=`DriveOps_Backup_${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        showToast("تم تنزيل النسخة الاحتياطية 💾");
+    }catch(error){ console.error(error); alert("تعذر إنشاء النسخة الاحتياطية"); }
+}
+
+async function restoreBackup(event){
+    const file=event.target.files?.[0]; event.target.value="";
+    if(!file||!currentUser) return;
+    try{
+        const data=JSON.parse(await file.text());
+        if(data.app!=="DriveOps"||!Array.isArray(data.operations)||!Array.isArray(data.expenses)) throw new Error("invalid-backup");
+        if(!confirm("سيتم إضافة بيانات النسخة الاحتياطية إلى حسابك. هل تريد المتابعة؟")) return;
+        if(data.car){
+            car={name:String(data.car.name||""),plate:String(data.car.plate||"")};
+            await setDoc(doc(db,"users",currentUser.uid),{car,updatedAt:serverTimestamp()},{merge:true});
+        }
+        for(const op of data.operations){ const copy={...op}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"operations"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); }
+        for(const expense of data.expenses){ const copy={...expense}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"expenses"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); }
+        await loadUserData(); loadSettings(); refreshAll();
+        showToast("تم استرجاع النسخة الاحتياطية بنجاح ♻️");
+    }catch(error){ console.error(error); alert("ملف النسخة الاحتياطية غير صحيح أو تعذر استرجاعه."); }
+}
+
+async function sendVerificationEmailNow(){
+    if(!currentUser) return;
+    try{ await sendEmailVerification(currentUser); showToast("تم إرسال رسالة تأكيد البريد الإلكتروني 📧"); }
+    catch(error){ console.error(error); alert(friendlyFirebaseError(error)); }
+}
+
+
+/* =========================================================
    CAR SETTINGS
 ========================================================= */
 
@@ -4819,6 +4921,14 @@ Object.assign(
         saveAccountSettings,
 
         saveCarSettings,
+
+        forgotPassword,
+
+        downloadBackup,
+
+        restoreBackup,
+
+        sendVerificationEmailNow,
 
         clearAllData,
 

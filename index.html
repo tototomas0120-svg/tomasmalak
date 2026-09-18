@@ -372,15 +372,17 @@ th{
    RESPONSIVE
 ========================= */
 
-@media(max-width:900px){
+@media(max-width:1100px){
 
     .sidebar{
-        width:210px;
+        width:220px;
+        padding:16px;
     }
 
     .main{
-        margin-right:210px;
-        width:calc(100% - 210px);
+        margin-right:220px;
+        width:calc(100% - 220px);
+        padding:20px;
     }
 
     .cards{
@@ -391,12 +393,13 @@ th{
     .grid-4{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 
 /* =========================
-   MOBILE SIDEBAR
-   القائمة ثابتة يمين
+   MOBILE
+   Sidebar ثابتة على اليمين
 ========================= */
 
 @media(max-width:650px){
@@ -406,118 +409,252 @@ th{
         min-height:100vh;
     }
 
+    /*
+       Sidebar تفضل على الجنب
+       بدون نقلها لأعلى الشاشة
+    */
     .sidebar{
         position:fixed;
         right:0;
         top:0;
         bottom:0;
 
-        width:190px;
+        width:150px;
 
-        padding:12px;
+        padding:14px 9px;
 
         overflow-y:auto;
+        overflow-x:hidden;
+
         z-index:1000;
     }
 
     .logo{
-        font-size:20px;
-        margin-bottom:4px;
-    }
-
-    .role-label{
-        font-size:12px;
-        margin-bottom:15px;
-    }
-
-    .menu button{
-        padding:11px 9px;
-        font-size:13px;
+        font-size:19px;
+        text-align:center;
         margin-bottom:5px;
     }
 
+    .role-label{
+        font-size:11px;
+        line-height:1.5;
+        text-align:center;
+        margin-bottom:16px;
+    }
+
+    .menu{
+        width:100%;
+    }
+
+    .menu button{
+        width:100%;
+        padding:11px 7px;
+        font-size:12px;
+        line-height:1.5;
+        margin-bottom:6px;
+        white-space:normal;
+        text-align:right;
+    }
+
+    /*
+       المحتوى ياخد باقي الشاشة
+    */
     .main{
-        margin-right:190px;
+        margin-right:150px;
         margin-left:0;
-        width:calc(100% - 190px);
-        padding:10px;
+
+        width:calc(100% - 150px);
+
+        padding:12px;
+
         min-width:0;
     }
 
     .topbar{
-        padding:14px;
+        padding:13px;
         display:flex;
         align-items:center;
         justify-content:space-between;
+        gap:8px;
+        flex-wrap:wrap;
     }
 
     .page-title{
-        font-size:19px;
+        font-size:18px;
+        line-height:1.4;
     }
 
     .user-info{
-        font-size:12px;
-        margin-top:6px;
+        font-size:11px;
+        margin-top:5px;
+        word-break:break-word;
+    }
+
+    .topbar .actions{
+        width:auto;
     }
 
     .topbar .actions .btn{
-        padding:8px 10px;
-        font-size:12px;
+        padding:8px 9px;
+        font-size:11px;
+        white-space:nowrap;
     }
 
+    /*
+       الكروت عمود واحد
+       علشان متبقاش مضغوطة
+    */
     .cards{
         grid-template-columns:1fr;
+        gap:10px;
+        margin-bottom:14px;
     }
 
+    .card{
+        padding:15px;
+    }
+
+    .card-title{
+        font-size:12px;
+        margin-bottom:7px;
+    }
+
+    .card-value{
+        font-size:21px;
+    }
+
+    /*
+       كل الفورم في عمود واحد
+    */
     .grid,
     .grid-3,
     .grid-4{
         grid-template-columns:1fr;
+        gap:10px;
     }
 
     .panel{
         padding:14px;
+        margin-bottom:14px;
+        border-radius:13px;
+    }
+
+    .panel-header{
+        gap:8px;
+        margin-bottom:13px;
+    }
+
+    .panel-header h3{
+        font-size:16px;
+    }
+
+    .form-group{
+        margin-bottom:11px;
+    }
+
+    .form-group label{
+        font-size:12px;
+        margin-bottom:6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+        padding:10px;
+        font-size:12px;
+        min-height:40px;
     }
 
     .btn{
-        font-size:13px;
-        padding:9px 11px;
+        font-size:12px;
+        padding:9px 10px;
+        border-radius:9px;
     }
 
+    .actions{
+        gap:6px;
+    }
+
+    .driver-card{
+        padding:14px;
+    }
+
+    .driver-card h3{
+        font-size:15px;
+        margin-bottom:9px;
+    }
+
+    /*
+       الجداول تفضل قابلة للسحب
+       بدل ما تكسر التصميم
+    */
     .table-wrap{
         width:100%;
         overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    table{
+        min-width:600px;
+    }
+
+    th,
+    td{
+        padding:10px 8px;
+        font-size:12px;
+    }
+
+    .badge{
+        padding:4px 7px;
+        font-size:11px;
+    }
+
+    .backup-box{
+        padding:14px;
+    }
+
+    .footer{
+        padding:18px 8px;
+        font-size:11px;
     }
 
 }
 
 
-/* شاشات الموبايل الصغيرة جدًا */
+/* =========================
+   موبايل صغير جدًا
+========================= */
 
 @media(max-width:380px){
 
     .sidebar{
-        width:165px;
-        padding:9px;
+        width:135px;
+        padding:12px 7px;
     }
 
     .main{
-        margin-right:165px;
-        width:calc(100% - 165px);
-        padding:8px;
+        margin-right:135px;
+        width:calc(100% - 135px);
+        padding:10px;
     }
 
     .logo{
-        font-size:18px;
+        font-size:17px;
     }
 
     .role-label{
         font-size:10px;
+        margin-bottom:13px;
     }
 
     .menu button{
         font-size:11px;
-        padding:9px 6px;
+        padding:10px 6px;
+        line-height:1.4;
+    }
+
+    .topbar{
+        padding:11px;
     }
 
     .page-title{
@@ -530,11 +667,76 @@ th{
 
     .topbar .actions .btn{
         font-size:10px;
-        padding:7px 8px;
+        padding:7px 7px;
     }
 
     .panel{
-        padding:10px;
+        padding:11px;
+    }
+
+    .card{
+        padding:13px;
+    }
+
+    .card-value{
+        font-size:19px;
+    }
+
+    .btn{
+        font-size:11px;
+        padding:8px 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+        font-size:11px;
+        padding:9px;
+    }
+
+}
+
+
+/* =========================
+   شاشات صغيرة جدًا جدًا
+========================= */
+
+@media(max-width:330px){
+
+    .sidebar{
+        width:125px;
+    }
+
+    .main{
+        margin-right:125px;
+        width:calc(100% - 125px);
+        padding:8px;
+    }
+
+    .menu button{
+        font-size:10px;
+        padding:9px 5px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .role-label{
+        font-size:9px;
+    }
+
+    .page-title{
+        font-size:15px;
+    }
+
+    .panel{
+        padding:9px;
+    }
+
+    .btn{
+        font-size:10px;
+        padding:7px 7px;
     }
 
 }
@@ -6137,9 +6339,7 @@ window.deleteAllData = async function(){
             "سيتم حذف جميع بيانات DriveOps الحالية:\n\n"+
 
             "• كل التشغيلات\n"+
-
             "• كل المصروفات\n"+
-
             "• كل أسماء السواقين\n\n"+
 
             "حساب تسجيل الدخول نفسه لن يتم حذفه.\n\n"+

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -148,6 +147,7 @@ button{
     top:0;
     bottom:0;
     overflow-y:auto;
+    z-index:1000;
 }
 
 .logo{
@@ -367,6 +367,11 @@ th{
     border-radius:12px;
 }
 
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media(max-width:900px){
 
     .sidebar{
@@ -388,39 +393,150 @@ th{
     }
 }
 
+
+/* =========================
+   MOBILE SIDEBAR
+   القائمة ثابتة يمين
+========================= */
+
 @media(max-width:650px){
 
     .layout{
-        display:block;
+        display:flex;
+        min-height:100vh;
     }
 
     .sidebar{
-        position:relative;
-        width:100%;
-        right:auto;
-        bottom:auto;
+        position:fixed;
+        right:0;
+        top:0;
+        bottom:0;
+
+        width:190px;
+
+        padding:12px;
+
+        overflow-y:auto;
+        z-index:1000;
+    }
+
+    .logo{
+        font-size:20px;
+        margin-bottom:4px;
+    }
+
+    .role-label{
+        font-size:12px;
+        margin-bottom:15px;
+    }
+
+    .menu button{
+        padding:11px 9px;
+        font-size:13px;
+        margin-bottom:5px;
     }
 
     .main{
-        margin-right:0;
-        width:100%;
-        padding:12px;
+        margin-right:190px;
+        margin-left:0;
+        width:calc(100% - 190px);
+        padding:10px;
+        min-width:0;
     }
 
-    .cards,
+    .topbar{
+        padding:14px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+    }
+
+    .page-title{
+        font-size:19px;
+    }
+
+    .user-info{
+        font-size:12px;
+        margin-top:6px;
+    }
+
+    .topbar .actions .btn{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
     .grid,
     .grid-3,
     .grid-4{
         grid-template-columns:1fr;
     }
 
-    .topbar{
-        display:block;
+    .panel{
+        padding:14px;
+    }
+
+    .btn{
+        font-size:13px;
+        padding:9px 11px;
+    }
+
+    .table-wrap{
+        width:100%;
+        overflow-x:auto;
+    }
+
+}
+
+
+/* شاشات الموبايل الصغيرة جدًا */
+
+@media(max-width:380px){
+
+    .sidebar{
+        width:165px;
+        padding:9px;
+    }
+
+    .main{
+        margin-right:165px;
+        width:calc(100% - 165px);
+        padding:8px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .role-label{
+        font-size:10px;
+    }
+
+    .menu button{
+        font-size:11px;
+        padding:9px 6px;
+    }
+
+    .page-title{
+        font-size:16px;
     }
 
     .user-info{
-        margin-top:8px;
+        font-size:10px;
     }
+
+    .topbar .actions .btn{
+        font-size:10px;
+        padding:7px 8px;
+    }
+
+    .panel{
+        padding:10px;
+    }
+
 }
 </style>
 </head>
@@ -1842,7 +1958,6 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -1851,7 +1966,6 @@ import {
     signOut,
     createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
 
 import {
     getFirestore,
@@ -1866,7 +1980,6 @@ import {
     getDocs,
     writeBatch
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 
 import {
     getFunctions,
@@ -1912,12 +2025,6 @@ const auth =
     getAuth(app);
 
 
-/* =========================
-   SECONDARY AUTH
-   لإنشاء المستخدم بدون
-   تسجيل خروج الأدمن
-========================= */
-
 const secondaryApp =
     initializeApp(
         firebaseConfig,
@@ -1934,12 +2041,6 @@ const secondaryAuth =
 const db =
     getFirestore(app);
 
-
-/* =========================
-   CLOUD FUNCTIONS
-   باقية فقط للعمليات
-   التي تحتاج Admin SDK
-========================= */
 
 const functions =
     getFunctions(
@@ -2079,20 +2180,16 @@ window.login = async function(){
         .value
         .trim();
 
-
     const password =
         document
         .getElementById("loginPassword")
         .value;
 
-
     const error =
         document
         .getElementById("loginError");
 
-
     error.textContent = "";
-
 
     if(!email || !password){
 
@@ -2101,7 +2198,6 @@ window.login = async function(){
 
         return;
     }
-
 
     try{
 
@@ -2131,7 +2227,6 @@ window.forgotPassword = async function(){
         .value
         .trim();
 
-
     if(!email){
 
         alert(
@@ -2141,7 +2236,6 @@ window.forgotPassword = async function(){
         return;
     }
 
-
     try{
 
         await sendPasswordResetEmail(
@@ -2149,11 +2243,9 @@ window.forgotPassword = async function(){
             email
         );
 
-
         alert(
             "تم إرسال رابط تغيير كلمة المرور إلى بريدك الإلكتروني"
         );
-
 
     }catch(e){
 
@@ -2205,6 +2297,7 @@ onAuthStateChanged(
                 .style.display = "none";
 
             return;
+
         }
 
         currentUser = user;
@@ -2493,18 +2586,15 @@ async function openApp(){
         .getElementById("loginPage")
         .style.display = "none";
 
-
     document
         .getElementById("app")
         .style.display = "block";
-
 
     document
         .getElementById("userInfo")
         .textContent =
             currentUserData.name ||
             currentUser.email;
-
 
     const roleNames = {
         admin: "👑 مسؤول النظام",
@@ -2534,24 +2624,20 @@ async function openApp(){
             ).toLowerCase() !== "admin"
         );
 
-
     document
         .getElementById("opDate")
         .value =
             today();
-
 
     document
         .getElementById("expenseDate")
         .value =
             today();
 
-
     document
         .getElementById("reportMonth")
         .value =
             currentMonth();
-
 
     await loadDrivers();
 
@@ -2574,19 +2660,15 @@ window.showPage = async function(page){
             p=>p.classList.remove("active")
         );
 
-
     const target =
         document.getElementById(
             "page-"+page
         );
 
-
     if(!target)
         return;
 
-
     target.classList.add("active");
-
 
     const titles = {
 
@@ -2619,13 +2701,11 @@ window.showPage = async function(page){
 
     };
 
-
     document
         .getElementById("pageTitle")
         .textContent =
             titles[page] ||
             "DriveOps";
-
 
     document
         .querySelectorAll(".menu button")
@@ -2633,44 +2713,34 @@ window.showPage = async function(page){
             b=>b.classList.remove("active")
         );
 
-
     const menu =
         document.getElementById(
             "menu-"+page
         );
 
-
     if(menu)
         menu.classList.add("active");
-
 
     if(page==="dashboard")
         renderDashboard();
 
-
     if(page==="operations")
         renderOperations();
-
 
     if(page==="expenses")
         renderExpenses();
 
-
     if(page==="reports")
         await buildReport();
-
 
     if(page==="drivers")
         await loadDrivers();
 
-
     if(page==="settings")
         loadSettings();
 
-
     if(page==="admin")
         await loadAdminUsers();
-
 
     if(page==="addOperation")
         fillDriverSelect();
@@ -2691,12 +2761,10 @@ async function loadMyData(){
     if(!currentUser)
         return;
 
-
     const opSnap =
         await getDocs(
             operationsRef()
         );
-
 
     opSnap.forEach(d=>{
 
@@ -2711,12 +2779,10 @@ async function loadMyData(){
 
     });
 
-
     const expSnap =
         await getDocs(
             expensesRef()
         );
-
 
     expSnap.forEach(d=>{
 
@@ -2731,7 +2797,6 @@ async function loadMyData(){
 
     });
 
-
     operations.sort(
         (a,b)=>
             String(b.date||"")
@@ -2740,7 +2805,6 @@ async function loadMyData(){
             )
     );
 
-
     expenses.sort(
         (a,b)=>
             String(b.date||"")
@@ -2748,7 +2812,6 @@ async function loadMyData(){
                 String(a.date||"")
             )
     );
-
 
     renderDashboard();
 
@@ -2769,7 +2832,6 @@ function renderDashboard(){
             0
         );
 
-
     const exp =
         expenses.reduce(
             (sum,e)=>
@@ -2778,30 +2840,25 @@ function renderDashboard(){
             0
         );
 
-
     document
         .getElementById("statOperations")
         .textContent =
             operations.length;
-
 
     document
         .getElementById("statRevenue")
         .textContent =
             money(revenue);
 
-
     document
         .getElementById("statExpenses")
         .textContent =
             money(exp);
 
-
     document
         .getElementById("statNet")
         .textContent =
             money(revenue-exp);
-
 
     const tbody =
         document
@@ -2809,9 +2866,7 @@ function renderDashboard(){
             "dashboardOperations"
         );
 
-
     tbody.innerHTML = "";
-
 
     operations
         .slice(0,10)
@@ -2885,14 +2940,12 @@ window.renderOperations = function(){
         .toLowerCase()
         .trim();
 
-
     const from =
         document
         .getElementById(
             "operationFrom"
         )
         .value;
-
 
     const to =
         document
@@ -2901,14 +2954,12 @@ window.renderOperations = function(){
         )
         .value;
 
-
     const payment =
         document
         .getElementById(
             "operationPaymentFilter"
         )
         .value;
-
 
     let data =
         operations.filter(o=>{
@@ -2920,13 +2971,11 @@ window.renderOperations = function(){
                  ${o.to||""}`
                 .toLowerCase();
 
-
             if(
                 search &&
                 !text.includes(search)
             )
                 return false;
-
 
             if(
                 from &&
@@ -2934,13 +2983,11 @@ window.renderOperations = function(){
             )
                 return false;
 
-
             if(
                 to &&
                 String(o.date||"") > to
             )
                 return false;
-
 
             if(
                 payment &&
@@ -2948,11 +2995,9 @@ window.renderOperations = function(){
             )
                 return false;
 
-
             return true;
 
         });
-
 
     const tbody =
         document
@@ -2960,9 +3005,7 @@ window.renderOperations = function(){
             "operationsTable"
         );
 
-
     tbody.innerHTML = "";
-
 
     if(!data.length){
 
@@ -2985,7 +3028,6 @@ window.renderOperations = function(){
         return;
 
     }
-
 
     data.forEach(o=>{
 
@@ -3047,7 +3089,6 @@ window.renderOperations = function(){
 
                 </button>
 
-
                 <button
                     class="btn btn-danger"
                     onclick="deleteOperation('${escapeAttr(o.id)}')">
@@ -3080,7 +3121,6 @@ window.saveOperation = async function(){
         )
         .value;
 
-
     const driverId =
         document
         .getElementById(
@@ -3088,12 +3128,10 @@ window.saveOperation = async function(){
         )
         .value;
 
-
     const driver =
         drivers.find(
             d=>d.id===driverId
         );
-
 
     const data = {
 
@@ -3174,7 +3212,6 @@ window.saveOperation = async function(){
 
     };
 
-
     if(!data.driverId){
 
         alert(
@@ -3184,7 +3221,6 @@ window.saveOperation = async function(){
         return;
 
     }
-
 
     if(
         !data.date ||
@@ -3198,7 +3234,6 @@ window.saveOperation = async function(){
         return;
 
     }
-
 
     try{
 
@@ -3224,7 +3259,6 @@ window.saveOperation = async function(){
                 new Date()
                 .toISOString();
 
-
             await addDoc(
                 operationsRef(),
                 data
@@ -3232,18 +3266,15 @@ window.saveOperation = async function(){
 
         }
 
-
         alert(
             "تم حفظ التشغيل"
         );
-
 
         clearOperationForm();
 
         await loadMyData();
 
         showPage("operations");
-
 
     }catch(e){
 
@@ -3275,10 +3306,8 @@ window.editOperation = function(id){
             x=>x.id===id
         );
 
-
     if(!o)
         return;
-
 
     document
         .getElementById(
@@ -3287,14 +3316,12 @@ window.editOperation = function(id){
         .value =
             o.id;
 
-
     document
         .getElementById(
             "opDriver"
         )
         .value =
             o.driverId || "";
-
 
     document
         .getElementById(
@@ -3303,14 +3330,12 @@ window.editOperation = function(id){
         .value =
             o.date || "";
 
-
     document
         .getElementById(
             "opClient"
         )
         .value =
             o.client || "";
-
 
     document
         .getElementById(
@@ -3319,14 +3344,12 @@ window.editOperation = function(id){
         .value =
             o.from || "";
 
-
     document
         .getElementById(
             "opTo"
         )
         .value =
             o.to || "";
-
 
     document
         .getElementById(
@@ -3335,14 +3358,12 @@ window.editOperation = function(id){
         .value =
             o.type || "";
 
-
     document
         .getElementById(
             "opPrice"
         )
         .value =
             o.price || "";
-
 
     document
         .getElementById(
@@ -3351,7 +3372,6 @@ window.editOperation = function(id){
         .value =
             o.payment || "paid";
 
-
     document
         .getElementById(
             "opNotes"
@@ -3359,14 +3379,12 @@ window.editOperation = function(id){
         .value =
             o.notes || "";
 
-
     document
         .getElementById(
             "operationFormTitle"
         )
         .textContent =
             "تعديل التشغيل";
-
 
     showPage(
         "addOperation"
@@ -3383,13 +3401,11 @@ function clearOperationForm(){
         )
         .value = "";
 
-
     document
         .getElementById(
             "opDriver"
         )
         .value = "";
-
 
     document
         .getElementById(
@@ -3398,13 +3414,11 @@ function clearOperationForm(){
         .value =
             today();
 
-
     document
         .getElementById(
             "opClient"
         )
         .value = "";
-
 
     document
         .getElementById(
@@ -3412,13 +3426,11 @@ function clearOperationForm(){
         )
         .value = "";
 
-
     document
         .getElementById(
             "opTo"
         )
         .value = "";
-
 
     document
         .getElementById(
@@ -3426,13 +3438,11 @@ function clearOperationForm(){
         )
         .value = "";
 
-
     document
         .getElementById(
             "opPrice"
         )
         .value = "";
-
 
     document
         .getElementById(
@@ -3441,13 +3451,11 @@ function clearOperationForm(){
         .value =
             "paid";
 
-
     document
         .getElementById(
             "opNotes"
         )
         .value = "";
-
 
     document
         .getElementById(
@@ -3472,7 +3480,6 @@ window.deleteOperation = async function(id){
     )
         return;
 
-
     try{
 
         await deleteDoc(
@@ -3487,14 +3494,11 @@ window.deleteOperation = async function(id){
 
         );
 
-
         await loadMyData();
-
 
         alert(
             "تم حذف التشغيل"
         );
-
 
     }catch(e){
 
@@ -3555,7 +3559,6 @@ window.saveExpense = async function(){
 
     };
 
-
     if(
         !data.date ||
         !data.amount
@@ -3569,7 +3572,6 @@ window.saveExpense = async function(){
 
     }
 
-
     try{
 
         await addDoc(
@@ -3577,13 +3579,11 @@ window.saveExpense = async function(){
             data
         );
 
-
         document
             .getElementById(
                 "expenseType"
             )
             .value = "";
-
 
         document
             .getElementById(
@@ -3591,21 +3591,17 @@ window.saveExpense = async function(){
             )
             .value = "";
 
-
         document
             .getElementById(
                 "expenseAmount"
             )
             .value = "";
 
-
         await loadMyData();
-
 
         alert(
             "تم إضافة المصروف"
         );
-
 
     }catch(e){
 
@@ -3628,9 +3624,7 @@ function renderExpenses(){
             "expensesTable"
         );
 
-
     tbody.innerHTML = "";
-
 
     if(!expenses.length){
 
@@ -3653,7 +3647,6 @@ function renderExpenses(){
         return;
 
     }
-
 
     expenses.forEach(e=>{
 
@@ -3707,7 +3700,6 @@ window.deleteExpense = async function(id){
     )
         return;
 
-
     try{
 
         await deleteDoc(
@@ -3722,14 +3714,11 @@ window.deleteExpense = async function(id){
 
         );
 
-
         await loadMyData();
-
 
         alert(
             "تم حذف المصروف"
         );
-
 
     }catch(e){
 
@@ -3755,9 +3744,7 @@ async function loadDrivers(){
             driversRef()
         );
 
-
     drivers = [];
-
 
     snap.forEach(d=>{
 
@@ -3772,7 +3759,6 @@ async function loadDrivers(){
 
     });
 
-
     drivers.sort(
         (a,b)=>
             String(a.name||"")
@@ -3781,7 +3767,6 @@ async function loadDrivers(){
                 "ar"
             )
     );
-
 
     renderDrivers();
 
@@ -3800,7 +3785,6 @@ function renderDrivers(){
             "driversList"
         );
 
-
     if(!drivers.length){
 
         container.innerHTML = `
@@ -3817,9 +3801,7 @@ function renderDrivers(){
 
     }
 
-
     container.innerHTML = "";
-
 
     drivers.forEach(d=>{
 
@@ -3827,7 +3809,6 @@ function renderDrivers(){
             operations.filter(
                 o=>o.driverId===d.id
             ).length;
-
 
         const revenue =
             operations
@@ -3841,7 +3822,6 @@ function renderDrivers(){
                 0
             );
 
-
         container.innerHTML += `
 
         <div class="driver-card">
@@ -3854,7 +3834,6 @@ function renderDrivers(){
                 )}
 
             </h3>
-
 
             <div
                 style="color:#6b7280;margin-bottom:12px">
@@ -3873,9 +3852,7 @@ function renderDrivers(){
 
             </div>
 
-
             <div class="actions">
-
 
                 <button
                     class="btn btn-primary"
@@ -3885,7 +3862,6 @@ function renderDrivers(){
 
                 </button>
 
-
                 <button
                     class="btn btn-warning"
                     onclick="renameDriver('${escapeAttr(d.id)}')">
@@ -3894,7 +3870,6 @@ function renderDrivers(){
 
                 </button>
 
-
                 <button
                     class="btn btn-danger"
                     onclick="deleteDriver('${escapeAttr(d.id)}')">
@@ -3902,7 +3877,6 @@ function renderDrivers(){
                     🗑️ حذف
 
                 </button>
-
 
             </div>
 
@@ -3923,16 +3897,13 @@ function fillDriverSelect(){
             "opDriver"
         );
 
-
     if(!select)
         return;
-
 
     select.innerHTML =
         `<option value="">
             اختر السواق
         </option>`;
-
 
     drivers.forEach(d=>{
 
@@ -3962,16 +3933,13 @@ function fillReportDriver(){
             "reportDriver"
         );
 
-
     if(!select)
         return;
-
 
     select.innerHTML =
         `<option value="">
             كل السواقين
         </option>`;
-
 
     drivers.forEach(d=>{
 
@@ -4016,13 +3984,11 @@ window.hideAddDriver = function(){
         )
         .classList.add("hidden");
 
-
     document
         .getElementById(
             "newDriverName"
         )
         .value = "";
-
 
     document
         .getElementById(
@@ -4043,28 +4009,23 @@ window.createDriver = async function(){
         .value
         .trim();
 
-
     const message =
         document
         .getElementById(
             "driverMessage"
         );
 
-
     if(!name){
 
         message.textContent =
             "اكتب اسم السواق";
 
-
         message.style.color =
             "#dc2626";
-
 
         return;
 
     }
-
 
     try{
 
@@ -4085,14 +4046,11 @@ window.createDriver = async function(){
 
         );
 
-
         message.textContent =
             "تم إضافة السواق بنجاح";
 
-
         message.style.color =
             "#16a34a";
-
 
         document
             .getElementById(
@@ -4100,18 +4058,14 @@ window.createDriver = async function(){
             )
             .value = "";
 
-
         await loadDrivers();
-
 
     }catch(e){
 
         console.error(e);
 
-
         message.textContent =
             "تعذر إضافة السواق";
-
 
         message.style.color =
             "#dc2626";
@@ -4132,10 +4086,8 @@ window.renameDriver = async function(driverId){
             d=>d.id===driverId
         );
 
-
     if(!driver)
         return;
-
 
     const newName =
         prompt(
@@ -4143,13 +4095,11 @@ window.renameDriver = async function(driverId){
             driver.name || ""
         );
 
-
     if(
         !newName ||
         !newName.trim()
     )
         return;
-
 
     try{
 
@@ -4170,12 +4120,10 @@ window.renameDriver = async function(driverId){
 
         );
 
-
         const related =
             operations.filter(
                 o=>o.driverId===driverId
             );
-
 
         for(
             const operation
@@ -4201,16 +4149,13 @@ window.renameDriver = async function(driverId){
 
         }
 
-
         await loadDrivers();
 
         await loadMyData();
 
-
         alert(
             "تم تعديل اسم السواق"
         );
-
 
     }catch(e){
 
@@ -4236,16 +4181,13 @@ window.deleteDriver = async function(driverId){
             d=>d.id===driverId
         );
 
-
     if(!driver)
         return;
-
 
     const related =
         operations.filter(
             o=>o.driverId===driverId
         );
-
 
     if(related.length){
 
@@ -4262,7 +4204,6 @@ window.deleteDriver = async function(driverId){
 
     }
 
-
     if(
         !confirm(
             "هل تريد حذف السواق "+
@@ -4271,7 +4212,6 @@ window.deleteDriver = async function(driverId){
         )
     )
         return;
-
 
     try{
 
@@ -4287,14 +4227,11 @@ window.deleteDriver = async function(driverId){
 
         );
 
-
         await loadDrivers();
-
 
         alert(
             "تم حذف السواق"
         );
-
 
     }catch(e){
 
@@ -4322,7 +4259,6 @@ window.driverReport = function(driverId){
         .value =
             driverId;
 
-
     showPage(
         "reports"
     );
@@ -4344,14 +4280,12 @@ window.buildReport = async function(){
         .value ||
         currentMonth();
 
-
     const selectedDriver =
         document
         .getElementById(
             "reportDriver"
         )
         .value;
-
 
     let data =
         operations.filter(
@@ -4360,7 +4294,6 @@ window.buildReport = async function(){
                     o.date||""
                 ).startsWith(month)
         );
-
 
     if(selectedDriver){
 
@@ -4373,7 +4306,6 @@ window.buildReport = async function(){
 
     }
 
-
     const reportExpenses =
         expenses.filter(
             e=>
@@ -4381,7 +4313,6 @@ window.buildReport = async function(){
                     e.date||""
                 ).startsWith(month)
         );
-
 
     const revenue =
         data.reduce(
@@ -4391,7 +4322,6 @@ window.buildReport = async function(){
             0
         );
 
-
     const exp =
         reportExpenses.reduce(
             (sum,e)=>
@@ -4399,7 +4329,6 @@ window.buildReport = async function(){
                 Number(e.amount||0),
             0
         );
-
 
     const paid =
         data
@@ -4413,7 +4342,6 @@ window.buildReport = async function(){
             0
         );
 
-
     const unpaid =
         data
         .filter(
@@ -4426,14 +4354,12 @@ window.buildReport = async function(){
             0
         );
 
-
     document
         .getElementById(
             "reportOperations"
         )
         .textContent =
             data.length;
-
 
     document
         .getElementById(
@@ -4442,14 +4368,12 @@ window.buildReport = async function(){
         .textContent =
             money(revenue);
 
-
     document
         .getElementById(
             "reportExpenses"
         )
         .textContent =
             money(exp);
-
 
     document
         .getElementById(
@@ -4458,10 +4382,8 @@ window.buildReport = async function(){
         .textContent =
             money(revenue-exp);
 
-
     let driverName =
         "كل السواقين";
-
 
     if(selectedDriver){
 
@@ -4471,13 +4393,11 @@ window.buildReport = async function(){
                     selectedDriver
             );
 
-
         if(d)
             driverName =
                 d.name;
 
     }
-
 
     const details =
         document
@@ -4485,11 +4405,9 @@ window.buildReport = async function(){
             "reportDetails"
         );
 
-
     details.innerHTML = `
 
         <div class="grid-4">
-
 
             <div class="card">
 
@@ -4509,7 +4427,6 @@ window.buildReport = async function(){
 
             </div>
 
-
             <div class="card">
 
                 <div class="card-title">
@@ -4525,7 +4442,6 @@ window.buildReport = async function(){
 
             </div>
 
-
             <div class="card">
 
                 <div class="card-title">
@@ -4540,7 +4456,6 @@ window.buildReport = async function(){
                 </div>
 
             </div>
-
 
             <div class="card">
 
@@ -4559,9 +4474,7 @@ window.buildReport = async function(){
 
             </div>
 
-
         </div>
-
 
         <h3
             style="margin:25px 0 12px">
@@ -4569,7 +4482,6 @@ window.buildReport = async function(){
             التشغيلات
 
         </h3>
-
 
         <div class="table-wrap">
 
@@ -4590,7 +4502,6 @@ window.buildReport = async function(){
         </tr>
 
         </thead>
-
 
         <tbody>
 
@@ -4702,14 +4613,12 @@ window.sumReport = function(){
         .value ||
         currentMonth();
 
-
     const selectedDriver =
         document
         .getElementById(
             "reportDriver"
         )
         .value;
-
 
     let data =
         operations.filter(
@@ -4718,7 +4627,6 @@ window.sumReport = function(){
                     o.date||""
                 ).startsWith(month)
         );
-
 
     if(selectedDriver){
 
@@ -4731,7 +4639,6 @@ window.sumReport = function(){
 
     }
 
-
     const total =
         data.reduce(
             (sum,o)=>
@@ -4739,7 +4646,6 @@ window.sumReport = function(){
                 Number(o.price||0),
             0
         );
-
 
     alert(
 
@@ -4781,7 +4687,6 @@ window.saveProfile = async function(){
         .value
         .trim();
 
-
     if(!name){
 
         alert(
@@ -4791,7 +4696,6 @@ window.saveProfile = async function(){
         return;
 
     }
-
 
     try{
 
@@ -4808,10 +4712,8 @@ window.saveProfile = async function(){
 
         );
 
-
         currentUserData.name =
             name;
-
 
         document
             .getElementById(
@@ -4820,11 +4722,9 @@ window.saveProfile = async function(){
             .textContent =
                 name;
 
-
         alert(
             "تم حفظ البيانات"
         );
-
 
     }catch(e){
 
@@ -4849,11 +4749,9 @@ async function(){
             currentUser.email
         );
 
-
         alert(
             "تم إرسال رابط تغيير كلمة المرور إلى بريدك"
         );
-
 
     }catch(e){
 
@@ -4914,7 +4812,6 @@ window.hideCreateUserForm = function(){
 
 /* =========================
    GET ALL USERS
-   مباشر من Firestore
 ========================= */
 
 window.loadAdminUsers = async function(){
@@ -4932,7 +4829,6 @@ window.loadAdminUsers = async function(){
                 )
             );
 
-
         adminUsers =
             snap.docs.map(
                 docSnap => ({
@@ -4945,9 +4841,7 @@ window.loadAdminUsers = async function(){
                 })
             );
 
-
         renderAdminUsers();
-
 
     }catch(e){
 
@@ -4955,7 +4849,6 @@ window.loadAdminUsers = async function(){
             "ADMIN LOAD ERROR",
             e
         );
-
 
         alert(
             "تعذر تحميل المستخدمين:\n" +
@@ -4978,10 +4871,8 @@ window.renderAdminUsers = function(){
             "adminUsersList"
         );
 
-
     if(!box)
         return;
-
 
     const q =
         (
@@ -4995,7 +4886,6 @@ window.renderAdminUsers = function(){
         .toLowerCase()
         .trim();
 
-
     const list =
         adminUsers.filter(
             u =>
@@ -5003,7 +4893,6 @@ window.renderAdminUsers = function(){
                 .toLowerCase()
                 .includes(q)
         );
-
 
     if(!list.length){
 
@@ -5014,7 +4903,6 @@ window.renderAdminUsers = function(){
 
     }
 
-
     box.innerHTML =
         list.map(
             u=>{
@@ -5023,10 +4911,8 @@ window.renderAdminUsers = function(){
                     u.uid ===
                     currentUser.uid;
 
-
                 const active =
                     u.active !== false;
-
 
                 return `
 
@@ -5150,14 +5036,12 @@ window.renderAdminUsers = function(){
 
 /* =========================
    CREATE USER
-   باستخدام Secondary Auth
 ========================= */
 
 window.createAdminUser = async function(){
 
     if(!isAdmin())
         return;
-
 
     const name =
         document
@@ -5166,7 +5050,6 @@ window.createAdminUser = async function(){
         )
         .value
         .trim();
-
 
     const email =
         document
@@ -5177,7 +5060,6 @@ window.createAdminUser = async function(){
         .trim()
         .toLowerCase();
 
-
     const password =
         document
         .getElementById(
@@ -5185,14 +5067,12 @@ window.createAdminUser = async function(){
         )
         .value;
 
-
     const role =
         document
         .getElementById(
             "newUserRole"
         )
         .value;
-
 
     if(
         !name ||
@@ -5206,14 +5086,7 @@ window.createAdminUser = async function(){
 
     }
 
-
     try{
-
-        /*
-          إنشاء الحساب الجديد
-          على Auth ثانوي حتى لا
-          يتأثر حساب الأدمن الحالي
-        */
 
         const credential =
             await createUserWithEmailAndPassword(
@@ -5222,15 +5095,8 @@ window.createAdminUser = async function(){
                 password
             );
 
-
         const uid =
             credential.user.uid;
-
-
-        /*
-          حفظ بروفايل المستخدم
-          في Firestore
-        */
 
         await setDoc(
 
@@ -5262,21 +5128,13 @@ window.createAdminUser = async function(){
 
         );
 
-
-        /*
-          تسجيل خروج الحساب الجديد
-          من Auth الثانوي فقط
-        */
-
         await signOut(
             secondaryAuth
         );
 
-
         alert(
             "تم إنشاء المستخدم بنجاح"
         );
-
 
         document
             .getElementById(
@@ -5284,13 +5142,11 @@ window.createAdminUser = async function(){
             )
             .value = "";
 
-
         document
             .getElementById(
                 "newUserEmail"
             )
             .value = "";
-
 
         document
             .getElementById(
@@ -5298,12 +5154,9 @@ window.createAdminUser = async function(){
             )
             .value = "";
 
-
         hideCreateUserForm();
 
-
         await loadAdminUsers();
-
 
     }catch(e){
 
@@ -5312,7 +5165,6 @@ window.createAdminUser = async function(){
             e
         );
 
-
         try{
 
             await signOut(
@@ -5320,7 +5172,6 @@ window.createAdminUser = async function(){
             );
 
         }catch(_){}
-
 
         alert(
             "تعذر إنشاء المستخدم:\n" +
@@ -5345,16 +5196,13 @@ window.editAdminUser = async function(uid){
     if(!isAdmin())
         return;
 
-
     const u =
         adminUsers.find(
             x=>x.uid===uid
         );
 
-
     if(!u)
         return;
-
 
     const name =
         prompt(
@@ -5362,10 +5210,8 @@ window.editAdminUser = async function(uid){
             u.name || ""
         );
 
-
     if(name===null)
         return;
-
 
     const email =
         prompt(
@@ -5373,10 +5219,8 @@ window.editAdminUser = async function(uid){
             u.email || ""
         );
 
-
     if(email===null)
         return;
-
 
     const role =
         prompt(
@@ -5384,16 +5228,13 @@ window.editAdminUser = async function(uid){
             u.role || "driver"
         );
 
-
     if(role===null)
         return;
-
 
     const cleanRole =
         role
         .trim()
         .toLowerCase();
-
 
     if(
         ![
@@ -5408,7 +5249,6 @@ window.editAdminUser = async function(uid){
         );
 
     }
-
 
     try{
 
@@ -5432,14 +5272,11 @@ window.editAdminUser = async function(uid){
 
         });
 
-
         alert(
             "تم تعديل المستخدم"
         );
 
-
         await loadAdminUsers();
-
 
     }catch(e){
 
@@ -5468,16 +5305,13 @@ window.adminChangePassword = async function(uid){
     if(!isAdmin())
         return;
 
-
     const p =
         prompt(
             "اكتب كلمة المرور الجديدة (6 أحرف على الأقل):"
         );
 
-
     if(p===null)
         return;
-
 
     if(p.length<6){
 
@@ -5486,7 +5320,6 @@ window.adminChangePassword = async function(uid){
         );
 
     }
-
 
     try{
 
@@ -5499,11 +5332,9 @@ window.adminChangePassword = async function(uid){
 
         });
 
-
         alert(
             "تم تغيير كلمة المرور"
         );
-
 
     }catch(e){
 
@@ -5532,7 +5363,6 @@ window.toggleAdminUser = async function(uid,active){
     if(!isAdmin())
         return;
 
-
     try{
 
         await updateUserFn({
@@ -5544,7 +5374,6 @@ window.toggleAdminUser = async function(uid,active){
 
         });
 
-
         alert(
             active
             ?
@@ -5553,9 +5382,7 @@ window.toggleAdminUser = async function(uid,active){
             "تم تفعيل الحساب"
         );
 
-
         await loadAdminUsers();
-
 
     }catch(e){
 
@@ -5584,16 +5411,13 @@ window.removeAdminUser = async function(uid){
     if(!isAdmin())
         return;
 
-
     const u =
         adminUsers.find(
             x=>x.uid===uid
         );
 
-
     if(!u)
         return;
-
 
     if(
         !confirm(
@@ -5602,21 +5426,17 @@ window.removeAdminUser = async function(uid){
     )
         return;
 
-
     try{
 
         await deleteUserFn({
             uid
         });
 
-
         alert(
             "تم حذف المستخدم وبياناته"
         );
 
-
         await loadAdminUsers();
-
 
     }catch(e){
 
@@ -5648,7 +5468,6 @@ window.adminResetEmail = async function(email){
     )
         return;
 
-
     try{
 
         await sendPasswordResetEmail(
@@ -5656,11 +5475,9 @@ window.adminResetEmail = async function(email){
             email
         );
 
-
         alert(
             "تم إرسال رابط تغيير كلمة المرور إلى البريد"
         );
-
 
     }catch(e){
 
@@ -5691,7 +5508,6 @@ window.createBackup = async function(){
         await loadMyData();
 
         await loadDrivers();
-
 
         const backup = {
 
@@ -5743,14 +5559,12 @@ window.createBackup = async function(){
 
         };
 
-
         const json =
             JSON.stringify(
                 backup,
                 null,
                 2
             );
-
 
         const blob =
             new Blob(
@@ -5761,52 +5575,42 @@ window.createBackup = async function(){
                 }
             );
 
-
         const url =
             URL.createObjectURL(
                 blob
             );
-
 
         const a =
             document.createElement(
                 "a"
             );
 
-
         const date =
             new Date()
             .toISOString()
             .slice(0,10);
 
-
         a.href =
             url;
 
-
         a.download =
             `DriveOps-Backup-${date}.json`;
-
 
         document
             .body
             .appendChild(a);
 
-
         a.click();
 
         a.remove();
-
 
         URL.revokeObjectURL(
             url
         );
 
-
         alert(
             "تم إنشاء النسخة الاحتياطية بنجاح"
         );
-
 
     }catch(e){
 
@@ -5834,7 +5638,6 @@ window.restoreBackup = async function(){
         )
         .files[0];
 
-
     if(!file){
 
         alert(
@@ -5845,29 +5648,25 @@ window.restoreBackup = async function(){
 
     }
 
-
     if(
         !confirm(
 
             "تنبيه:\n\n"+
             "سيتم إضافة البيانات الموجودة في النسخة إلى حسابك الحالي.\n"+
             "لن يتم حذف بيانات Firebase الحالية.\n\n"+
-            "هل تريد المتابعة؟"
+            "هل تريد المتابعة?"
 
         )
     )
         return;
-
 
     try{
 
         const text =
             await file.text();
 
-
         const backup =
             JSON.parse(text);
-
 
         if(
 
@@ -5901,14 +5700,11 @@ window.restoreBackup = async function(){
 
         }
 
-
         let batch =
             writeBatch(db);
 
-
         let count =
             0;
-
 
         for(
             const d
@@ -5919,7 +5715,6 @@ window.restoreBackup = async function(){
                 d.id ||
                 crypto.randomUUID();
 
-
             const ref =
                 doc(
                     db,
@@ -5928,7 +5723,6 @@ window.restoreBackup = async function(){
                     "drivers",
                     driverId
                 );
-
 
             batch.set(
 
@@ -5952,9 +5746,7 @@ window.restoreBackup = async function(){
 
             );
 
-
             count++;
-
 
             if(count>=450){
 
@@ -5969,7 +5761,6 @@ window.restoreBackup = async function(){
             }
 
         }
-
 
         for(
             const o
@@ -5980,7 +5771,6 @@ window.restoreBackup = async function(){
                 o.id ||
                 crypto.randomUUID();
 
-
             const ref =
                 doc(
                     db,
@@ -5990,13 +5780,10 @@ window.restoreBackup = async function(){
                     operationId
                 );
 
-
             const data =
                 {...o};
 
-
             delete data.id;
-
 
             batch.set(
 
@@ -6010,9 +5797,7 @@ window.restoreBackup = async function(){
 
             );
 
-
             count++;
-
 
             if(count>=450){
 
@@ -6027,7 +5812,6 @@ window.restoreBackup = async function(){
             }
 
         }
-
 
         for(
             const e
@@ -6038,7 +5822,6 @@ window.restoreBackup = async function(){
                 e.id ||
                 crypto.randomUUID();
 
-
             const ref =
                 doc(
                     db,
@@ -6048,13 +5831,10 @@ window.restoreBackup = async function(){
                     expenseId
                 );
 
-
             const data =
                 {...e};
 
-
             delete data.id;
-
 
             batch.set(
 
@@ -6068,9 +5848,7 @@ window.restoreBackup = async function(){
 
             );
 
-
             count++;
-
 
             if(count>=450){
 
@@ -6086,27 +5864,22 @@ window.restoreBackup = async function(){
 
         }
 
-
         if(count>0)
             await batch.commit();
-
 
         await loadDrivers();
 
         await loadMyData();
 
-
         alert(
             "تم استرجاع النسخة الاحتياطية بنجاح"
         );
-
 
         document
             .getElementById(
                 "backupFile"
             )
             .value = "";
-
 
     }catch(e){
 
@@ -6136,14 +5909,12 @@ window.sumVisibleColumns = function(){
         .toLowerCase()
         .trim();
 
-
     const from =
         document
         .getElementById(
             "operationFrom"
         )
         .value;
-
 
     const to =
         document
@@ -6152,14 +5923,12 @@ window.sumVisibleColumns = function(){
         )
         .value;
 
-
     const payment =
         document
         .getElementById(
             "operationPaymentFilter"
         )
         .value;
-
 
     const data =
         operations.filter(o=>{
@@ -6171,13 +5940,11 @@ window.sumVisibleColumns = function(){
                  ${o.to||""}`
                 .toLowerCase();
 
-
             if(
                 search &&
                 !text.includes(search)
             )
                 return false;
-
 
             if(
                 from &&
@@ -6185,13 +5952,11 @@ window.sumVisibleColumns = function(){
             )
                 return false;
 
-
             if(
                 to &&
                 String(o.date||"") > to
             )
                 return false;
-
 
             if(
                 payment &&
@@ -6199,11 +5964,9 @@ window.sumVisibleColumns = function(){
             )
                 return false;
 
-
             return true;
 
         });
-
 
     const totalPrice =
         data.reduce(
@@ -6212,7 +5975,6 @@ window.sumVisibleColumns = function(){
                 Number(o.price||0),
             0
         );
-
 
     const paid =
         data
@@ -6226,7 +5988,6 @@ window.sumVisibleColumns = function(){
             0
         );
 
-
     const unpaid =
         data
         .filter(
@@ -6239,18 +6000,15 @@ window.sumVisibleColumns = function(){
             0
         );
 
-
     const summary =
         document
         .getElementById(
             "operationsSummary"
         );
 
-
     summary.classList.remove(
         "hidden"
     );
-
 
     summary.innerHTML = `
 
@@ -6261,9 +6019,7 @@ window.sumVisibleColumns = function(){
 
         </h3>
 
-
         <div class="grid-4">
-
 
             <div class="card">
 
@@ -6280,7 +6036,6 @@ window.sumVisibleColumns = function(){
 
             </div>
 
-
             <div class="card">
 
                 <div class="card-title">
@@ -6295,7 +6050,6 @@ window.sumVisibleColumns = function(){
                 </div>
 
             </div>
-
 
             <div class="card">
 
@@ -6312,7 +6066,6 @@ window.sumVisibleColumns = function(){
 
             </div>
 
-
             <div class="card">
 
                 <div class="card-title">
@@ -6327,7 +6080,6 @@ window.sumVisibleColumns = function(){
                 </div>
 
             </div>
-
 
         </div>
 
@@ -6354,11 +6106,9 @@ window.refreshData = async function(){
 
         renderDashboard();
 
-
         alert(
             "🔄 تم تحديث البيانات بنجاح"
         );
-
 
     }catch(e){
 
@@ -6398,10 +6148,8 @@ window.deleteAllData = async function(){
 
         );
 
-
     if(!firstConfirm)
         return;
-
 
     const confirmation =
         prompt(
@@ -6411,7 +6159,6 @@ window.deleteAllData = async function(){
             "ويجب كتابتها بالإنجليزية وبنفس الحروف."
 
         );
-
 
     if(
         confirmation !==
@@ -6429,26 +6176,21 @@ window.deleteAllData = async function(){
 
     }
 
-
     try{
 
         let totalDeleted =
             0;
-
 
         const operationsSnap =
             await getDocs(
                 operationsRef()
             );
 
-
         let batch =
             writeBatch(db);
 
-
         let count =
             0;
-
 
         for(
             const d
@@ -6459,11 +6201,9 @@ window.deleteAllData = async function(){
                 d.ref
             );
 
-
             count++;
 
             totalDeleted++;
-
 
             if(count>=400){
 
@@ -6479,27 +6219,22 @@ window.deleteAllData = async function(){
 
         }
 
-
         if(count>0){
 
             await batch.commit();
 
         }
 
-
         const expensesSnap =
             await getDocs(
                 expensesRef()
             );
 
-
         batch =
             writeBatch(db);
 
-
         count =
             0;
-
 
         for(
             const d
@@ -6510,11 +6245,9 @@ window.deleteAllData = async function(){
                 d.ref
             );
 
-
             count++;
 
             totalDeleted++;
-
 
             if(count>=400){
 
@@ -6530,27 +6263,22 @@ window.deleteAllData = async function(){
 
         }
 
-
         if(count>0){
 
             await batch.commit();
 
         }
 
-
         const driversSnap =
             await getDocs(
                 driversRef()
             );
 
-
         batch =
             writeBatch(db);
 
-
         count =
             0;
-
 
         for(
             const d
@@ -6561,11 +6289,9 @@ window.deleteAllData = async function(){
                 d.ref
             );
 
-
             count++;
 
             totalDeleted++;
-
 
             if(count>=400){
 
@@ -6581,20 +6307,17 @@ window.deleteAllData = async function(){
 
         }
 
-
         if(count>0){
 
             await batch.commit();
 
         }
 
-
         operations = [];
 
         expenses = [];
 
         drivers = [];
-
 
         renderDashboard();
 
@@ -6604,13 +6327,11 @@ window.deleteAllData = async function(){
 
         renderDrivers();
 
-
         const summary =
             document
             .getElementById(
                 "operationsSummary"
             );
-
 
         if(summary){
 
@@ -6622,7 +6343,6 @@ window.deleteAllData = async function(){
                 "";
 
         }
-
 
         alert(
 
@@ -6636,11 +6356,9 @@ window.deleteAllData = async function(){
 
         );
 
-
     }catch(e){
 
         console.error(e);
-
 
         alert(
 
@@ -6700,4 +6418,3 @@ function escapeAttr(value){
 
 </body>
 </html>
-```

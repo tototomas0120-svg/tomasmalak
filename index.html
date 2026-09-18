@@ -81,6 +81,13 @@ button{
     border-color:#2563eb;
 }
 
+.form-group input,
+.form-group select,
+.form-group textarea{
+    min-height:44px;
+    font-size:15px;
+}
+
 .btn{
     border:0;
     border-radius:10px;
@@ -147,7 +154,6 @@ button{
     top:0;
     bottom:0;
     overflow-y:auto;
-    z-index:1000;
 }
 
 .logo{
@@ -367,22 +373,15 @@ th{
     border-radius:12px;
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1100px){
+@media(max-width:900px){
 
     .sidebar{
-        width:220px;
-        padding:16px;
+        width:210px;
     }
 
     .main{
-        margin-right:220px;
-        width:calc(100% - 220px);
-        padding:20px;
+        margin-right:210px;
+        width:calc(100% - 210px);
     }
 
     .cards{
@@ -393,352 +392,22 @@ th{
     .grid-4{
         grid-template-columns:repeat(2,1fr);
     }
-
 }
-
-
-/* =========================
-   MOBILE
-   Sidebar ثابتة على اليمين
-========================= */
 
 @media(max-width:650px){
-
-    .layout{
-        display:flex;
-        min-height:100vh;
-    }
-
-    /*
-       Sidebar تفضل على الجنب
-       بدون نقلها لأعلى الشاشة
-    */
-    .sidebar{
-        position:fixed;
-        right:0;
-        top:0;
-        bottom:0;
-
-        width:150px;
-
-        padding:14px 9px;
-
-        overflow-y:auto;
-        overflow-x:hidden;
-
-        z-index:1000;
-    }
-
-    .logo{
-        font-size:19px;
-        text-align:center;
-        margin-bottom:5px;
-    }
-
-    .role-label{
-        font-size:11px;
-        line-height:1.5;
-        text-align:center;
-        margin-bottom:16px;
-    }
-
-    .menu{
-        width:100%;
-    }
-
-    .menu button{
-        width:100%;
-        padding:11px 7px;
-        font-size:12px;
-        line-height:1.5;
-        margin-bottom:6px;
-        white-space:normal;
-        text-align:right;
-    }
-
-    /*
-       المحتوى ياخد باقي الشاشة
-    */
-    .main{
-        margin-right:150px;
-        margin-left:0;
-
-        width:calc(100% - 150px);
-
-        padding:12px;
-
-        min-width:0;
-    }
-
-    .topbar{
-        padding:13px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:8px;
-        flex-wrap:wrap;
-    }
-
-    .page-title{
-        font-size:18px;
-        line-height:1.4;
-    }
-
-    .user-info{
-        font-size:11px;
-        margin-top:5px;
-        word-break:break-word;
-    }
-
-    .topbar .actions{
-        width:auto;
-    }
-
-    .topbar .actions .btn{
-        padding:8px 9px;
-        font-size:11px;
-        white-space:nowrap;
-    }
-
-    /*
-       الكروت عمود واحد
-       علشان متبقاش مضغوطة
-    */
-    .cards{
-        grid-template-columns:1fr;
-        gap:10px;
-        margin-bottom:14px;
-    }
-
-    .card{
-        padding:15px;
-    }
-
-    .card-title{
-        font-size:12px;
-        margin-bottom:7px;
-    }
-
-    .card-value{
-        font-size:21px;
-    }
-
-    /*
-       كل الفورم في عمود واحد
-    */
-    .grid,
-    .grid-3,
-    .grid-4{
-        grid-template-columns:1fr;
-        gap:10px;
-    }
-
-    .panel{
-        padding:14px;
-        margin-bottom:14px;
-        border-radius:13px;
-    }
-
-    .panel-header{
-        gap:8px;
-        margin-bottom:13px;
-    }
-
-    .panel-header h3{
-        font-size:16px;
-    }
-
-    .form-group{
-        margin-bottom:11px;
-    }
-
-    .form-group label{
-        font-size:12px;
-        margin-bottom:6px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea{
-        padding:10px;
-        font-size:12px;
-        min-height:40px;
-    }
-
-    .btn{
-        font-size:12px;
-        padding:9px 10px;
-        border-radius:9px;
-    }
-
-    .actions{
-        gap:6px;
-    }
-
-    .driver-card{
-        padding:14px;
-    }
-
-    .driver-card h3{
-        font-size:15px;
-        margin-bottom:9px;
-    }
-
-    /*
-       الجداول تفضل قابلة للسحب
-       بدل ما تكسر التصميم
-    */
-    .table-wrap{
-        width:100%;
-        overflow-x:auto;
-        -webkit-overflow-scrolling:touch;
-    }
-
-    table{
-        min-width:600px;
-    }
-
-    th,
-    td{
-        padding:10px 8px;
-        font-size:12px;
-    }
-
-    .badge{
-        padding:4px 7px;
-        font-size:11px;
-    }
-
-    .backup-box{
-        padding:14px;
-    }
-
-    .footer{
-        padding:18px 8px;
-        font-size:11px;
-    }
-
-}
-
-
-/* =========================
-   موبايل صغير جدًا
-========================= */
-
-@media(max-width:380px){
-
-    .sidebar{
-        width:135px;
-        padding:12px 7px;
-    }
-
-    .main{
-        margin-right:135px;
-        width:calc(100% - 135px);
-        padding:10px;
-    }
-
-    .logo{
-        font-size:17px;
-    }
-
-    .role-label{
-        font-size:10px;
-        margin-bottom:13px;
-    }
-
-    .menu button{
-        font-size:11px;
-        padding:10px 6px;
-        line-height:1.4;
-    }
-
-    .topbar{
-        padding:11px;
-    }
-
-    .page-title{
-        font-size:16px;
-    }
-
-    .user-info{
-        font-size:10px;
-    }
-
-    .topbar .actions .btn{
-        font-size:10px;
-        padding:7px 7px;
-    }
-
-    .panel{
-        padding:11px;
-    }
-
-    .card{
-        padding:13px;
-    }
-
-    .card-value{
-        font-size:19px;
-    }
-
-    .btn{
-        font-size:11px;
-        padding:8px 8px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea{
-        font-size:11px;
-        padding:9px;
-    }
-
-}
-
-
-/* =========================
-   شاشات صغيرة جدًا جدًا
-========================= */
-
-@media(max-width:330px){
-
-    .sidebar{
-        width:125px;
-    }
-
-    .main{
-        margin-right:125px;
-        width:calc(100% - 125px);
-        padding:8px;
-    }
-
-    .menu button{
-        font-size:10px;
-        padding:9px 5px;
-    }
-
-    .logo{
-        font-size:16px;
-    }
-
-    .role-label{
-        font-size:9px;
-    }
-
-    .page-title{
-        font-size:15px;
-    }
-
-    .panel{
-        padding:9px;
-    }
-
-    .btn{
-        font-size:10px;
-        padding:7px 7px;
-    }
-
+    .layout{display:flex;min-height:100vh;}
+    .sidebar{position:fixed;right:0;top:0;bottom:0;width:190px;padding:12px;overflow-y:auto;z-index:1000;}
+    .logo{font-size:20px;}
+    .role-label{font-size:12px;margin-bottom:15px;}
+    .menu button{padding:11px 9px;font-size:13px;min-height:42px;}
+    .main{margin-right:190px;width:calc(100% - 190px);padding:10px;min-width:0;}
+    .topbar{padding:14px;display:block;}
+    .page-title{font-size:19px;}
+    .user-info{font-size:12px;margin-top:6px;}
+    .topbar .actions .btn{padding:8px 10px;font-size:12px;}
+    .cards,.grid,.grid-3,.grid-4{grid-template-columns:1fr;}
+    .panel{padding:14px;}
+    .btn{font-size:13px;padding:9px 11px;min-height:42px;}
 }
 </style>
 </head>
@@ -1809,133 +1478,31 @@ th{
 <section id="page-admin" class="page">
 
 <div class="panel">
-
     <div class="panel-header">
-
-        <h3>
-            👑 إدارة المستخدمين
-        </h3>
-
-        <button
-            class="btn btn-primary"
-            onclick="showCreateUserForm()">
-
-            ➕ مستخدم جديد
-
-        </button>
-
+        <h3>👑 إدارة المستخدمين</h3>
+        <button class="btn btn-primary" onclick="showCreateUserForm()">➕ مستخدم جديد</button>
     </div>
 
     <div class="form-group">
-
-        <label>
-            بحث
-        </label>
-
-        <input
-            id="adminUserSearch"
-            oninput="renderAdminUsers()"
-            placeholder="الاسم أو البريد الإلكتروني">
-
+        <label>بحث</label>
+        <input id="adminUserSearch" oninput="renderAdminUsers()" placeholder="الاسم أو البريد الإلكتروني">
     </div>
 
-    <div
-        id="createUserBox"
-        class="backup-box hidden"
-        style="margin-bottom:15px">
-
-        <h3 style="margin-bottom:15px">
-            إضافة مستخدم
-        </h3>
-
+    <div id="createUserBox" class="backup-box hidden" style="margin-bottom:15px">
+        <h3 style="margin-bottom:15px">إضافة مستخدم</h3>
         <div class="grid">
-
-            <div class="form-group">
-
-                <label>
-                    الاسم
-                </label>
-
-                <input
-                    id="newUserName">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-                    البريد الإلكتروني
-                </label>
-
-                <input
-                    id="newUserEmail"
-                    type="email">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-                    كلمة المرور
-                </label>
-
-                <input
-                    id="newUserPassword"
-                    type="password"
-                    minlength="6">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-                    الصلاحية
-                </label>
-
-                <select id="newUserRole">
-
-                    <option value="driver">
-                        سواق
-                    </option>
-
-                    <option value="manager">
-                        مدير
-                    </option>
-
-                    <option value="admin">
-                        مسؤول
-                    </option>
-
-                </select>
-
-            </div>
-
+            <div class="form-group"><label>الاسم</label><input id="newUserName"></div>
+            <div class="form-group"><label>البريد الإلكتروني</label><input id="newUserEmail" type="email"></div>
+            <div class="form-group"><label>كلمة المرور</label><input id="newUserPassword" type="password" minlength="6"></div>
+            <div class="form-group"><label>الصلاحية</label><select id="newUserRole"><option value="driver">سواق</option><option value="manager">مدير</option><option value="admin">مسؤول</option></select></div>
         </div>
-
         <div class="actions">
-
-            <button
-                class="btn btn-success"
-                onclick="createAdminUser()">
-
-                حفظ المستخدم
-
-            </button>
-
-            <button
-                class="btn btn-secondary"
-                onclick="hideCreateUserForm()">
-
-                إلغاء
-
-            </button>
-
+            <button class="btn btn-success" onclick="createAdminUser()">حفظ المستخدم</button>
+            <button class="btn btn-secondary" onclick="hideCreateUserForm()">إلغاء</button>
         </div>
-
     </div>
 
     <div id="adminUsersList"></div>
-
 </div>
 
 </section>
@@ -2160,14 +1727,15 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+
 import {
     getAuth,
     signInWithEmailAndPassword,
     onAuthStateChanged,
     sendPasswordResetEmail,
-    signOut,
-    createUserWithEmailAndPassword
+    signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
     getFirestore,
@@ -2227,49 +1795,15 @@ const auth =
     getAuth(app);
 
 
-const secondaryApp =
-    initializeApp(
-        firebaseConfig,
-        "secondary"
-    );
-
-
-const secondaryAuth =
-    getAuth(
-        secondaryApp
-    );
-
-
 const db =
     getFirestore(app);
 
-
-const functions =
-    getFunctions(
-        app,
-        "us-central1"
-    );
-
-
-const updateUserFn =
-    httpsCallable(
-        functions,
-        "updateUser"
-    );
-
-
-const changeUserPasswordFn =
-    httpsCallable(
-        functions,
-        "changeUserPassword"
-    );
-
-
-const deleteUserFn =
-    httpsCallable(
-        functions,
-        "deleteUser"
-    );
+const functions = getFunctions(app);
+const getAllUsers = httpsCallable(functions, "getAllUsers");
+const createUserFn = httpsCallable(functions, "createUser");
+const updateUserFn = httpsCallable(functions, "updateUser");
+const changeUserPasswordFn = httpsCallable(functions, "changeUserPassword");
+const deleteUserFn = httpsCallable(functions, "deleteUser");
 
 
 /* =========================
@@ -2380,18 +1914,23 @@ window.login = async function(){
         document
         .getElementById("loginEmail")
         .value
-        .trim();
+        .trim()
+        .toLowerCase();
+
 
     const password =
         document
         .getElementById("loginPassword")
         .value;
 
+
     const error =
         document
         .getElementById("loginError");
 
+
     error.textContent = "";
+
 
     if(!email || !password){
 
@@ -2400,6 +1939,7 @@ window.login = async function(){
 
         return;
     }
+
 
     try{
 
@@ -2429,6 +1969,7 @@ window.forgotPassword = async function(){
         .value
         .trim();
 
+
     if(!email){
 
         alert(
@@ -2438,6 +1979,7 @@ window.forgotPassword = async function(){
         return;
     }
 
+
     try{
 
         await sendPasswordResetEmail(
@@ -2445,9 +1987,11 @@ window.forgotPassword = async function(){
             email
         );
 
+
         alert(
             "تم إرسال رابط تغيير كلمة المرور إلى بريدك الإلكتروني"
         );
+
 
     }catch(e){
 
@@ -2499,7 +2043,6 @@ onAuthStateChanged(
                 .style.display = "none";
 
             return;
-
         }
 
         currentUser = user;
@@ -2520,7 +2063,7 @@ onAuthStateChanged(
             console.log(userRef.path);
 
             const snap =
-                await getDocFromServer(userRef);
+                await getDoc(userRef);
 
             console.log("Firestore Document Exists:");
             console.log(snap.exists());
@@ -2654,40 +2197,17 @@ onAuthStateChanged(
                 isActive
             );
 
-            const allowedRoles = [
-                "admin",
-                "manager",
-                "driver"
-            ];
+            const allowedRoles = ["admin", "manager", "driver"];
+            const hasValidRole = allowedRoles.includes(cleanRole);
 
-            const hasValidRole =
-                allowedRoles.includes(
-                    cleanRole
-                );
+            // صلاحيات الحساب الحالية
+            const isAdmin = cleanRole === "admin";
+            const isManager = cleanRole === "manager";
+            const isDriver = cleanRole === "driver";
 
-            const isAdmin =
-                cleanRole === "admin";
-
-            const isManager =
-                cleanRole === "manager";
-
-            const isDriver =
-                cleanRole === "driver";
-
-            console.log(
-                "Is Admin:",
-                isAdmin
-            );
-
-            console.log(
-                "Is Manager:",
-                isManager
-            );
-
-            console.log(
-                "Is Driver:",
-                isDriver
-            );
+            console.log("Is Admin:", isAdmin);
+            console.log("Is Manager:", isManager);
+            console.log("Is Driver:", isDriver);
 
             console.log("====================================");
 
@@ -2717,10 +2237,7 @@ onAuthStateChanged(
                 return;
             }
 
-            console.log(
-                "✅ ROLE CHECK PASSED:",
-                cleanRole
-            );
+            console.log("✅ ROLE CHECK PASSED:", cleanRole);
 
             console.log(
                 "===================================="
@@ -2788,15 +2305,18 @@ async function openApp(){
         .getElementById("loginPage")
         .style.display = "none";
 
+
     document
         .getElementById("app")
         .style.display = "block";
+
 
     document
         .getElementById("userInfo")
         .textContent =
             currentUserData.name ||
             currentUser.email;
+
 
     const roleNames = {
         admin: "👑 مسؤول النظام",
@@ -2806,40 +2326,29 @@ async function openApp(){
 
     document
         .getElementById("roleLabel")
-        .textContent =
-            roleNames[
-                String(
-                    currentUserData.role || "driver"
-                ).toLowerCase()
-            ] || "DriveOps";
+        .textContent = roleNames[String(currentUserData.role || "driver").toLowerCase()] || "DriveOps";
 
-    const adminMenu =
-        document.getElementById(
-            "menu-admin"
-        );
+    const adminMenu = document.getElementById("menu-admin");
+    if(adminMenu) adminMenu.classList.toggle("hidden", String(currentUserData.role || "").toLowerCase() !== "admin");
 
-    if(adminMenu)
-        adminMenu.classList.toggle(
-            "hidden",
-            String(
-                currentUserData.role || ""
-            ).toLowerCase() !== "admin"
-        );
 
     document
         .getElementById("opDate")
         .value =
             today();
 
+
     document
         .getElementById("expenseDate")
         .value =
             today();
 
+
     document
         .getElementById("reportMonth")
         .value =
             currentMonth();
+
 
     await loadDrivers();
 
@@ -2862,15 +2371,19 @@ window.showPage = async function(page){
             p=>p.classList.remove("active")
         );
 
+
     const target =
         document.getElementById(
             "page-"+page
         );
 
+
     if(!target)
         return;
 
+
     target.classList.add("active");
+
 
     const titles = {
 
@@ -2903,11 +2416,13 @@ window.showPage = async function(page){
 
     };
 
+
     document
         .getElementById("pageTitle")
         .textContent =
             titles[page] ||
             "DriveOps";
+
 
     document
         .querySelectorAll(".menu button")
@@ -2915,34 +2430,43 @@ window.showPage = async function(page){
             b=>b.classList.remove("active")
         );
 
+
     const menu =
         document.getElementById(
             "menu-"+page
         );
 
+
     if(menu)
         menu.classList.add("active");
+
 
     if(page==="dashboard")
         renderDashboard();
 
+
     if(page==="operations")
         renderOperations();
+
 
     if(page==="expenses")
         renderExpenses();
 
+
     if(page==="reports")
         await buildReport();
 
+
     if(page==="drivers")
         await loadDrivers();
+
 
     if(page==="settings")
         loadSettings();
 
     if(page==="admin")
         await loadAdminUsers();
+
 
     if(page==="addOperation")
         fillDriverSelect();
@@ -2960,13 +2484,14 @@ async function loadMyData(){
 
     expenses = [];
 
-    if(!currentUser)
-        return;
+    if(!currentUser) return;
+
 
     const opSnap =
         await getDocs(
             operationsRef()
         );
+
 
     opSnap.forEach(d=>{
 
@@ -2981,10 +2506,12 @@ async function loadMyData(){
 
     });
 
+
     const expSnap =
         await getDocs(
             expensesRef()
         );
+
 
     expSnap.forEach(d=>{
 
@@ -2999,6 +2526,7 @@ async function loadMyData(){
 
     });
 
+
     operations.sort(
         (a,b)=>
             String(b.date||"")
@@ -3007,6 +2535,7 @@ async function loadMyData(){
             )
     );
 
+
     expenses.sort(
         (a,b)=>
             String(b.date||"")
@@ -3014,6 +2543,7 @@ async function loadMyData(){
                 String(a.date||"")
             )
     );
+
 
     renderDashboard();
 
@@ -3034,6 +2564,7 @@ function renderDashboard(){
             0
         );
 
+
     const exp =
         expenses.reduce(
             (sum,e)=>
@@ -3042,25 +2573,30 @@ function renderDashboard(){
             0
         );
 
+
     document
         .getElementById("statOperations")
         .textContent =
             operations.length;
+
 
     document
         .getElementById("statRevenue")
         .textContent =
             money(revenue);
 
+
     document
         .getElementById("statExpenses")
         .textContent =
             money(exp);
 
+
     document
         .getElementById("statNet")
         .textContent =
             money(revenue-exp);
+
 
     const tbody =
         document
@@ -3068,7 +2604,9 @@ function renderDashboard(){
             "dashboardOperations"
         );
 
+
     tbody.innerHTML = "";
+
 
     operations
         .slice(0,10)
@@ -3142,12 +2680,14 @@ window.renderOperations = function(){
         .toLowerCase()
         .trim();
 
+
     const from =
         document
         .getElementById(
             "operationFrom"
         )
         .value;
+
 
     const to =
         document
@@ -3156,12 +2696,14 @@ window.renderOperations = function(){
         )
         .value;
 
+
     const payment =
         document
         .getElementById(
             "operationPaymentFilter"
         )
         .value;
+
 
     let data =
         operations.filter(o=>{
@@ -3173,11 +2715,13 @@ window.renderOperations = function(){
                  ${o.to||""}`
                 .toLowerCase();
 
+
             if(
                 search &&
                 !text.includes(search)
             )
                 return false;
+
 
             if(
                 from &&
@@ -3185,11 +2729,13 @@ window.renderOperations = function(){
             )
                 return false;
 
+
             if(
                 to &&
                 String(o.date||"") > to
             )
                 return false;
+
 
             if(
                 payment &&
@@ -3197,9 +2743,11 @@ window.renderOperations = function(){
             )
                 return false;
 
+
             return true;
 
         });
+
 
     const tbody =
         document
@@ -3207,7 +2755,9 @@ window.renderOperations = function(){
             "operationsTable"
         );
 
+
     tbody.innerHTML = "";
+
 
     if(!data.length){
 
@@ -3230,6 +2780,7 @@ window.renderOperations = function(){
         return;
 
     }
+
 
     data.forEach(o=>{
 
@@ -3291,6 +2842,7 @@ window.renderOperations = function(){
 
                 </button>
 
+
                 <button
                     class="btn btn-danger"
                     onclick="deleteOperation('${escapeAttr(o.id)}')">
@@ -3323,6 +2875,7 @@ window.saveOperation = async function(){
         )
         .value;
 
+
     const driverId =
         document
         .getElementById(
@@ -3330,10 +2883,12 @@ window.saveOperation = async function(){
         )
         .value;
 
+
     const driver =
         drivers.find(
             d=>d.id===driverId
         );
+
 
     const data = {
 
@@ -3414,6 +2969,7 @@ window.saveOperation = async function(){
 
     };
 
+
     if(!data.driverId){
 
         alert(
@@ -3423,6 +2979,7 @@ window.saveOperation = async function(){
         return;
 
     }
+
 
     if(
         !data.date ||
@@ -3436,6 +2993,7 @@ window.saveOperation = async function(){
         return;
 
     }
+
 
     try{
 
@@ -3461,6 +3019,7 @@ window.saveOperation = async function(){
                 new Date()
                 .toISOString();
 
+
             await addDoc(
                 operationsRef(),
                 data
@@ -3468,9 +3027,11 @@ window.saveOperation = async function(){
 
         }
 
+
         alert(
             "تم حفظ التشغيل"
         );
+
 
         clearOperationForm();
 
@@ -3478,18 +3039,14 @@ window.saveOperation = async function(){
 
         showPage("operations");
 
+
     }catch(e){
 
-        console.error(
-            "SAVE OPERATION ERROR:",
-            e
-        );
+        console.error("SAVE OPERATION ERROR:",e);
 
         alert(
-            "حدث خطأ أثناء حفظ التشغيل\n\nCode: " +
-            (e.code || "") +
-            "\n\nMessage: " +
-            (e.message || "")
+            "حدث خطأ أثناء حفظ التشغيل\n\nCode: " + (e.code || "") + "\n\n" +
+            "Message: " + (e.message || "")
         );
 
     }
@@ -3508,8 +3065,10 @@ window.editOperation = function(id){
             x=>x.id===id
         );
 
+
     if(!o)
         return;
+
 
     document
         .getElementById(
@@ -3518,12 +3077,14 @@ window.editOperation = function(id){
         .value =
             o.id;
 
+
     document
         .getElementById(
             "opDriver"
         )
         .value =
             o.driverId || "";
+
 
     document
         .getElementById(
@@ -3532,12 +3093,14 @@ window.editOperation = function(id){
         .value =
             o.date || "";
 
+
     document
         .getElementById(
             "opClient"
         )
         .value =
             o.client || "";
+
 
     document
         .getElementById(
@@ -3546,12 +3109,14 @@ window.editOperation = function(id){
         .value =
             o.from || "";
 
+
     document
         .getElementById(
             "opTo"
         )
         .value =
             o.to || "";
+
 
     document
         .getElementById(
@@ -3560,12 +3125,14 @@ window.editOperation = function(id){
         .value =
             o.type || "";
 
+
     document
         .getElementById(
             "opPrice"
         )
         .value =
             o.price || "";
+
 
     document
         .getElementById(
@@ -3574,6 +3141,7 @@ window.editOperation = function(id){
         .value =
             o.payment || "paid";
 
+
     document
         .getElementById(
             "opNotes"
@@ -3581,12 +3149,14 @@ window.editOperation = function(id){
         .value =
             o.notes || "";
 
+
     document
         .getElementById(
             "operationFormTitle"
         )
         .textContent =
             "تعديل التشغيل";
+
 
     showPage(
         "addOperation"
@@ -3603,11 +3173,13 @@ function clearOperationForm(){
         )
         .value = "";
 
+
     document
         .getElementById(
             "opDriver"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -3616,11 +3188,13 @@ function clearOperationForm(){
         .value =
             today();
 
+
     document
         .getElementById(
             "opClient"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -3628,11 +3202,13 @@ function clearOperationForm(){
         )
         .value = "";
 
+
     document
         .getElementById(
             "opTo"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -3640,11 +3216,13 @@ function clearOperationForm(){
         )
         .value = "";
 
+
     document
         .getElementById(
             "opPrice"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -3653,11 +3231,13 @@ function clearOperationForm(){
         .value =
             "paid";
 
+
     document
         .getElementById(
             "opNotes"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -3682,6 +3262,7 @@ window.deleteOperation = async function(id){
     )
         return;
 
+
     try{
 
         await deleteDoc(
@@ -3696,11 +3277,14 @@ window.deleteOperation = async function(id){
 
         );
 
+
         await loadMyData();
+
 
         alert(
             "تم حذف التشغيل"
         );
+
 
     }catch(e){
 
@@ -3761,6 +3345,7 @@ window.saveExpense = async function(){
 
     };
 
+
     if(
         !data.date ||
         !data.amount
@@ -3774,6 +3359,7 @@ window.saveExpense = async function(){
 
     }
 
+
     try{
 
         await addDoc(
@@ -3781,11 +3367,13 @@ window.saveExpense = async function(){
             data
         );
 
+
         document
             .getElementById(
                 "expenseType"
             )
             .value = "";
+
 
         document
             .getElementById(
@@ -3793,17 +3381,21 @@ window.saveExpense = async function(){
             )
             .value = "";
 
+
         document
             .getElementById(
                 "expenseAmount"
             )
             .value = "";
 
+
         await loadMyData();
+
 
         alert(
             "تم إضافة المصروف"
         );
+
 
     }catch(e){
 
@@ -3826,7 +3418,9 @@ function renderExpenses(){
             "expensesTable"
         );
 
+
     tbody.innerHTML = "";
+
 
     if(!expenses.length){
 
@@ -3849,6 +3443,7 @@ function renderExpenses(){
         return;
 
     }
+
 
     expenses.forEach(e=>{
 
@@ -3902,6 +3497,7 @@ window.deleteExpense = async function(id){
     )
         return;
 
+
     try{
 
         await deleteDoc(
@@ -3916,11 +3512,14 @@ window.deleteExpense = async function(id){
 
         );
 
+
         await loadMyData();
+
 
         alert(
             "تم حذف المصروف"
         );
+
 
     }catch(e){
 
@@ -3946,7 +3545,9 @@ async function loadDrivers(){
             driversRef()
         );
 
+
     drivers = [];
+
 
     snap.forEach(d=>{
 
@@ -3961,6 +3562,7 @@ async function loadDrivers(){
 
     });
 
+
     drivers.sort(
         (a,b)=>
             String(a.name||"")
@@ -3969,6 +3571,7 @@ async function loadDrivers(){
                 "ar"
             )
     );
+
 
     renderDrivers();
 
@@ -3987,6 +3590,7 @@ function renderDrivers(){
             "driversList"
         );
 
+
     if(!drivers.length){
 
         container.innerHTML = `
@@ -4003,7 +3607,9 @@ function renderDrivers(){
 
     }
 
+
     container.innerHTML = "";
+
 
     drivers.forEach(d=>{
 
@@ -4011,6 +3617,7 @@ function renderDrivers(){
             operations.filter(
                 o=>o.driverId===d.id
             ).length;
+
 
         const revenue =
             operations
@@ -4024,6 +3631,7 @@ function renderDrivers(){
                 0
             );
 
+
         container.innerHTML += `
 
         <div class="driver-card">
@@ -4036,6 +3644,7 @@ function renderDrivers(){
                 )}
 
             </h3>
+
 
             <div
                 style="color:#6b7280;margin-bottom:12px">
@@ -4054,7 +3663,9 @@ function renderDrivers(){
 
             </div>
 
+
             <div class="actions">
+
 
                 <button
                     class="btn btn-primary"
@@ -4064,6 +3675,7 @@ function renderDrivers(){
 
                 </button>
 
+
                 <button
                     class="btn btn-warning"
                     onclick="renameDriver('${escapeAttr(d.id)}')">
@@ -4072,6 +3684,7 @@ function renderDrivers(){
 
                 </button>
 
+
                 <button
                     class="btn btn-danger"
                     onclick="deleteDriver('${escapeAttr(d.id)}')">
@@ -4079,6 +3692,7 @@ function renderDrivers(){
                     🗑️ حذف
 
                 </button>
+
 
             </div>
 
@@ -4099,13 +3713,16 @@ function fillDriverSelect(){
             "opDriver"
         );
 
+
     if(!select)
         return;
+
 
     select.innerHTML =
         `<option value="">
             اختر السواق
         </option>`;
+
 
     drivers.forEach(d=>{
 
@@ -4135,13 +3752,16 @@ function fillReportDriver(){
             "reportDriver"
         );
 
+
     if(!select)
         return;
+
 
     select.innerHTML =
         `<option value="">
             كل السواقين
         </option>`;
+
 
     drivers.forEach(d=>{
 
@@ -4186,11 +3806,13 @@ window.hideAddDriver = function(){
         )
         .classList.add("hidden");
 
+
     document
         .getElementById(
             "newDriverName"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -4211,23 +3833,28 @@ window.createDriver = async function(){
         .value
         .trim();
 
+
     const message =
         document
         .getElementById(
             "driverMessage"
         );
 
+
     if(!name){
 
         message.textContent =
             "اكتب اسم السواق";
 
+
         message.style.color =
             "#dc2626";
+
 
         return;
 
     }
+
 
     try{
 
@@ -4248,11 +3875,14 @@ window.createDriver = async function(){
 
         );
 
+
         message.textContent =
             "تم إضافة السواق بنجاح";
 
+
         message.style.color =
             "#16a34a";
+
 
         document
             .getElementById(
@@ -4260,14 +3890,18 @@ window.createDriver = async function(){
             )
             .value = "";
 
+
         await loadDrivers();
+
 
     }catch(e){
 
         console.error(e);
 
+
         message.textContent =
             "تعذر إضافة السواق";
+
 
         message.style.color =
             "#dc2626";
@@ -4288,8 +3922,10 @@ window.renameDriver = async function(driverId){
             d=>d.id===driverId
         );
 
+
     if(!driver)
         return;
+
 
     const newName =
         prompt(
@@ -4297,11 +3933,13 @@ window.renameDriver = async function(driverId){
             driver.name || ""
         );
 
+
     if(
         !newName ||
         !newName.trim()
     )
         return;
+
 
     try{
 
@@ -4322,10 +3960,12 @@ window.renameDriver = async function(driverId){
 
         );
 
+
         const related =
             operations.filter(
                 o=>o.driverId===driverId
             );
+
 
         for(
             const operation
@@ -4351,13 +3991,16 @@ window.renameDriver = async function(driverId){
 
         }
 
+
         await loadDrivers();
 
         await loadMyData();
 
+
         alert(
             "تم تعديل اسم السواق"
         );
+
 
     }catch(e){
 
@@ -4383,13 +4026,16 @@ window.deleteDriver = async function(driverId){
             d=>d.id===driverId
         );
 
+
     if(!driver)
         return;
+
 
     const related =
         operations.filter(
             o=>o.driverId===driverId
         );
+
 
     if(related.length){
 
@@ -4406,6 +4052,7 @@ window.deleteDriver = async function(driverId){
 
     }
 
+
     if(
         !confirm(
             "هل تريد حذف السواق "+
@@ -4414,6 +4061,7 @@ window.deleteDriver = async function(driverId){
         )
     )
         return;
+
 
     try{
 
@@ -4429,11 +4077,14 @@ window.deleteDriver = async function(driverId){
 
         );
 
+
         await loadDrivers();
+
 
         alert(
             "تم حذف السواق"
         );
+
 
     }catch(e){
 
@@ -4461,6 +4112,7 @@ window.driverReport = function(driverId){
         .value =
             driverId;
 
+
     showPage(
         "reports"
     );
@@ -4482,12 +4134,14 @@ window.buildReport = async function(){
         .value ||
         currentMonth();
 
+
     const selectedDriver =
         document
         .getElementById(
             "reportDriver"
         )
         .value;
+
 
     let data =
         operations.filter(
@@ -4496,6 +4150,7 @@ window.buildReport = async function(){
                     o.date||""
                 ).startsWith(month)
         );
+
 
     if(selectedDriver){
 
@@ -4508,6 +4163,7 @@ window.buildReport = async function(){
 
     }
 
+
     const reportExpenses =
         expenses.filter(
             e=>
@@ -4515,6 +4171,7 @@ window.buildReport = async function(){
                     e.date||""
                 ).startsWith(month)
         );
+
 
     const revenue =
         data.reduce(
@@ -4524,6 +4181,7 @@ window.buildReport = async function(){
             0
         );
 
+
     const exp =
         reportExpenses.reduce(
             (sum,e)=>
@@ -4531,6 +4189,7 @@ window.buildReport = async function(){
                 Number(e.amount||0),
             0
         );
+
 
     const paid =
         data
@@ -4544,6 +4203,7 @@ window.buildReport = async function(){
             0
         );
 
+
     const unpaid =
         data
         .filter(
@@ -4556,12 +4216,14 @@ window.buildReport = async function(){
             0
         );
 
+
     document
         .getElementById(
             "reportOperations"
         )
         .textContent =
             data.length;
+
 
     document
         .getElementById(
@@ -4570,12 +4232,14 @@ window.buildReport = async function(){
         .textContent =
             money(revenue);
 
+
     document
         .getElementById(
             "reportExpenses"
         )
         .textContent =
             money(exp);
+
 
     document
         .getElementById(
@@ -4584,8 +4248,10 @@ window.buildReport = async function(){
         .textContent =
             money(revenue-exp);
 
+
     let driverName =
         "كل السواقين";
+
 
     if(selectedDriver){
 
@@ -4595,11 +4261,13 @@ window.buildReport = async function(){
                     selectedDriver
             );
 
+
         if(d)
             driverName =
                 d.name;
 
     }
+
 
     const details =
         document
@@ -4607,9 +4275,11 @@ window.buildReport = async function(){
             "reportDetails"
         );
 
+
     details.innerHTML = `
 
         <div class="grid-4">
+
 
             <div class="card">
 
@@ -4629,6 +4299,7 @@ window.buildReport = async function(){
 
             </div>
 
+
             <div class="card">
 
                 <div class="card-title">
@@ -4644,6 +4315,7 @@ window.buildReport = async function(){
 
             </div>
 
+
             <div class="card">
 
                 <div class="card-title">
@@ -4658,6 +4330,7 @@ window.buildReport = async function(){
                 </div>
 
             </div>
+
 
             <div class="card">
 
@@ -4676,7 +4349,9 @@ window.buildReport = async function(){
 
             </div>
 
+
         </div>
+
 
         <h3
             style="margin:25px 0 12px">
@@ -4684,6 +4359,7 @@ window.buildReport = async function(){
             التشغيلات
 
         </h3>
+
 
         <div class="table-wrap">
 
@@ -4704,6 +4380,7 @@ window.buildReport = async function(){
         </tr>
 
         </thead>
+
 
         <tbody>
 
@@ -4815,12 +4492,14 @@ window.sumReport = function(){
         .value ||
         currentMonth();
 
+
     const selectedDriver =
         document
         .getElementById(
             "reportDriver"
         )
         .value;
+
 
     let data =
         operations.filter(
@@ -4829,6 +4508,7 @@ window.sumReport = function(){
                     o.date||""
                 ).startsWith(month)
         );
+
 
     if(selectedDriver){
 
@@ -4841,6 +4521,7 @@ window.sumReport = function(){
 
     }
 
+
     const total =
         data.reduce(
             (sum,o)=>
@@ -4848,6 +4529,7 @@ window.sumReport = function(){
                 Number(o.price||0),
             0
         );
+
 
     alert(
 
@@ -4889,6 +4571,7 @@ window.saveProfile = async function(){
         .value
         .trim();
 
+
     if(!name){
 
         alert(
@@ -4898,6 +4581,7 @@ window.saveProfile = async function(){
         return;
 
     }
+
 
     try{
 
@@ -4914,8 +4598,10 @@ window.saveProfile = async function(){
 
         );
 
+
         currentUserData.name =
             name;
+
 
         document
             .getElementById(
@@ -4924,9 +4610,11 @@ window.saveProfile = async function(){
             .textContent =
                 name;
 
+
         alert(
             "تم حفظ البيانات"
         );
+
 
     }catch(e){
 
@@ -4951,9 +4639,11 @@ async function(){
             currentUser.email
         );
 
+
         alert(
             "تم إرسال رابط تغيير كلمة المرور إلى بريدك"
         );
+
 
     }catch(e){
 
@@ -4974,728 +4664,117 @@ async function(){
 
 let adminUsers = [];
 
-
 function isAdmin(){
-
-    return String(
-        currentUserData?.role || ""
-    ).toLowerCase() === "admin";
-
+    return String(currentUserData?.role || "").toLowerCase() === "admin";
 }
 
-
 window.showCreateUserForm = function(){
-
-    if(!isAdmin())
-        return alert("غير مسموح");
-
-    document
-        .getElementById(
-            "createUserBox"
-        )
-        .classList
-        .remove("hidden");
-
+    if(!isAdmin()) return alert("غير مسموح");
+    document.getElementById("createUserBox").classList.remove("hidden");
 };
-
 
 window.hideCreateUserForm = function(){
-
-    const box =
-        document.getElementById(
-            "createUserBox"
-        );
-
-    if(box)
-        box.classList.add("hidden");
-
+    const box=document.getElementById("createUserBox");
+    if(box) box.classList.add("hidden");
 };
-
-
-/* =========================
-   GET ALL USERS
-========================= */
 
 window.loadAdminUsers = async function(){
-
-    if(!isAdmin())
-        return;
-
+    if(!isAdmin()) return;
     try{
-
-        const snap =
-            await getDocs(
-                collection(
-                    db,
-                    "users"
-                )
-            );
-
-        adminUsers =
-            snap.docs.map(
-                docSnap => ({
-
-                    uid:
-                        docSnap.id,
-
-                    ...docSnap.data()
-
-                })
-            );
-
+        const result = await getAllUsers();
+        adminUsers = Array.isArray(result.data) ? result.data : [];
         renderAdminUsers();
-
     }catch(e){
-
-        console.error(
-            "ADMIN LOAD ERROR",
-            e
-        );
-
-        alert(
-            "تعذر تحميل المستخدمين:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
+        console.error("ADMIN LOAD ERROR",e);
+        alert("تعذر تحميل المستخدمين:\n" + (e.message || e.code || "خطأ"));
     }
-
 };
-
 
 window.renderAdminUsers = function(){
-
-    const box =
-        document.getElementById(
-            "adminUsersList"
-        );
-
-    if(!box)
-        return;
-
-    const q =
-        (
-            document
-            .getElementById(
-                "adminUserSearch"
-            )
-            ?.value ||
-            ""
-        )
-        .toLowerCase()
-        .trim();
-
-    const list =
-        adminUsers.filter(
-            u =>
-                `${u.name||""} ${u.email||""}`
-                .toLowerCase()
-                .includes(q)
-        );
-
-    if(!list.length){
-
-        box.innerHTML =
-            '<div class="empty">لا يوجد مستخدمين</div>';
-
-        return;
-
-    }
-
-    box.innerHTML =
-        list.map(
-            u=>{
-
-                const self =
-                    u.uid ===
-                    currentUser.uid;
-
-                const active =
-                    u.active !== false;
-
-                return `
-
-                <div class="driver-card">
-
-                    <h3>
-                        ${escapeHtml(
-                            u.name ||
-                            "بدون اسم"
-                        )}
-                    </h3>
-
-                    <p
-                        style="color:#6b7280;margin-bottom:10px">
-
-                        ${escapeHtml(
-                            u.email || ""
-                        )}
-
-                    </p>
-
-                    <p
-                        style="margin-bottom:12px">
-
-                        <strong>
-                            الصلاحية:
-                        </strong>
-
-                        ${escapeHtml(
-                            u.role ||
-                            "driver"
-                        )}
-
-                        &nbsp; | &nbsp;
-
-                        <strong>
-                            الحالة:
-                        </strong>
-
-                        ${
-                            active
-                            ?
-                            "🟢 فعال"
-                            :
-                            "🔴 متوقف"
-                        }
-
-                    </p>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn btn-info"
-                            onclick="editAdminUser('${escapeAttr(u.uid)}')">
-
-                            ✏️ تعديل
-
-                        </button>
-
-                        <button
-                            class="btn btn-warning"
-                            onclick="adminChangePassword('${escapeAttr(u.uid)}')">
-
-                            🔑 كلمة المرور
-
-                        </button>
-
-                        <button
-                            class="btn btn-secondary"
-                            onclick="adminResetEmail('${escapeAttr(u.email||"")}')">
-
-                            📧 إرسال Reset
-
-                        </button>
-
-                        ${
-                            self
-                            ?
-                            ""
-                            :
-                            `<button
-                                class="btn ${active?"btn-danger":"btn-success"}"
-                                onclick="toggleAdminUser('${escapeAttr(u.uid)}',${active})">
-
-                                ${
-                                    active
-                                    ?
-                                    "⏸️ إيقاف"
-                                    :
-                                    "▶️ تفعيل"
-                                }
-
-                            </button>`
-                        }
-
-                        ${
-                            self
-                            ?
-                            ""
-                            :
-                            `<button
-                                class="btn btn-danger"
-                                onclick="removeAdminUser('${escapeAttr(u.uid)}')">
-
-                                🗑️ حذف
-
-                            </button>`
-                        }
-
-                    </div>
-
-                </div>
-
-                `;
-
-            }
-        ).join("");
-
+    const box=document.getElementById("adminUsersList");
+    if(!box) return;
+    const q=(document.getElementById("adminUserSearch")?.value || "").toLowerCase().trim();
+    const list=adminUsers.filter(u => `${u.name||""} ${u.email||""}`.toLowerCase().includes(q));
+    if(!list.length){ box.innerHTML='<div class="empty">لا يوجد مستخدمين</div>'; return; }
+    box.innerHTML=list.map(u=>{
+        const self=u.uid===currentUser.uid;
+        const active=u.active!==false;
+        return `
+        <div class="driver-card">
+            <h3>${escapeHtml(u.name||"بدون اسم")}</h3>
+            <p style="color:#6b7280;margin-bottom:10px">${escapeHtml(u.email||"")}</p>
+            <p style="margin-bottom:12px"><strong>الصلاحية:</strong> ${escapeHtml(u.role||"driver")} &nbsp; | &nbsp; <strong>الحالة:</strong> ${active?"🟢 فعال":"🔴 متوقف"}</p>
+            <div class="actions">
+                <button class="btn btn-info" onclick="editAdminUser('${escapeAttr(u.uid)}')">✏️ تعديل</button>
+                <button class="btn btn-warning" onclick="adminChangePassword('${escapeAttr(u.uid)}')">🔑 كلمة المرور</button>
+                <button class="btn btn-secondary" onclick="adminResetEmail('${escapeAttr(u.email||"")}')">📧 إرسال Reset</button>
+                ${self ? "" : `<button class="btn ${active?"btn-danger":"btn-success"}" onclick="toggleAdminUser('${escapeAttr(u.uid)}',${active})">${active?"⏸️ إيقاف":"▶️ تفعيل"}</button>`}
+                ${self ? "" : `<button class="btn btn-danger" onclick="removeAdminUser('${escapeAttr(u.uid)}')">🗑️ حذف</button>`}
+            </div>
+        </div>`;
+    }).join("");
 };
-
-
-/* =========================
-   CREATE USER
-========================= */
 
 window.createAdminUser = async function(){
-
-    if(!isAdmin())
-        return;
-
-    const name =
-        document
-        .getElementById(
-            "newUserName"
-        )
-        .value
-        .trim();
-
-    const email =
-        document
-        .getElementById(
-            "newUserEmail"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-    const password =
-        document
-        .getElementById(
-            "newUserPassword"
-        )
-        .value;
-
-    const role =
-        document
-        .getElementById(
-            "newUserRole"
-        )
-        .value;
-
-    if(
-        !name ||
-        !email ||
-        password.length < 6
-    ){
-
-        return alert(
-            "اكتب الاسم والبريد وكلمة مرور 6 أحرف على الأقل"
-        );
-
-    }
-
+    if(!isAdmin()) return;
+    const name=document.getElementById("newUserName").value.trim();
+    const email=document.getElementById("newUserEmail").value.trim().toLowerCase();
+    const password=document.getElementById("newUserPassword").value;
+    const role=document.getElementById("newUserRole").value;
+    if(!name||!email||password.length<6) return alert("اكتب الاسم والبريد وكلمة مرور 6 أحرف على الأقل");
     try{
-
-        const credential =
-            await createUserWithEmailAndPassword(
-                secondaryAuth,
-                email,
-                password
-            );
-
-        const uid =
-            credential.user.uid;
-
-        await setDoc(
-
-            doc(
-                db,
-                "users",
-                uid
-            ),
-
-            {
-
-                name:
-                    name,
-
-                email:
-                    email,
-
-                role:
-                    role,
-
-                active:
-                    true,
-
-                createdAt:
-                    new Date()
-                    .toISOString()
-
-            }
-
-        );
-
-        await signOut(
-            secondaryAuth
-        );
-
-        alert(
-            "تم إنشاء المستخدم بنجاح"
-        );
-
-        document
-            .getElementById(
-                "newUserName"
-            )
-            .value = "";
-
-        document
-            .getElementById(
-                "newUserEmail"
-            )
-            .value = "";
-
-        document
-            .getElementById(
-                "newUserPassword"
-            )
-            .value = "";
-
+        await createUserFn({name,email,password,role});
+        alert("تم إنشاء المستخدم بنجاح");
+        document.getElementById("newUserName").value="";
+        document.getElementById("newUserEmail").value="";
+        document.getElementById("newUserPassword").value="";
         hideCreateUserForm();
-
         await loadAdminUsers();
-
     }catch(e){
-
-        console.error(
-            "CREATE USER ERROR:",
-            e
-        );
-
-        try{
-
-            await signOut(
-                secondaryAuth
-            );
-
-        }catch(_){}
-
-        alert(
-            "تعذر إنشاء المستخدم:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
+        console.error(e); alert("تعذر إنشاء المستخدم:\n"+(e.message||e.code||"خطأ"));
     }
-
 };
-
-
-/* =========================
-   EDIT USER
-========================= */
 
 window.editAdminUser = async function(uid){
-
-    if(!isAdmin())
-        return;
-
-    const u =
-        adminUsers.find(
-            x=>x.uid===uid
-        );
-
-    if(!u)
-        return;
-
-    const name =
-        prompt(
-            "الاسم الجديد:",
-            u.name || ""
-        );
-
-    if(name===null)
-        return;
-
-    const email =
-        prompt(
-            "البريد الإلكتروني الجديد:",
-            u.email || ""
-        );
-
-    if(email===null)
-        return;
-
-    const role =
-        prompt(
-            "الصلاحية: admin أو manager أو driver",
-            u.role || "driver"
-        );
-
-    if(role===null)
-        return;
-
-    const cleanRole =
-        role
-        .trim()
-        .toLowerCase();
-
-    if(
-        ![
-            "admin",
-            "manager",
-            "driver"
-        ].includes(cleanRole)
-    ){
-
-        return alert(
-            "الصلاحية غير صحيحة"
-        );
-
-    }
-
+    if(!isAdmin()) return;
+    const u=adminUsers.find(x=>x.uid===uid); if(!u) return;
+    const name=prompt("الاسم الجديد:",u.name||""); if(name===null) return;
+    const email=prompt("البريد الإلكتروني الجديد:",u.email||""); if(email===null) return;
+    const role=prompt("الصلاحية: admin أو manager أو driver",u.role||"driver"); if(role===null) return;
+    const cleanRole=role.trim().toLowerCase();
+    if(!["admin","manager","driver"].includes(cleanRole)) return alert("الصلاحية غير صحيحة");
     try{
-
-        await updateUserFn({
-
-            uid,
-
-            name:
-                name.trim(),
-
-            email:
-                email
-                .trim()
-                .toLowerCase(),
-
-            role:
-                cleanRole,
-
-            active:
-                u.active !== false
-
-        });
-
-        alert(
-            "تم تعديل المستخدم"
-        );
-
-        await loadAdminUsers();
-
-    }catch(e){
-
-        console.error(e);
-
-        alert(
-            "تعذر تعديل المستخدم:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
-    }
-
+        await updateUserFn({uid,name:name.trim(),email:email.trim().toLowerCase(),role:cleanRole,active:u.active!==false});
+        alert("تم تعديل المستخدم"); await loadAdminUsers();
+    }catch(e){ console.error(e); alert("تعذر تعديل المستخدم:\n"+(e.message||e.code||"خطأ")); }
 };
-
-
-/* =========================
-   CHANGE PASSWORD
-========================= */
 
 window.adminChangePassword = async function(uid){
-
-    if(!isAdmin())
-        return;
-
-    const p =
-        prompt(
-            "اكتب كلمة المرور الجديدة (6 أحرف على الأقل):"
-        );
-
-    if(p===null)
-        return;
-
-    if(p.length<6){
-
-        return alert(
-            "كلمة المرور يجب أن تكون 6 أحرف على الأقل"
-        );
-
-    }
-
-    try{
-
-        await changeUserPasswordFn({
-
-            uid,
-
-            password:
-                p
-
-        });
-
-        alert(
-            "تم تغيير كلمة المرور"
-        );
-
-    }catch(e){
-
-        console.error(e);
-
-        alert(
-            "تعذر تغيير كلمة المرور:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
-    }
-
+    if(!isAdmin()) return;
+    const p=prompt("اكتب كلمة المرور الجديدة (6 أحرف على الأقل):");
+    if(p===null) return; if(p.length<6) return alert("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
+    try{ await changeUserPasswordFn({uid,password:p}); alert("تم تغيير كلمة المرور"); }
+    catch(e){ console.error(e); alert("تعذر تغيير كلمة المرور:\n"+(e.message||e.code||"خطأ")); }
 };
-
-
-/* =========================
-   TOGGLE USER
-========================= */
 
 window.toggleAdminUser = async function(uid,active){
-
-    if(!isAdmin())
-        return;
-
-    try{
-
-        await updateUserFn({
-
-            uid,
-
-            active:
-                !active
-
-        });
-
-        alert(
-            active
-            ?
-            "تم إيقاف الحساب"
-            :
-            "تم تفعيل الحساب"
-        );
-
-        await loadAdminUsers();
-
-    }catch(e){
-
-        console.error(e);
-
-        alert(
-            "تعذر تغيير حالة الحساب:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
-    }
-
+    if(!isAdmin()) return;
+    try{ await updateUserFn({uid,active:!active}); alert(active?"تم إيقاف الحساب":"تم تفعيل الحساب"); await loadAdminUsers(); }
+    catch(e){ console.error(e); alert("تعذر تغيير حالة الحساب:\n"+(e.message||e.code||"خطأ")); }
 };
-
-
-/* =========================
-   DELETE USER
-========================= */
 
 window.removeAdminUser = async function(uid){
-
-    if(!isAdmin())
-        return;
-
-    const u =
-        adminUsers.find(
-            x=>x.uid===uid
-        );
-
-    if(!u)
-        return;
-
-    if(
-        !confirm(
-            `سيتم حذف حساب ${u.email} وبياناته نهائياً. هل أنت متأكد؟`
-        )
-    )
-        return;
-
-    try{
-
-        await deleteUserFn({
-            uid
-        });
-
-        alert(
-            "تم حذف المستخدم وبياناته"
-        );
-
-        await loadAdminUsers();
-
-    }catch(e){
-
-        console.error(e);
-
-        alert(
-            "تعذر حذف المستخدم:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
-    }
-
+    if(!isAdmin()) return;
+    const u=adminUsers.find(x=>x.uid===uid); if(!u) return;
+    if(!confirm(`سيتم حذف حساب ${u.email} وبياناته نهائياً. هل أنت متأكد؟`)) return;
+    try{ await deleteUserFn({uid}); alert("تم حذف المستخدم وبياناته"); await loadAdminUsers(); }
+    catch(e){ console.error(e); alert("تعذر حذف المستخدم:\n"+(e.message||e.code||"خطأ")); }
 };
 
-
-/* =========================
-   RESET PASSWORD EMAIL
-========================= */
-
 window.adminResetEmail = async function(email){
-
-    if(
-        !isAdmin() ||
-        !email
-    )
-        return;
-
-    try{
-
-        await sendPasswordResetEmail(
-            auth,
-            email
-        );
-
-        alert(
-            "تم إرسال رابط تغيير كلمة المرور إلى البريد"
-        );
-
-    }catch(e){
-
-        console.error(e);
-
-        alert(
-            "تعذر إرسال الرابط:\n" +
-            (
-                e.message ||
-                e.code ||
-                "خطأ"
-            )
-        );
-
-    }
-
+    if(!isAdmin()||!email) return;
+    try{ await sendPasswordResetEmail(auth,email); alert("تم إرسال رابط تغيير كلمة المرور إلى البريد"); }
+    catch(e){ console.error(e); alert("تعذر إرسال الرابط:\n"+(e.message||e.code||"خطأ")); }
 };
 
 
@@ -5710,6 +4789,7 @@ window.createBackup = async function(){
         await loadMyData();
 
         await loadDrivers();
+
 
         const backup = {
 
@@ -5761,12 +4841,14 @@ window.createBackup = async function(){
 
         };
 
+
         const json =
             JSON.stringify(
                 backup,
                 null,
                 2
             );
+
 
         const blob =
             new Blob(
@@ -5777,42 +4859,52 @@ window.createBackup = async function(){
                 }
             );
 
+
         const url =
             URL.createObjectURL(
                 blob
             );
+
 
         const a =
             document.createElement(
                 "a"
             );
 
+
         const date =
             new Date()
             .toISOString()
             .slice(0,10);
 
+
         a.href =
             url;
 
+
         a.download =
             `DriveOps-Backup-${date}.json`;
+
 
         document
             .body
             .appendChild(a);
 
+
         a.click();
 
         a.remove();
+
 
         URL.revokeObjectURL(
             url
         );
 
+
         alert(
             "تم إنشاء النسخة الاحتياطية بنجاح"
         );
+
 
     }catch(e){
 
@@ -5840,6 +4932,7 @@ window.restoreBackup = async function(){
         )
         .files[0];
 
+
     if(!file){
 
         alert(
@@ -5850,25 +4943,29 @@ window.restoreBackup = async function(){
 
     }
 
+
     if(
         !confirm(
 
             "تنبيه:\n\n"+
             "سيتم إضافة البيانات الموجودة في النسخة إلى حسابك الحالي.\n"+
             "لن يتم حذف بيانات Firebase الحالية.\n\n"+
-            "هل تريد المتابعة?"
+            "هل تريد المتابعة؟"
 
         )
     )
         return;
+
 
     try{
 
         const text =
             await file.text();
 
+
         const backup =
             JSON.parse(text);
+
 
         if(
 
@@ -5902,11 +4999,18 @@ window.restoreBackup = async function(){
 
         }
 
+
         let batch =
             writeBatch(db);
 
+
         let count =
             0;
+
+
+        /*
+          السواقين
+        */
 
         for(
             const d
@@ -5917,6 +5021,7 @@ window.restoreBackup = async function(){
                 d.id ||
                 crypto.randomUUID();
 
+
             const ref =
                 doc(
                     db,
@@ -5925,6 +5030,7 @@ window.restoreBackup = async function(){
                     "drivers",
                     driverId
                 );
+
 
             batch.set(
 
@@ -5948,7 +5054,9 @@ window.restoreBackup = async function(){
 
             );
 
+
             count++;
+
 
             if(count>=450){
 
@@ -5963,6 +5071,11 @@ window.restoreBackup = async function(){
             }
 
         }
+
+
+        /*
+          التشغيلات
+        */
 
         for(
             const o
@@ -5973,6 +5086,7 @@ window.restoreBackup = async function(){
                 o.id ||
                 crypto.randomUUID();
 
+
             const ref =
                 doc(
                     db,
@@ -5982,10 +5096,13 @@ window.restoreBackup = async function(){
                     operationId
                 );
 
+
             const data =
                 {...o};
 
+
             delete data.id;
+
 
             batch.set(
 
@@ -5999,7 +5116,9 @@ window.restoreBackup = async function(){
 
             );
 
+
             count++;
+
 
             if(count>=450){
 
@@ -6014,6 +5133,11 @@ window.restoreBackup = async function(){
             }
 
         }
+
+
+        /*
+          المصروفات
+        */
 
         for(
             const e
@@ -6024,6 +5148,7 @@ window.restoreBackup = async function(){
                 e.id ||
                 crypto.randomUUID();
 
+
             const ref =
                 doc(
                     db,
@@ -6033,10 +5158,13 @@ window.restoreBackup = async function(){
                     expenseId
                 );
 
+
             const data =
                 {...e};
 
+
             delete data.id;
+
 
             batch.set(
 
@@ -6050,7 +5178,9 @@ window.restoreBackup = async function(){
 
             );
 
+
             count++;
+
 
             if(count>=450){
 
@@ -6066,22 +5196,27 @@ window.restoreBackup = async function(){
 
         }
 
+
         if(count>0)
             await batch.commit();
+
 
         await loadDrivers();
 
         await loadMyData();
 
+
         alert(
             "تم استرجاع النسخة الاحتياطية بنجاح"
         );
+
 
         document
             .getElementById(
                 "backupFile"
             )
             .value = "";
+
 
     }catch(e){
 
@@ -6111,12 +5246,14 @@ window.sumVisibleColumns = function(){
         .toLowerCase()
         .trim();
 
+
     const from =
         document
         .getElementById(
             "operationFrom"
         )
         .value;
+
 
     const to =
         document
@@ -6125,12 +5262,14 @@ window.sumVisibleColumns = function(){
         )
         .value;
 
+
     const payment =
         document
         .getElementById(
             "operationPaymentFilter"
         )
         .value;
+
 
     const data =
         operations.filter(o=>{
@@ -6142,11 +5281,13 @@ window.sumVisibleColumns = function(){
                  ${o.to||""}`
                 .toLowerCase();
 
+
             if(
                 search &&
                 !text.includes(search)
             )
                 return false;
+
 
             if(
                 from &&
@@ -6154,11 +5295,13 @@ window.sumVisibleColumns = function(){
             )
                 return false;
 
+
             if(
                 to &&
                 String(o.date||"") > to
             )
                 return false;
+
 
             if(
                 payment &&
@@ -6166,9 +5309,11 @@ window.sumVisibleColumns = function(){
             )
                 return false;
 
+
             return true;
 
         });
+
 
     const totalPrice =
         data.reduce(
@@ -6177,6 +5322,7 @@ window.sumVisibleColumns = function(){
                 Number(o.price||0),
             0
         );
+
 
     const paid =
         data
@@ -6190,6 +5336,7 @@ window.sumVisibleColumns = function(){
             0
         );
 
+
     const unpaid =
         data
         .filter(
@@ -6202,15 +5349,18 @@ window.sumVisibleColumns = function(){
             0
         );
 
+
     const summary =
         document
         .getElementById(
             "operationsSummary"
         );
 
+
     summary.classList.remove(
         "hidden"
     );
+
 
     summary.innerHTML = `
 
@@ -6221,7 +5371,9 @@ window.sumVisibleColumns = function(){
 
         </h3>
 
+
         <div class="grid-4">
+
 
             <div class="card">
 
@@ -6238,6 +5390,7 @@ window.sumVisibleColumns = function(){
 
             </div>
 
+
             <div class="card">
 
                 <div class="card-title">
@@ -6252,6 +5405,7 @@ window.sumVisibleColumns = function(){
                 </div>
 
             </div>
+
 
             <div class="card">
 
@@ -6268,6 +5422,7 @@ window.sumVisibleColumns = function(){
 
             </div>
 
+
             <div class="card">
 
                 <div class="card-title">
@@ -6282,6 +5437,7 @@ window.sumVisibleColumns = function(){
                 </div>
 
             </div>
+
 
         </div>
 
@@ -6308,9 +5464,11 @@ window.refreshData = async function(){
 
         renderDashboard();
 
+
         alert(
             "🔄 تم تحديث البيانات بنجاح"
         );
+
 
     }catch(e){
 
@@ -6339,7 +5497,9 @@ window.deleteAllData = async function(){
             "سيتم حذف جميع بيانات DriveOps الحالية:\n\n"+
 
             "• كل التشغيلات\n"+
+
             "• كل المصروفات\n"+
+
             "• كل أسماء السواقين\n\n"+
 
             "حساب تسجيل الدخول نفسه لن يتم حذفه.\n\n"+
@@ -6348,8 +5508,10 @@ window.deleteAllData = async function(){
 
         );
 
+
     if(!firstConfirm)
         return;
+
 
     const confirmation =
         prompt(
@@ -6359,6 +5521,7 @@ window.deleteAllData = async function(){
             "ويجب كتابتها بالإنجليزية وبنفس الحروف."
 
         );
+
 
     if(
         confirmation !==
@@ -6376,21 +5539,30 @@ window.deleteAllData = async function(){
 
     }
 
+
     try{
 
         let totalDeleted =
             0;
+
+
+        /*
+          حذف التشغيلات
+        */
 
         const operationsSnap =
             await getDocs(
                 operationsRef()
             );
 
+
         let batch =
             writeBatch(db);
 
+
         let count =
             0;
+
 
         for(
             const d
@@ -6401,9 +5573,11 @@ window.deleteAllData = async function(){
                 d.ref
             );
 
+
             count++;
 
             totalDeleted++;
+
 
             if(count>=400){
 
@@ -6419,22 +5593,31 @@ window.deleteAllData = async function(){
 
         }
 
+
         if(count>0){
 
             await batch.commit();
 
         }
 
+
+        /*
+          حذف المصروفات
+        */
+
         const expensesSnap =
             await getDocs(
                 expensesRef()
             );
 
+
         batch =
             writeBatch(db);
 
+
         count =
             0;
+
 
         for(
             const d
@@ -6445,9 +5628,11 @@ window.deleteAllData = async function(){
                 d.ref
             );
 
+
             count++;
 
             totalDeleted++;
+
 
             if(count>=400){
 
@@ -6463,22 +5648,31 @@ window.deleteAllData = async function(){
 
         }
 
+
         if(count>0){
 
             await batch.commit();
 
         }
 
+
+        /*
+          حذف أسماء السواقين
+        */
+
         const driversSnap =
             await getDocs(
                 driversRef()
             );
 
+
         batch =
             writeBatch(db);
 
+
         count =
             0;
+
 
         for(
             const d
@@ -6489,9 +5683,11 @@ window.deleteAllData = async function(){
                 d.ref
             );
 
+
             count++;
 
             totalDeleted++;
+
 
             if(count>=400){
 
@@ -6507,17 +5703,24 @@ window.deleteAllData = async function(){
 
         }
 
+
         if(count>0){
 
             await batch.commit();
 
         }
 
+
+        /*
+          تنظيف الذاكرة
+        */
+
         operations = [];
 
         expenses = [];
 
         drivers = [];
+
 
         renderDashboard();
 
@@ -6527,11 +5730,13 @@ window.deleteAllData = async function(){
 
         renderDrivers();
 
+
         const summary =
             document
             .getElementById(
                 "operationsSummary"
             );
+
 
         if(summary){
 
@@ -6543,6 +5748,7 @@ window.deleteAllData = async function(){
                 "";
 
         }
+
 
         alert(
 
@@ -6556,9 +5762,11 @@ window.deleteAllData = async function(){
 
         );
 
+
     }catch(e){
 
         console.error(e);
+
 
         alert(
 

@@ -18,6 +18,10 @@ const ALLOWED_ROLES = [
     "driver"
 ];
 
+/* ================================
+   REQUIRE ADMIN
+================================ */
+
 async function requireAdmin(request) {
 
     if (!request.auth) {
@@ -38,7 +42,7 @@ async function requireAdmin(request) {
 
     if (
         !data ||
-        String(data.role || "").toLowerCase() !== "admin" ||
+        String(data.role || "").trim().toLowerCase() !== "admin" ||
         data.active === false
     ) {
         throw new HttpsError(
@@ -50,33 +54,41 @@ async function requireAdmin(request) {
     return data;
 }
 
-
 /* ================================
    GET ALL USERS
 ================================ */
 
 exports.getAllUsers = onCall(
     {
-        cors: [
-            "http://127.0.0.1:5500",
-            "http://localhost:5500"
-        ]
+        cors: true
     },
     async (request) => {
 
         await requireAdmin(request);
 
-        const snap = await db
-            .collection("users")
-            .get();
+        try {
 
-        return snap.docs.map(doc => ({
-            uid: doc.id,
-            ...doc.data()
-        }));
+            const snap = await db
+                .collection("users")
+                .get();
+
+            return snap.docs.map(doc => ({
+                uid: doc.id,
+                ...doc.data()
+            }));
+
+        } catch (e) {
+
+            console.error("GET ALL USERS ERROR:", e);
+
+            throw new HttpsError(
+                "internal",
+                e.message ||
+                "تعذر تحميل المستخدمين."
+            );
+        }
     }
 );
-
 
 /* ================================
    CREATE USER
@@ -84,10 +96,7 @@ exports.getAllUsers = onCall(
 
 exports.createUser = onCall(
     {
-        cors: [
-            "http://127.0.0.1:5500",
-            "http://localhost:5500"
-        ]
+        cors: true
     },
     async (request) => {
 
@@ -137,12 +146,13 @@ exports.createUser = onCall(
 
         try {
 
-            const user = await auth.createUser({
-                email: cleanEmail,
-                password: cleanPassword,
-                displayName: cleanName,
-                disabled: false
-            });
+            const user =
+                await auth.createUser({
+                    email: cleanEmail,
+                    password: cleanPassword,
+                    displayName: cleanName,
+                    disabled: false
+                });
 
             await db
                 .collection("users")
@@ -162,6 +172,8 @@ exports.createUser = onCall(
             };
 
         } catch (e) {
+
+            console.error("CREATE USER ERROR:", e);
 
             if (
                 e.code ===
@@ -183,17 +195,13 @@ exports.createUser = onCall(
     }
 );
 
-
 /* ================================
    UPDATE USER
 ================================ */
 
 exports.updateUser = onCall(
     {
-        cors: [
-            "http://127.0.0.1:5500",
-            "http://localhost:5500"
-        ]
+        cors: true
     },
     async (request) => {
 
@@ -227,7 +235,7 @@ exports.updateUser = onCall(
         if (
             uid === request.auth.uid &&
             role !== undefined &&
-            String(role).toLowerCase() !== "admin"
+            String(role).trim().toLowerCase() !== "admin"
         ) {
             throw new HttpsError(
                 "failed-precondition",
@@ -238,23 +246,37 @@ exports.updateUser = onCall(
         const authUpdate = {};
 
         if (email !== undefined) {
-            authUpdate.email =
+
+            const cleanEmail =
                 String(email)
                     .trim()
                     .toLowerCase();
+
+            if (!cleanEmail) {
+                throw new HttpsError(
+                    "invalid-argument",
+                    "البريد الإلكتروني غير صحيح."
+                );
+            }
+
+            authUpdate.email = cleanEmail;
         }
 
         if (active !== undefined) {
+
             authUpdate.disabled =
                 active === false;
         }
 
         if (name !== undefined) {
+
             authUpdate.displayName =
                 String(name).trim();
         }
 
         try {
+
+            /* تحديث Firebase Authentication */
 
             if (
                 Object.keys(authUpdate).length > 0
@@ -266,14 +288,18 @@ exports.updateUser = onCall(
                 );
             }
 
+            /* تحديث Firestore */
+
             const profile = {};
 
             if (name !== undefined) {
+
                 profile.name =
                     String(name).trim();
             }
 
             if (email !== undefined) {
+
                 profile.email =
                     String(email)
                         .trim()
@@ -306,10 +332,12 @@ exports.updateUser = onCall(
                     );
                 }
 
-                profile.role = cleanRole;
+                profile.role =
+                    cleanRole;
             }
 
             if (active !== undefined) {
+
                 profile.active =
                     Boolean(active);
             }
@@ -335,6 +363,8 @@ exports.updateUser = onCall(
 
         } catch (e) {
 
+            console.error("UPDATE USER ERROR:", e);
+
             if (e instanceof HttpsError) {
                 throw e;
             }
@@ -343,6 +373,7 @@ exports.updateUser = onCall(
                 e.code ===
                 "auth/email-already-exists"
             ) {
+
                 throw new HttpsError(
                     "already-exists",
                     "البريد الإلكتروني مستخدم بالفعل."
@@ -351,8 +382,20 @@ exports.updateUser = onCall(
 
             if (
                 e.code ===
+                "auth/invalid-email"
+            ) {
+
+                throw new HttpsError(
+                    "invalid-argument",
+                    "البريد الإلكتروني غير صحيح."
+                );
+            }
+
+            if (
+                e.code ===
                 "auth/user-not-found"
             ) {
+
                 throw new HttpsError(
                     "not-found",
                     "المستخدم غير موجود."
@@ -368,17 +411,13 @@ exports.updateUser = onCall(
     }
 );
 
-
 /* ================================
    CHANGE USER PASSWORD
 ================================ */
 
 exports.changeUserPassword = onCall(
     {
-        cors: [
-            "http://127.0.0.1:5500",
-            "http://localhost:5500"
-        ]
+        cors: true
     },
     async (request) => {
 
@@ -400,7 +439,9 @@ exports.changeUserPassword = onCall(
             );
         }
 
-        if (uid === request.auth.uid) {
+        if (
+            uid === request.auth.uid
+        ) {
             throw new HttpsError(
                 "failed-precondition",
                 "استخدم تغيير كلمة المرور من إعدادات حسابك."
@@ -423,10 +464,16 @@ exports.changeUserPassword = onCall(
 
         } catch (e) {
 
+            console.error(
+                "CHANGE PASSWORD ERROR:",
+                e
+            );
+
             if (
                 e.code ===
                 "auth/user-not-found"
             ) {
+
                 throw new HttpsError(
                     "not-found",
                     "المستخدم غير موجود."
@@ -442,17 +489,13 @@ exports.changeUserPassword = onCall(
     }
 );
 
-
 /* ================================
    DELETE USER
 ================================ */
 
 exports.deleteUser = onCall(
     {
-        cors: [
-            "http://127.0.0.1:5500",
-            "http://localhost:5500"
-        ]
+        cors: true
     },
     async (request) => {
 
@@ -463,13 +506,17 @@ exports.deleteUser = onCall(
         } = request.data || {};
 
         if (!uid) {
+
             throw new HttpsError(
                 "invalid-argument",
                 "UID مطلوب."
             );
         }
 
-        if (uid === request.auth.uid) {
+        if (
+            uid === request.auth.uid
+        ) {
+
             throw new HttpsError(
                 "failed-precondition",
                 "لا يمكنك حذف حسابك."
@@ -478,42 +525,47 @@ exports.deleteUser = onCall(
 
         try {
 
-            await auth.deleteUser(uid);
+            /* حذف حساب Firebase Authentication */
 
-        } catch (e) {
+            try {
 
-            if (
-                e.code !==
-                "auth/user-not-found"
-            ) {
-                throw new HttpsError(
-                    "internal",
-                    e.message ||
-                    "تعذر حذف حساب الدخول."
-                );
+                await auth.deleteUser(uid);
+
+            } catch (e) {
+
+                if (
+                    e.code !==
+                    "auth/user-not-found"
+                ) {
+
+                    throw e;
+                }
             }
-        }
 
-        try {
+            /* حذف بيانات Firestore بالكامل */
 
-            await db
-                .recursiveDelete(
-                    db
-                        .collection("users")
-                        .doc(uid)
-                );
+            await db.recursiveDelete(
+                db
+                    .collection("users")
+                    .doc(uid)
+            );
+
+            return {
+                ok: true
+            };
 
         } catch (e) {
+
+            console.error(
+                "DELETE USER ERROR:",
+                e
+            );
 
             throw new HttpsError(
                 "internal",
                 e.message ||
-                "تم حذف الدخول ولكن حدث خطأ أثناء حذف بيانات المستخدم."
+                "تعذر حذف المستخدم."
             );
         }
-
-        return {
-            ok: true
-        };
     }
 );

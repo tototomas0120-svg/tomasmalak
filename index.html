@@ -1,4 +1,5 @@
-<!DOCTYPE html>.
+```html
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -7,35 +8,18 @@
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
-    --bg:#f3f6fb;
-    --card:#ffffff;
-    --text:#172033;
-    --muted:#718096;
-    --border:#e5e9f2;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --warning:#d97706;
-    --sidebar:#111827;
+    font-family:Arial,Tahoma,sans-serif;
 }
 
 body{
-    font-family:Tahoma,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
+    background:#f4f6f9;
+    color:#1f2937;
 }
 
-button,
-input,
-select,
-textarea{
+button,input,select,textarea{
     font-family:inherit;
 }
 
@@ -43,277 +27,184 @@ button{
     cursor:pointer;
 }
 
-/* =========================
-   LOGIN
-========================= */
-
-#loginScreen{
+.login-page{
     min-height:100vh;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     padding:20px;
-    background:
-        radial-gradient(circle at top right,#2563eb55,transparent 35%),
-        radial-gradient(circle at bottom left,#7c3aed44,transparent 35%),
-        #0f172a;
+    background:linear-gradient(135deg,#111827,#2563eb);
 }
 
 .login-box{
     width:100%;
-    max-width:430px;
+    max-width:420px;
     background:white;
-    border-radius:24px;
-    padding:35px;
-    box-shadow:0 30px 80px #0008;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
 }
 
-.logo{
-    width:65px;
-    height:65px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:bold;
-    margin:0 auto 18px;
-}
-
-.login-title{
+.login-box h1{
     text-align:center;
-    font-size:26px;
-    font-weight:800;
+    margin-bottom:8px;
 }
 
-.login-subtitle{
+.login-box p{
     text-align:center;
-    color:var(--muted);
-    margin:8px 0 28px;
+    color:#6b7280;
+    margin-bottom:25px;
 }
 
 .form-group{
-    margin-bottom:17px;
+    margin-bottom:15px;
 }
 
 .form-group label{
     display:block;
     margin-bottom:7px;
     font-weight:bold;
-    font-size:14px;
 }
 
-.form-control{
+.form-group input,
+.form-group select,
+.form-group textarea{
     width:100%;
-    padding:13px 14px;
-    border:1px solid var(--border);
-    border-radius:12px;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
     outline:none;
-    background:#fafbfe;
-    transition:.2s;
 }
 
-.form-control:focus{
-    border-color:var(--primary);
-    box-shadow:0 0 0 3px #2563eb15;
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#2563eb;
 }
 
 .btn{
     border:0;
-    border-radius:11px;
+    border-radius:10px;
     padding:11px 16px;
     font-weight:bold;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-1px);
 }
 
 .btn-primary{
-    background:var(--primary);
+    background:#2563eb;
     color:white;
 }
 
-.btn-primary:hover{
-    background:var(--primary-dark);
-}
-
 .btn-success{
-    background:#dcfce7;
-    color:#15803d;
+    background:#16a34a;
+    color:white;
 }
 
 .btn-danger{
-    background:#fee2e2;
-    color:#b91c1c;
+    background:#dc2626;
+    color:white;
 }
 
 .btn-warning{
-    background:#fef3c7;
-    color:#92400e;
+    background:#f59e0b;
+    color:white;
 }
 
 .btn-secondary{
-    background:#eef2f7;
-    color:#334155;
+    background:#6b7280;
+    color:white;
 }
 
-.btn-block{
+.btn-info{
+    background:#0891b2;
+    color:white;
+}
+
+.full{
     width:100%;
 }
 
 .login-error{
-    display:none;
-    background:#fee2e2;
-    color:#b91c1c;
-    padding:11px;
-    border-radius:10px;
-    margin-bottom:15px;
+    color:#dc2626;
+    margin-top:12px;
     text-align:center;
-    font-size:14px;
 }
-
-/* =========================
-   APP
-========================= */
 
 #app{
     display:none;
+}
+
+.layout{
+    display:flex;
     min-height:100vh;
 }
 
 .sidebar{
+    width:250px;
+    background:#111827;
+    color:white;
+    padding:20px;
     position:fixed;
     right:0;
     top:0;
-    width:260px;
-    height:100vh;
-    background:var(--sidebar);
-    color:white;
-    padding:20px 15px;
-    z-index:1000;
+    bottom:0;
     overflow-y:auto;
 }
 
-.sidebar-brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:8px 10px 25px;
-    border-bottom:1px solid #ffffff14;
-    margin-bottom:20px;
-}
-
-.sidebar-logo{
-    width:45px;
-    height:45px;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.logo{
+    font-size:24px;
     font-weight:bold;
+    margin-bottom:5px;
 }
 
-.brand-text{
-    font-size:18px;
-    font-weight:800;
+.role-label{
+    font-size:13px;
+    color:#9ca3af;
+    margin-bottom:25px;
 }
 
-.brand-small{
-    color:#94a3b8;
-    font-size:11px;
-    margin-top:3px;
-}
-
-.nav-title{
-    color:#64748b;
-    font-size:11px;
-    margin:17px 10px 8px;
-}
-
-.nav-item{
+.menu button{
     width:100%;
-    border:0;
-    background:transparent;
-    color:#cbd5e1;
     text-align:right;
-    padding:12px;
+    background:transparent;
+    color:#d1d5db;
+    border:0;
+    padding:13px;
     border-radius:10px;
-    margin-bottom:4px;
-    display:flex;
-    align-items:center;
-    gap:11px;
-    font-size:14px;
+    margin-bottom:6px;
 }
 
-.nav-item:hover,
-.nav-item.active{
+.menu button:hover,
+.menu button.active{
     background:#2563eb;
     color:white;
 }
 
 .main{
-    margin-right:260px;
-    min-height:100vh;
+    margin-right:250px;
+    width:calc(100% - 250px);
+    padding:25px;
 }
 
 .topbar{
-    height:75px;
     background:white;
-    border-bottom:1px solid var(--border);
+    padding:18px 22px;
+    border-radius:15px;
+    margin-bottom:20px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:0 28px;
-    position:sticky;
-    top:0;
-    z-index:500;
+    align-items:center;
+    gap:10px;
 }
 
 .page-title{
-    font-size:22px;
-    font-weight:800;
-}
-
-.user-box{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.avatar{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#dbeafe;
-    color:#1d4ed8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    font-size:24px;
     font-weight:bold;
 }
 
-.mobile-menu{
-    display:none;
-    border:0;
-    background:#eef2ff;
-    width:42px;
-    height:42px;
-    border-radius:10px;
-    font-size:20px;
+.user-info{
+    color:#6b7280;
+    font-size:14px;
 }
-
-.content{
-    padding:28px;
-}
-
-/* =========================
-   PAGES
-========================= */
 
 .page{
     display:none;
@@ -323,107 +214,73 @@ button{
     display:block;
 }
 
-.welcome{
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
-    color:white;
-    border-radius:20px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 12px 30px #2563eb22;
-}
-
-.welcome h2{
-    font-size:25px;
-    margin-bottom:7px;
-}
-
-.welcome p{
-    opacity:.9;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.stats-grid{
+.cards{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:18px;
-    margin-bottom:25px;
+    gap:15px;
+    margin-bottom:20px;
 }
 
-.stat-card{
+.card{
     background:white;
-    border:1px solid var(--border);
-    border-radius:17px;
     padding:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    border-radius:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-.stat-icon{
-    width:50px;
-    height:50px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    background:#eff6ff;
+.card-title{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:10px;
 }
 
-.stat-label{
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:7px;
+.card-value{
+    font-size:25px;
+    font-weight:bold;
 }
 
-.stat-value{
-    font-size:24px;
-    font-weight:800;
-}
-
-/* =========================
-   PANELS
-========================= */
+.green{color:#16a34a}
+.red{color:#dc2626}
+.blue{color:#2563eb}
+.orange{color:#ea580c}
 
 .panel{
     background:white;
-    border:1px solid var(--border);
-    border-radius:17px;
+    border-radius:15px;
     padding:20px;
-    margin-bottom:22px;
+    margin-bottom:20px;
 }
 
 .panel-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
     gap:10px;
-}
-
-.panel-title{
-    font-size:18px;
-    font-weight:800;
-}
-
-.filters{
-    display:flex;
-    gap:10px;
+    margin-bottom:15px;
     flex-wrap:wrap;
-    margin-bottom:18px;
 }
 
-.filters .form-control{
-    width:auto;
-    min-width:160px;
+.panel-header h3{
+    font-size:18px;
 }
 
-/* =========================
-   TABLE
-========================= */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
 
 .table-wrap{
     overflow-x:auto;
@@ -432,1759 +289,1817 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:850px;
 }
 
-th{
-    background:#f8fafc;
-    color:#64748b;
-    font-size:12px;
-    padding:13px;
+th,td{
+    padding:12px 10px;
+    border-bottom:1px solid #e5e7eb;
     text-align:right;
     white-space:nowrap;
 }
 
-td{
-    padding:14px 13px;
-    border-top:1px solid var(--border);
-    font-size:13px;
-}
-
-tr:hover td{
-    background:#fafcff;
+th{
+    background:#f9fafb;
 }
 
 .badge{
-    display:inline-flex;
     padding:5px 9px;
     border-radius:20px;
-    font-size:11px;
+    font-size:12px;
     font-weight:bold;
 }
 
-.badge-success{
+.badge-paid{
     background:#dcfce7;
-    color:#15803d;
+    color:#166534;
 }
 
-.badge-danger{
+.badge-unpaid{
     background:#fee2e2;
-    color:#b91c1c;
+    color:#991b1b;
 }
 
-.badge-warning{
-    background:#fef3c7;
-    color:#92400e;
+.driver-card{
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:12px;
+}
+
+.driver-card h3{
+    margin-bottom:12px;
 }
 
 .actions{
     display:flex;
-    gap:6px;
+    gap:7px;
+    flex-wrap:wrap;
 }
-
-/* =========================
-   FORMS
-========================= */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:17px;
-}
-
-.form-grid .full{
-    grid-column:1/-1;
-}
-
-.form-actions{
-    display:flex;
-    gap:10px;
-    margin-top:10px;
-}
-
-/* =========================
-   REPORTS
-========================= */
-
-.report-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.report-box{
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:20px;
-}
-
-.report-box h3{
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:8px;
-}
-
-.report-box strong{
-    font-size:27px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:#0008;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:3000;
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:100%;
-    max-width:650px;
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    max-height:90vh;
-    overflow:auto;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.close{
-    border:0;
-    background:#f1f5f9;
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    font-size:18px;
-}
-
-/* =========================
-   EMPTY
-========================= */
 
 .empty{
     text-align:center;
-    color:var(--muted);
-    padding:40px 15px;
+    padding:30px;
+    color:#6b7280;
 }
 
-.empty-icon{
-    font-size:45px;
-    margin-bottom:10px;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    left:25px;
-    bottom:25px;
-    background:#111827;
-    color:white;
-    padding:13px 18px;
+.backup-box{
+    border:1px dashed #cbd5e1;
+    padding:18px;
     border-radius:12px;
-    z-index:5000;
-    transform:translateY(100px);
-    opacity:0;
-    transition:.3s;
+    background:#f8fafc;
 }
-
-.toast.show{
-    transform:translateY(0);
-    opacity:1;
-}
-
-/* =========================
-   FOOTER
-========================= */
 
 .footer{
     text-align:center;
-    color:#64748b;
+    color:#9ca3af;
+    padding:25px;
     font-size:13px;
-    font-weight:800;
-    letter-spacing:.35px;
-    padding:28px 0 8px;
 }
 
-.footer strong{
-    font-weight:900;
+.hidden{
+    display:none!important;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.danger-box{
+    border:1px solid #fecaca;
+    background:#fff1f2;
+    padding:18px;
+    border-radius:12px;
+}
 
-@media(max-width:1100px){
+@media(max-width:900px){
 
-    .stats-grid{
+    .sidebar{
+        width:210px;
+    }
+
+    .main{
+        margin-right:210px;
+        width:calc(100% - 210px);
+    }
+
+    .cards{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .report-grid{
-        grid-template-columns:1fr 1fr;
+    .grid-3,
+    .grid-4{
+        grid-template-columns:repeat(2,1fr);
     }
-
 }
 
-@media(max-width:800px){
+@media(max-width:650px){
 
-    .sidebar{
-        transform:translateX(100%);
-        transition:.25s;
+    .layout{
+        display:block;
     }
 
-    .sidebar.open{
-        transform:translateX(0);
+    .sidebar{
+        position:relative;
+        width:100%;
+        right:auto;
+        bottom:auto;
     }
 
     .main{
         margin-right:0;
+        width:100%;
+        padding:12px;
     }
 
-    .mobile-menu{
-        display:block;
+    .cards,
+    .grid,
+    .grid-3,
+    .grid-4{
+        grid-template-columns:1fr;
     }
 
     .topbar{
-        padding:0 15px;
+        display:block;
     }
 
-    .content{
-        padding:16px;
+    .user-info{
+        margin-top:8px;
     }
-
-    .stats-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-    }
-
-    .stat-card{
-        padding:14px;
-    }
-
-    .stat-value{
-        font-size:19px;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .report-grid{
-        grid-template-columns:1fr;
-    }
-
-    .page-title{
-        font-size:17px;
-    }
-
-    .user-box span{
-        display:none;
-    }
-
-}
-
-@media(max-width:500px){
-
-    .stats-grid{
-        grid-template-columns:1fr;
-    }
-
-    .login-box{
-        padding:25px 18px;
-    }
-
-    .welcome{
-        padding:20px;
-    }
-
-    .welcome h2{
-        font-size:20px;
-    }
-
-    .panel{
-        padding:15px;
-    }
-
 }
 </style>
 </head>
 
 <body>
 
-<section id="loginScreen">
+<!-- LOGIN -->
+<div id="loginPage" class="login-page">
 
     <div class="login-box">
 
-        <div class="logo">DO</div>
+        <h1>DriveOps</h1>
 
-        <div class="login-title">
-            DriveOps
-        </div>
-
-        <div class="login-subtitle">
+        <p>
             نظام إدارة التشغيلات والسيولة
-        </div>
-
-        <div id="loginError" class="login-error">
-            البريد الإلكتروني أو كلمة المرور غير صحيحة
-        </div>
+        </p>
 
         <div class="form-group">
 
-            <label>البريد الإلكتروني</label>
+            <label>
+                البريد الإلكتروني
+            </label>
 
             <input
-                id="loginUsername"
+                id="loginEmail"
                 type="email"
-                class="form-control"
-                placeholder="admin1@gmail.com"
-                autocomplete="email"
+                placeholder="البريد الإلكتروني"
             >
 
         </div>
 
         <div class="form-group">
 
-            <label>كلمة المرور</label>
+            <label>
+                كلمة المرور
+            </label>
 
             <input
                 id="loginPassword"
                 type="password"
-                class="form-control"
-                placeholder="ادخل كلمة المرور"
-                autocomplete="current-password"
+                placeholder="كلمة المرور"
             >
 
         </div>
 
         <button
-            class="btn btn-primary btn-block"
-            onclick="login()"
-        >
+            class="btn btn-primary full"
+            onclick="login()">
+
             تسجيل الدخول
+
         </button>
 
         <button
-            class="btn btn-secondary btn-block"
-            style="margin-top:10px"
-            onclick="forgotPassword()"
-        >
-            نسيت كلمة المرور؟ إرسال رابط استعادة 📧
+            class="btn full"
+            style="margin-top:10px;background:#f3f4f6"
+            onclick="forgotPassword()">
+
+            نسيت كلمة المرور؟
+
         </button>
 
-        <div style="text-align:center;margin-top:15px;color:#94a3b8;font-size:12px">
-            استخدم البريد الإلكتروني المسجل في Firebase
+        <div
+            id="loginError"
+            class="login-error">
         </div>
 
     </div>
+
+</div>
+
+
+<!-- APP -->
+<div id="app">
+
+<div class="layout">
+
+<aside class="sidebar">
+
+    <div class="logo">
+        DriveOps
+    </div>
+
+    <div
+        class="role-label"
+        id="roleLabel">
+
+        👑 مدير التشغيل
+
+    </div>
+
+    <div class="menu">
+
+        <button
+            onclick="showPage('dashboard')"
+            id="menu-dashboard">
+
+            🏠 لوحة التحكم
+
+        </button>
+
+        <button
+            onclick="showPage('operations')"
+            id="menu-operations">
+
+            🚗 التشغيلات
+
+        </button>
+
+        <button
+            onclick="showPage('addOperation')"
+            id="menu-addOperation">
+
+            ➕ إضافة تشغيل
+
+        </button>
+
+        <button
+            onclick="showPage('expenses')"
+            id="menu-expenses">
+
+            💰 المصروفات
+
+        </button>
+
+        <button
+            onclick="showPage('reports')"
+            id="menu-reports">
+
+            📊 التقارير
+
+        </button>
+
+        <button
+            onclick="showPage('drivers')"
+            id="menu-drivers">
+
+            👥 السواقين
+
+        </button>
+
+        <button
+            onclick="showPage('backup')"
+            id="menu-backup">
+
+            💾 النسخة الاحتياطية
+
+        </button>
+
+        <button
+            onclick="showPage('settings')"
+            id="menu-settings">
+
+            ⚙️ الإعدادات
+
+        </button>
+
+        <button
+            onclick="showPage('admin')"
+            id="menu-admin"
+            class="hidden">
+
+            👑 إدارة المستخدمين
+
+        </button>
+
+        <button onclick="logout()">
+
+            🚪 تسجيل الخروج
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+<div class="topbar">
+
+    <div>
+
+        <div
+            class="page-title"
+            id="pageTitle">
+
+            لوحة التحكم
+
+        </div>
+
+        <div
+            class="user-info"
+            id="userInfo">
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <button
+            class="btn btn-secondary"
+            onclick="refreshData()">
+
+            🔄 تحديث
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+<section
+    id="page-dashboard"
+    class="page">
+
+<div class="cards">
+
+    <div class="card">
+
+        <div class="card-title">
+            إجمالي التشغيلات
+        </div>
+
+        <div
+            class="card-value blue"
+            id="statOperations">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+            إجمالي الدخل
+        </div>
+
+        <div
+            class="card-value green"
+            id="statRevenue">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+            المصروفات
+        </div>
+
+        <div
+            class="card-value red"
+            id="statExpenses">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+            صافي الربح
+        </div>
+
+        <div
+            class="card-value orange"
+            id="statNet">
+
+            0
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+    <h3>
+        آخر التشغيلات
+    </h3>
+
+    <div class="actions">
+
+        <button
+            class="btn btn-info"
+            onclick="showPage('reports')">
+
+            📊 التقرير
+
+        </button>
+
+        <button
+            class="btn btn-primary"
+            onclick="showPage('addOperation')">
+
+            ➕ تشغيل جديد
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>التاريخ</th>
+    <th>السواق</th>
+    <th>العميل</th>
+    <th>من</th>
+    <th>إلى</th>
+    <th>السعر</th>
+    <th>الحالة</th>
+
+</tr>
+
+</thead>
+
+<tbody id="dashboardOperations"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
-<div id="app">
+<!-- OPERATIONS -->
+<section
+    id="page-operations"
+    class="page">
 
-    <aside class="sidebar" id="sidebar">
+<div class="panel">
 
-        <div class="sidebar-brand">
+<div class="panel-header">
 
-            <div class="sidebar-logo">
-                DO
-            </div>
+    <h3>
+        التشغيلات
+    </h3>
 
-            <div>
-
-                <div class="brand-text">
-                    DriveOps
-                </div>
-
-                <div class="brand-small">
-                    Operations Manager
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="nav-title">
-            الرئيسية
-        </div>
+    <div class="actions">
 
         <button
-            class="nav-item active"
-            onclick="showPage('dashboard',this)"
-        >
-            📊
-            <span>لوحة التحكم</span>
-        </button>
+            class="btn btn-primary"
+            onclick="showPage('addOperation')">
 
-        <div class="nav-title">
-            التشغيلات
-        </div>
+            ➕ إضافة تشغيل
 
-        <button
-            class="nav-item"
-            onclick="showPage('operations',this)"
-        >
-            🚗
-            <span>التشغيلات</span>
         </button>
 
         <button
-            class="nav-item"
-            onclick="openOperationModal()"
-        >
-            ➕
-            <span>إضافة تشغيلة</span>
-        </button>
+            class="btn btn-info"
+            onclick="sumVisibleColumns()">
 
-        <div class="nav-title">
-            المالية
-        </div>
+            🧮 جمع الأعمدة
 
-        <button
-            class="nav-item"
-            onclick="showPage('expenses',this)"
-        >
-            💸
-            <span>المصروفات</span>
         </button>
 
         <button
-            class="nav-item"
-            onclick="showPage('reports',this)"
-        >
-            📈
-            <span>التقارير</span>
+            class="btn btn-secondary"
+            onclick="refreshData()">
+
+            🔄 تحديث
+
         </button>
 
-        <div class="nav-title">
-            النظام
-        </div>
+    </div>
 
-        <button
-            class="nav-item"
-            onclick="showPage('settings',this)"
-        >
-            ⚙️
-            <span>الإعدادات</span>
-        </button>
+</div>
 
-        <button
-            class="nav-item"
-            onclick="logout()"
-        >
-            🚪
-            <span>تسجيل الخروج</span>
-        </button>
 
-    </aside>
+<div class="grid-4">
 
+<div class="form-group">
 
-    <main class="main">
+<label>
+    بحث
+</label>
 
-        <header class="topbar">
+<input
+    id="operationSearch"
+    oninput="renderOperations()"
+    placeholder="السواق / العميل / الطريق">
 
-            <div style="display:flex;align-items:center;gap:12px">
+</div>
 
-                <button
-                    class="mobile-menu"
-                    onclick="toggleSidebar()"
-                >
-                    ☰
-                </button>
 
-                <div
-                    class="page-title"
-                    id="pageTitle"
-                >
-                    لوحة التحكم
-                </div>
+<div class="form-group">
 
-            </div>
+<label>
+    من تاريخ
+</label>
 
-            <div class="user-box">
+<input
+    id="operationFrom"
+    type="date"
+    onchange="renderOperations()">
 
-                <span id="topUsername">
-                    admin1@gmail.com
-                </span>
+</div>
 
-                <div
-                    class="avatar"
-                    id="avatar"
-                >
-                    A
-                </div>
 
-            </div>
+<div class="form-group">
 
-        </header>
+<label>
+    إلى تاريخ
+</label>
 
+<input
+    id="operationTo"
+    type="date"
+    onchange="renderOperations()">
 
-        <div class="content">
+</div>
 
-            <section
-                id="dashboard"
-                class="page active"
-            >
 
-                <div class="welcome">
+<div class="form-group">
 
-                    <h2>
-                        أهلاً بيك 👋
-                    </h2>
+<label>
+    الدفع
+</label>
 
-                    <p>
-                        هنا تقدر تتابع كل التشغيلات والدخل والمصروفات وصافي الربح.
-                    </p>
+<select
+    id="operationPaymentFilter"
+    onchange="renderOperations()">
 
-                </div>
+<option value="">
+    الكل
+</option>
 
+<option value="paid">
+    مدفوع
+</option>
 
-                <div class="stats-grid">
+<option value="unpaid">
+    غير مدفوع
+</option>
 
-                    <div class="stat-card">
+</select>
 
-                        <div>
+</div>
 
-                            <div class="stat-label">
-                                إجمالي التشغيلات
-                            </div>
+</div>
 
-                            <div
-                                class="stat-value"
-                                id="statOperations"
-                            >
-                                0
-                            </div>
+</div>
 
-                        </div>
 
-                        <div class="stat-icon">
-                            🚗
-                        </div>
+<div class="panel">
 
-                    </div>
+<div class="table-wrap">
 
+<table>
 
-                    <div class="stat-card">
+<thead>
 
-                        <div>
+<tr>
 
-                            <div class="stat-label">
-                                إجمالي الدخل
-                            </div>
+<th>التاريخ</th>
+<th>السواق</th>
+<th>العميل</th>
+<th>من</th>
+<th>إلى</th>
+<th>النوع</th>
+<th>السعر</th>
+<th>الدفع</th>
+<th>إجراء</th>
 
-                            <div
-                                class="stat-value"
-                                id="statIncome"
-                            >
-                                0 ج
-                            </div>
+</tr>
 
-                        </div>
+</thead>
 
-                        <div class="stat-icon">
-                            💰
-                        </div>
+<tbody id="operationsTable"></tbody>
 
-                    </div>
-
-
-                    <div class="stat-card">
-
-                        <div>
-
-                            <div class="stat-label">
-                                المصروفات
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="statExpenses"
-                            >
-                                0 ج
-                            </div>
-
-                        </div>
-
-                        <div class="stat-icon">
-                            💸
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat-card">
-
-                        <div>
-
-                            <div class="stat-label">
-                                صافي الربح
-                            </div>
-
-                            <div
-                                class="stat-value"
-                                id="statProfit"
-                            >
-                                0 ج
-                            </div>
-
-                        </div>
-
-                        <div class="stat-icon">
-                            📈
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="panel">
-
-                    <div class="panel-header">
-
-                        <div class="panel-title">
-                            آخر التشغيلات
-                        </div>
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="showPage('operations')"
-                        >
-                            عرض الكل
-                        </button>
-
-                    </div>
-
-                    <div class="table-wrap">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-                                    <th>التاريخ</th>
-                                    <th>العميل</th>
-                                    <th>من</th>
-                                    <th>إلى</th>
-                                    <th>السعر</th>
-                                    <th>الحالة</th>
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="recentOperations"></tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-
-                <div class="footer">
-                    <strong>Made with ❤️ by Engineer Thomas Malak</strong>
-                </div>
-
-            </section>
-
-
-            <section
-                id="operations"
-                class="page"
-            >
-
-                <div class="panel">
-
-                    <div class="panel-header">
-
-                        <div>
-
-                            <div class="panel-title">
-                                إدارة التشغيلات
-                            </div>
-
-                            <div style="color:#94a3b8;font-size:12px;margin-top:4px">
-                                سجل كل تشغيلاتك وراجع إجماليها بسهولة.
-                            </div>
-
-                        </div>
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="openOperationModal()"
-                        >
-                            + إضافة تشغيلة
-                        </button>
-
-                    </div>
-
-
-                    <div class="filters">
-
-                        <input
-                            id="operationSearch"
-                            class="form-control"
-                            placeholder="🔎 بحث بالعميل أو الطريق..."
-                            oninput="renderOperations()"
-                        >
-
-                        <input
-                            id="operationFrom"
-                            type="date"
-                            class="form-control"
-                            onchange="renderOperations()"
-                        >
-
-                        <input
-                            id="operationTo"
-                            type="date"
-                            class="form-control"
-                            onchange="renderOperations()"
-                        >
-
-                        <select
-                            id="operationStatus"
-                            class="form-control"
-                            onchange="renderOperations()"
-                        >
-                            <option value="">كل الحالات</option>
-                            <option value="paid">مدفوع</option>
-                            <option value="unpaid">آجل</option>
-                        </select>
-
-                    </div>
-
-
-                    <div class="table-wrap">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-                                    <th>#</th>
-                                    <th>التاريخ</th>
-                                    <th>العميل</th>
-                                    <th>من</th>
-                                    <th>إلى</th>
-                                    <th>نوع التشغيل</th>
-                                    <th>السعر</th>
-                                    <th>الحالة</th>
-                                    <th>إجراءات</th>
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="operationsTable"></tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <section
-                id="expenses"
-                class="page"
-            >
-
-                <div class="panel">
-
-                    <div class="panel-header">
-
-                        <div class="panel-title">
-                            المصروفات
-                        </div>
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="openExpenseModal()"
-                        >
-                            + إضافة مصروف
-                        </button>
-
-                    </div>
-
-
-                    <div class="table-wrap">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-                                    <th>#</th>
-                                    <th>التاريخ</th>
-                                    <th>النوع</th>
-                                    <th>الوصف</th>
-                                    <th>المبلغ</th>
-                                    <th>إجراء</th>
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="expensesTable"></tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <section
-                id="reports"
-                class="page"
-            >
-
-                <div class="panel">
-
-                    <div class="panel-header">
-
-                        <div class="panel-title">
-                            التقارير المالية
-                        </div>
-
-                        <button
-                            class="btn btn-secondary"
-                            onclick="window.print()"
-                        >
-                            🖨️ طباعة
-                        </button>
-
-                    </div>
-
-
-                    <div class="filters">
-
-                        <input
-                            id="reportMonth"
-                            type="month"
-                            class="form-control"
-                            onchange="renderReports()"
-                        >
-
-                    </div>
-
-
-                    <div class="report-grid">
-
-                        <div class="report-box">
-                            <h3>عدد التشغيلات</h3>
-                            <strong id="reportCount">0</strong>
-                        </div>
-
-                        <div class="report-box">
-                            <h3>إجمالي التشغيلات</h3>
-                            <strong id="reportIncome">0 ج</strong>
-                        </div>
-
-                        <div class="report-box">
-                            <h3>إجمالي المصروفات</h3>
-                            <strong id="reportExpenses">0 ج</strong>
-                        </div>
-
-                        <div class="report-box">
-                            <h3>المدفوع</h3>
-                            <strong id="reportPaid">0 ج</strong>
-                        </div>
-
-                        <div class="report-box">
-                            <h3>الآجل</h3>
-                            <strong id="reportUnpaid">0 ج</strong>
-                        </div>
-
-                        <div class="report-box">
-                            <h3>صافي الربح</h3>
-                            <strong id="reportProfit">0 ج</strong>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="panel">
-
-                    <div class="panel-title" style="margin-bottom:18px">
-                        كشف حساب التشغيلات
-                    </div>
-
-                    <div class="table-wrap">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-                                    <th>التاريخ</th>
-                                    <th>العميل</th>
-                                    <th>الطريق</th>
-                                    <th>السعر</th>
-                                    <th>الحالة</th>
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="reportOperationsTable"></tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <section
-                id="settings"
-                class="page"
-            >
-
-                <div class="panel">
-
-                    <div class="panel-header">
-
-                        <div class="panel-title">
-                            إعدادات الحساب
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>
-                                البريد الإلكتروني
-                            </label>
-
-                            <input
-                                id="settingsUsername"
-                                type="email"
-                                class="form-control"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                كلمة المرور الجديدة
-                            </label>
-
-                            <input
-                                id="settingsPassword"
-                                type="password"
-                                class="form-control"
-                                placeholder="اتركها فارغة إذا لم ترد تغييرها"
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-actions">
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="saveAccountSettings()"
-                        >
-                            حفظ بيانات الحساب
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="panel">
-
-                    <div class="panel-title" style="margin-bottom:20px">
-                        بيانات العربية
-                    </div>
-
-
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>
-                                اسم العربية
-                            </label>
-
-                            <input
-                                id="carName"
-                                class="form-control"
-                                placeholder="مثال: BYD F3"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                رقم اللوحة
-                            </label>
-
-                            <input
-                                id="carPlate"
-                                class="form-control"
-                                placeholder="رقم اللوحة"
-                            >
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-actions">
-
-                        <button
-                            class="btn btn-primary"
-                            onclick="saveCarSettings()"
-                        >
-                            حفظ بيانات العربية
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="panel">
-
-                    <div class="panel-title" style="margin-bottom:15px">
-                        النسخ الاحتياطي واسترجاع البيانات 💾
-                    </div>
-
-                    <p style="color:var(--muted);line-height:1.8;margin-bottom:15px">
-                        حمّل نسخة من تشغيلاتك ومصروفاتك وبيانات العربية على جهازك، ويمكنك استرجاعها لاحقًا من نفس الحساب.
-                    </p>
-
-                    <div class="form-actions" style="display:flex;gap:10px;flex-wrap:wrap">
-                        <button class="btn btn-primary" onclick="downloadBackup()">📥 تنزيل نسخة احتياطية</button>
-                        <button class="btn btn-secondary" onclick="document.getElementById('backupFile').click()">📤 استرجاع نسخة احتياطية</button>
-                        <input id="backupFile" type="file" accept="application/json,.json" style="display:none" onchange="restoreBackup(event)">
-                    </div>
-
-                    <div style="margin-top:15px;padding:12px;border-radius:10px;background:#eff6ff;color:#1e40af;line-height:1.7;font-size:13px">
-                        عند الاسترجاع سيتم إضافة بيانات الملف إلى الحساب، ولن يتم حذف البيانات الموجودة.
-                    </div>
-
-                </div>
-
-                <div class="panel">
-                    <div class="panel-title" style="margin-bottom:15px">أمان الحساب 💌</div>
-                    <button class="btn btn-secondary" onclick="sendVerificationEmailNow()">📧 إرسال رسالة تأكيد البريد الإلكتروني</button>
-                    <div style="margin-top:12px;color:var(--muted);line-height:1.7;font-size:13px">
-                        Firebase يدعم استعادة كلمة المرور ورسالة تأكيد البريد مباشرة. أما الرسالة الترحيبية المخصصة باسم DriveOps فتحتاج خدمة بريد إضافية لاحقًا.
-                    </div>
-                </div>
-
-                <div class="panel">
-
-                    <div class="panel-title" style="margin-bottom:15px">
-                        إدارة البيانات
-                    </div>
-
-                    <button
-                        class="btn btn-danger"
-                        onclick="clearAllData()"
-                    >
-                        ⚠️ حذف كل البيانات
-                    </button>
-
-                </div>
-
-
-                <div class="footer">
-                    <strong>Made with ❤️ by Engineer Thomas Malak</strong>
-                </div>
-
-            </section>
-
-        </div>
-
-    </main>
+</table>
 
 </div>
 
 
 <div
-    class="modal"
-    id="operationModal"
->
+    id="operationsSummary"
+    class="backup-box hidden"
+    style="margin-top:15px">
 
-    <div class="modal-box">
+</div>
 
-        <div class="modal-header">
+</div>
 
-            <div class="panel-title">
+</section>
 
-                <span id="operationModalTitle">
-                    إضافة تشغيلة جديدة
-                </span>
 
-            </div>
+<!-- ADD OPERATION -->
+<section
+    id="page-addOperation"
+    class="page">
 
-            <button
-                class="close"
-                onclick="closeOperationModal()"
-            >
-                ×
-            </button>
+<div class="panel">
 
-        </div>
+<div class="panel-header">
 
+<h3 id="operationFormTitle">
+    إضافة تشغيل جديد
+</h3>
+
+</div>
+
+
+<input
+    type="hidden"
+    id="operationId">
+
+
+<div class="grid">
+
+
+<div class="form-group">
+
+<label>
+    السواق
+</label>
+
+<select id="opDriver">
+
+<option value="">
+    اختر السواق
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    التاريخ
+</label>
+
+<input
+    id="opDate"
+    type="date">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    اسم العميل
+</label>
+
+<input
+    id="opClient"
+    placeholder="اسم العميل">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    من
+</label>
+
+<input
+    id="opFrom"
+    placeholder="مكان البداية">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    إلى
+</label>
+
+<input
+    id="opTo"
+    placeholder="مكان الوصول">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    نوع التشغيل
+</label>
+
+<input
+    id="opType"
+    placeholder="Airport / Transfer / Tour">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    السعر
+</label>
+
+<input
+    id="opPrice"
+    type="number"
+    step="0.01">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    حالة الدفع
+</label>
+
+<select id="opPayment">
+
+<option value="paid">
+    مدفوع
+</option>
+
+<option value="unpaid">
+    غير مدفوع
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    ملاحظات
+</label>
+
+<input
+    id="opNotes"
+    placeholder="ملاحظات">
+
+</div>
+
+</div>
+
+
+<button
+    class="btn btn-success"
+    onclick="saveOperation()">
+
+    حفظ التشغيل
+
+</button>
+
+<button
+    class="btn btn-secondary"
+    onclick="showPage('operations')">
+
+    إلغاء
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- EXPENSES -->
+<section
+    id="page-expenses"
+    class="page">
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>
+    إضافة مصروف
+</h3>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="form-group">
+
+<label>
+    التاريخ
+</label>
+
+<input
+    id="expenseDate"
+    type="date">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    نوع المصروف
+</label>
+
+<input
+    id="expenseType"
+    placeholder="بنزين / صيانة ...">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    الوصف
+</label>
+
+<input
+    id="expenseDescription">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    المبلغ
+</label>
+
+<input
+    id="expenseAmount"
+    type="number"
+    step="0.01">
+
+</div>
+
+</div>
+
+
+<button
+    class="btn btn-success"
+    onclick="saveExpense()">
+
+    إضافة المصروف
+
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>
+    المصروفات
+</h3>
+
+<button
+    class="btn btn-secondary"
+    onclick="refreshData()">
+
+    🔄 تحديث
+
+</button>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>التاريخ</th>
+<th>النوع</th>
+<th>الوصف</th>
+<th>المبلغ</th>
+<th>إجراء</th>
+
+</tr>
+
+</thead>
+
+<tbody id="expensesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REPORTS -->
+<section
+    id="page-reports"
+    class="page">
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>
+    التقرير الشهري
+</h3>
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="form-group">
+
+<label>
+    الشهر
+</label>
+
+<input
+    id="reportMonth"
+    type="month"
+    onchange="buildReport()">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    السواق
+</label>
+
+<select
+    id="reportDriver"
+    onchange="buildReport()">
+
+<option value="">
+    كل السواقين
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+
+<div class="card-title">
+    عدد التشغيلات
+</div>
+
+<div
+    class="card-value blue"
+    id="reportOperations">
+
+    0
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-title">
+    إجمالي الدخل
+</div>
+
+<div
+    class="card-value green"
+    id="reportRevenue">
+
+    0
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-title">
+    المصروفات
+</div>
+
+<div
+    class="card-value red"
+    id="reportExpenses">
+
+    0
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-title">
+    صافي الربح
+</div>
+
+<div
+    class="card-value orange"
+    id="reportNet">
+
+    0
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>
+    تفاصيل التقرير
+</h3>
+
+<button
+    class="btn btn-info"
+    onclick="sumReport()">
+
+    🧮 جمع التقرير
+
+</button>
+
+</div>
+
+<div id="reportDetails"></div>
+
+</div>
+
+</section>
+
+
+<!-- DRIVERS -->
+<section
+    id="page-drivers"
+    class="page">
+
+<div class="panel">
+
+<div class="panel-header">
+
+<div>
+
+<h3>
+    السواقين
+</h3>
+
+<p
+    style="color:#6b7280;margin-top:5px">
+
+    إضافة وإدارة أسماء السواقين
+
+</p>
+
+</div>
+
+
+<button
+    class="btn btn-primary"
+    onclick="showAddDriver()">
+
+    ➕ إضافة سواق
+
+</button>
+
+</div>
+
+
+<div id="driversList"></div>
+
+</div>
+
+
+<div
+    id="addDriverPanel"
+    class="panel hidden">
+
+<h3 style="margin-bottom:15px">
+
+    إضافة سواق جديد
+
+</h3>
+
+
+<div class="form-group">
+
+<label>
+    اسم السواق
+</label>
+
+<input
+    id="newDriverName"
+    placeholder="مثال: محمد أحمد">
+
+</div>
+
+
+<button
+    class="btn btn-success"
+    onclick="createDriver()">
+
+    حفظ السواق
+
+</button>
+
+
+<button
+    class="btn btn-secondary"
+    onclick="hideAddDriver()">
+
+    إلغاء
+
+</button>
+
+
+<div
+    id="driverMessage"
+    style="margin-top:12px">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN -->
+<section id="page-admin" class="page">
+
+<div class="panel">
+
+    <div class="panel-header">
+
+        <h3>
+            👑 إدارة المستخدمين
+        </h3>
+
+        <button
+            class="btn btn-primary"
+            onclick="showCreateUserForm()">
+
+            ➕ مستخدم جديد
+
+        </button>
+
+    </div>
+
+    <div class="form-group">
+
+        <label>
+            بحث
+        </label>
 
         <input
-            type="hidden"
-            id="operationId"
-        >
+            id="adminUserSearch"
+            oninput="renderAdminUsers()"
+            placeholder="الاسم أو البريد الإلكتروني">
 
+    </div>
 
-        <div class="form-grid">
+    <div
+        id="createUserBox"
+        class="backup-box hidden"
+        style="margin-bottom:15px">
+
+        <h3 style="margin-bottom:15px">
+            إضافة مستخدم
+        </h3>
+
+        <div class="grid">
 
             <div class="form-group">
 
-                <label>التاريخ</label>
+                <label>
+                    الاسم
+                </label>
 
                 <input
-                    id="operationDate"
-                    type="date"
-                    class="form-control"
-                >
+                    id="newUserName">
 
             </div>
 
-
             <div class="form-group">
 
-                <label>العميل</label>
+                <label>
+                    البريد الإلكتروني
+                </label>
 
                 <input
-                    id="operationClient"
-                    class="form-control"
-                    placeholder="اسم العميل"
-                >
+                    id="newUserEmail"
+                    type="email">
 
             </div>
 
-
             <div class="form-group">
 
-                <label>من</label>
+                <label>
+                    كلمة المرور
+                </label>
 
                 <input
-                    id="operationFromPlace"
-                    class="form-control"
-                    placeholder="مكان البداية"
-                >
+                    id="newUserPassword"
+                    type="password"
+                    minlength="6">
 
             </div>
 
-
             <div class="form-group">
 
-                <label>إلى</label>
+                <label>
+                    الصلاحية
+                </label>
 
-                <input
-                    id="operationToPlace"
-                    class="form-control"
-                    placeholder="مكان الوصول"
-                >
+                <select id="newUserRole">
 
-            </div>
+                    <option value="driver">
+                        سواق
+                    </option>
 
+                    <option value="manager">
+                        مدير
+                    </option>
 
-            <div class="form-group">
-
-                <label>نوع التشغيل</label>
-
-                <select
-                    id="operationType"
-                    class="form-control"
-                >
-
-                    <option value="مشوار">مشوار</option>
-                    <option value="مطار">مطار</option>
-                    <option value="انتظار">انتظار</option>
-                    <option value="رحلة">رحلة</option>
-                    <option value="أخرى">أخرى</option>
+                    <option value="admin">
+                        مسؤول
+                    </option>
 
                 </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>السعر</label>
-
-                <input
-                    id="operationPrice"
-                    type="number"
-                    min="0"
-                    class="form-control"
-                    placeholder="0"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>الحالة</label>
-
-                <select
-                    id="operationPayment"
-                    class="form-control"
-                >
-
-                    <option value="paid">مدفوع</option>
-                    <option value="unpaid">آجل</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group full">
-
-                <label>ملاحظات</label>
-
-                <textarea
-                    id="operationNotes"
-                    class="form-control"
-                    rows="3"
-                    placeholder="أي ملاحظات..."
-                ></textarea>
 
             </div>
 
         </div>
 
-
-        <div class="form-actions">
+        <div class="actions">
 
             <button
-                class="btn btn-primary"
-                onclick="saveOperation()"
-            >
-                حفظ التشغيلة
+                class="btn btn-success"
+                onclick="createAdminUser()">
+
+                حفظ المستخدم
+
             </button>
 
             <button
                 class="btn btn-secondary"
-                onclick="closeOperationModal()"
-            >
+                onclick="hideCreateUserForm()">
+
                 إلغاء
+
             </button>
 
         </div>
 
     </div>
 
+    <div id="adminUsersList"></div>
+
 </div>
 
-
-<div
-    class="modal"
-    id="expenseModal"
->
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div class="panel-title">
-                إضافة مصروف
-            </div>
-
-            <button
-                class="close"
-                onclick="closeExpenseModal()"
-            >
-                ×
-            </button>
-
-        </div>
+</section>
 
 
-        <div class="form-group">
-
-            <label>التاريخ</label>
-
-            <input
-                id="expenseDate"
-                type="date"
-                class="form-control"
-            >
-
-        </div>
+<!-- BACKUP -->
+<section
+    id="page-backup"
+    class="page">
 
 
-        <div class="form-group">
+<div class="panel">
 
-            <label>نوع المصروف</label>
+<div class="panel-header">
 
-            <select
-                id="expenseType"
-                class="form-control"
-            >
+<h3>
+    💾 النسخة الاحتياطية
+</h3>
 
-                <option value="بنزين">بنزين</option>
-                <option value="صيانة">صيانة</option>
-                <option value="غسيل">غسيل</option>
-                <option value="أكل وشرب">أكل وشرب</option>
-                <option value="أخرى">أخرى</option>
+<div class="actions">
 
-            </select>
+<button
+    class="btn btn-secondary"
+    onclick="refreshData()">
 
-        </div>
+    🔄 تحديث
 
+</button>
 
-        <div class="form-group">
-
-            <label>الوصف</label>
-
-            <input
-                id="expenseDescription"
-                class="form-control"
-                placeholder="وصف المصروف"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>المبلغ</label>
-
-            <input
-                id="expenseAmount"
-                type="number"
-                min="0"
-                class="form-control"
-                placeholder="0"
-            >
-
-        </div>
-
-
-        <div class="form-actions">
-
-            <button
-                class="btn btn-primary"
-                onclick="saveExpense()"
-            >
-                حفظ المصروف
-            </button>
-
-            <button
-                class="btn btn-secondary"
-                onclick="closeExpenseModal()"
-            >
-                إلغاء
-            </button>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 
-<div
-    id="toast"
-    class="toast"
-></div>
+<div class="backup-box">
+
+<p
+    style="margin-bottom:15px;color:#4b5563">
+
+    احفظ نسخة من بيانات DriveOps على جهازك.
+    النسخة تشمل السواقين والتشغيلات والمصروفات وبيانات الحساب.
+
+</p>
+
+
+<button
+    class="btn btn-primary"
+    onclick="createBackup()">
+
+    💾 تحميل نسخة احتياطية
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>
+    ♻️ استرجاع نسخة احتياطية
+</h3>
+
+</div>
+
+
+<div class="backup-box">
+
+<p
+    style="margin-bottom:15px;color:#4b5563">
+
+    اختار ملف النسخة الاحتياطية لاسترجاع البيانات إلى Firebase.
+
+</p>
+
+
+<input
+    id="backupFile"
+    type="file"
+    accept=".json"
+    style="margin-bottom:15px">
+
+
+<br>
+
+
+<button
+    class="btn btn-warning"
+    onclick="restoreBackup()">
+
+    ♻️ استرجاع النسخة
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-header">
+
+<h3>
+    ⚠️ منطقة البيانات
+</h3>
+
+</div>
+
+
+<div class="danger-box">
+
+<p
+    style="margin-bottom:15px;color:#991b1b">
+
+    <strong>
+        تحذير:
+    </strong>
+
+    حذف البيانات عملية نهائية ولا يمكن التراجع عنها من داخل البرنامج.
+    سيتم حذف التشغيلات والمصروفات وأسماء السواقين من حسابك،
+    ولكن حساب تسجيل الدخول نفسه لن يتم حذفه.
+
+</p>
+
+
+<button
+    class="btn btn-danger"
+    onclick="deleteAllData()">
+
+    🗑️ حذف كل البيانات
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section
+    id="page-settings"
+    class="page">
+
+
+<div class="panel">
+
+<h3
+    style="margin-bottom:20px">
+
+    إعدادات الحساب
+
+</h3>
+
+
+<div class="form-group">
+
+<label>
+    الاسم
+</label>
+
+<input id="settingsName">
+
+</div>
+
+
+<button
+    class="btn btn-success"
+    onclick="saveProfile()">
+
+    حفظ البيانات
+
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h3
+    style="margin-bottom:15px">
+
+    تغيير كلمة المرور
+
+</h3>
+
+
+<button
+    class="btn btn-warning"
+    onclick="sendPasswordResetForCurrentUser()">
+
+    إرسال رابط تغيير كلمة المرور
+
+</button>
+
+</div>
+
+</section>
+
+
+<div class="footer">
+
+    Made with ❤️ by Engineer Thomas Malak
+
+</div>
+
+</main>
+
+</div>
+
+</div>
 
 
 <script type="module">
 
-/* =========================================================
-   FIREBASE
-========================================================= */
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
     getAuth,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    sendPasswordResetEmail,
-    sendEmailVerification,
-    updatePassword,
-    updateEmail,
     onAuthStateChanged,
-    signOut
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+    sendPasswordResetEmail,
+    signOut,
+    createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
     getFirestore,
-    collection,
     doc,
     getDoc,
-    getDocs,
+    getDocFromServer,
     setDoc,
-    addDoc,
     updateDoc,
     deleteDoc,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    collection,
+    addDoc,
+    getDocs,
+    writeBatch
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+import {
+    getFunctions,
+    httpsCallable
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAM6s61Gyrn_FK9JFs11NhSI_2WGRZ2R-k",
-    authDomain: "driveops-b1c74.firebaseapp.com",
-    projectId: "driveops-b1c74",
-    storageBucket: "driveops-b1c74.firebasestorage.app",
-    messagingSenderId: "468738900505",
-    appId: "1:468738900505:web:a01130301f18c76069e088",
-    measurementId: "G-Z4SH9EC1J6"
+
+    apiKey:
+        "AIzaSyAM6s61Gyrn_FK9JFs11NhSI_2WGRZ2R-k",
+
+    authDomain:
+        "driveops-b1c74.firebaseapp.com",
+
+    projectId:
+        "driveops-b1c74",
+
+    storageBucket:
+        "driveops-b1c74.firebasestorage.app",
+
+    messagingSenderId:
+        "468738900505",
+
+    appId:
+        "1:468738900505:web:a01130301f18c76069e088",
+
+    measurementId:
+        "G-Z4SH9EC1J6"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app =
+    initializeApp(firebaseConfig);
 
 
-/* =========================================================
-   DATA
-========================================================= */
+const auth =
+    getAuth(app);
 
-let operations = [];
-let expenses = [];
 
-let account = {
-    email:"",
-    username:""
-};
+/* =========================
+   SECONDARY AUTH
+   لإنشاء المستخدم بدون
+   تسجيل خروج الأدمن
+========================= */
 
-let car = {
-    name:"",
-    plate:""
-};
+const secondaryApp =
+    initializeApp(
+        firebaseConfig,
+        "secondary"
+    );
+
+
+const secondaryAuth =
+    getAuth(
+        secondaryApp
+    );
+
+
+const db =
+    getFirestore(app);
+
+
+/* =========================
+   CLOUD FUNCTIONS
+   باقية فقط للعمليات
+   التي تحتاج Admin SDK
+========================= */
+
+const functions =
+    getFunctions(
+        app,
+        "us-central1"
+    );
+
+
+const updateUserFn =
+    httpsCallable(
+        functions,
+        "updateUser"
+    );
+
+
+const changeUserPasswordFn =
+    httpsCallable(
+        functions,
+        "changeUserPassword"
+    );
+
+
+const deleteUserFn =
+    httpsCallable(
+        functions,
+        "deleteUser"
+    );
+
+
+/* =========================
+   GLOBAL
+========================= */
 
 let currentUser = null;
-let dataReady = false;
+
+let currentUserData = null;
+
+let operations = [];
+
+let expenses = [];
+
+let drivers = [];
 
 
-/* =========================================================
-   INIT
-========================================================= */
+/* =========================
+   HELPERS
+========================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+function money(value){
 
-        setTodayDefaults();
-
-        const reportMonth =
-            document.getElementById("reportMonth");
-
-        if(reportMonth){
-
-            reportMonth.value =
-                new Date()
-                .toISOString()
-                .slice(0,7);
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
-onAuthStateChanged(
-    auth,
-    async(user)=>{
-
-        currentUser =
-            user || null;
-
-        if(user){
-
-            try{
-
-                await loadUserData();
-
-                dataReady = true;
-
-                openApp();
-
-                refreshAll();
-
-            }catch(error){
-
-                console.error(error);
-
-                showLoginError(
-                    "حصل خطأ أثناء تحميل بيانات الحساب. تأكد من إعداد Firestore."
-                );
-
-                await signOut(auth);
-
+    return Number(value || 0)
+        .toLocaleString(
+            "ar-EG",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
             }
-
-        }else{
-
-            dataReady = false;
-
-            document.getElementById(
-                "loginScreen"
-            ).style.display="flex";
-
-            document.getElementById(
-                "app"
-            ).style.display="none";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   AUTH HELPERS
-========================================================= */
-
-function normalizeEmail(email){
-
-    return String(email || "")
-        .trim()
-        .toLowerCase();
-
-}
-
-
-function isValidEmail(email){
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
-
-}
-
-
-function friendlyFirebaseError(error){
-
-    const code =
-        error?.code || "";
-
-
-    if(
-        code.includes("invalid-credential") ||
-        code.includes("wrong-password") ||
-        code.includes("user-not-found")
-    ){
-
-        return "البريد الإلكتروني أو كلمة المرور غير صحيحة";
-
-    }
-
-
-    if(
-        code.includes("invalid-email")
-    ){
-
-        return "اكتب بريد إلكتروني صحيح مثل admin1@gmail.com";
-
-    }
-
-
-    if(
-        code.includes("email-already-in-use")
-    ){
-
-        return "هذا البريد الإلكتروني مستخدم بالفعل";
-
-    }
-
-
-    if(
-        code.includes("weak-password")
-    ){
-
-        return "كلمة المرور ضعيفة. استخدم 6 أحرف أو أكثر.";
-
-    }
-
-
-    if(
-        code.includes("operation-not-allowed")
-    ){
-
-        return "فعّل Email/Password من Firebase Authentication أولاً.";
-
-    }
-
-
-    if(
-        code.includes("network-request-failed")
-    ){
-
-        return "مشكلة في الإنترنت. حاول مرة أخرى.";
-
-    }
-
-
-    if(
-        code.includes("permission-denied")
-    ){
-
-        return "صلاحيات Firestore غير مضبوطة.";
-
-    }
-
-
-    if(
-        code.includes("requires-recent-login")
-    ){
-
-        return "لأسباب أمنية، سجّل خروج ثم ادخل مرة أخرى.";
-
-    }
-
-
-    return "حصل خطأ. تأكد من إعداد Firebase ثم حاول مرة أخرى.";
-
-}
-
-
-function showLoginError(message){
-
-    const el =
-        document.getElementById(
-            "loginError"
         );
 
-    el.textContent =
-        message;
+}
 
-    el.style.display =
-        "block";
+
+function today(){
+
+    return new Date()
+        .toISOString()
+        .split("T")[0];
 
 }
 
 
-function hideLoginError(){
+function currentMonth(){
 
-    const el =
-        document.getElementById(
-            "loginError"
-        );
-
-    el.style.display =
-        "none";
+    return new Date()
+        .toISOString()
+        .slice(0,7);
 
 }
 
 
-async function forgotPassword(){
-    const email = normalizeEmail(document.getElementById("loginUsername")?.value);
-    if(!isValidEmail(email)){
-        showLoginError("اكتب بريدك الإلكتروني أولاً ثم اضغط نسيت كلمة المرور.");
-        return;
-    }
-    try{
-        await sendPasswordResetEmail(auth,email);
-        hideLoginError();
-        alert("تم إرسال رابط استعادة كلمة المرور إلى بريدك الإلكتروني 📧");
-    }catch(error){
-        console.error(error);
-        showLoginError(friendlyFirebaseError(error));
-    }
+function userDoc(uid){
+
+    return doc(
+        db,
+        "users",
+        uid
+    );
+
 }
 
 
-/* =========================================================
+function operationsRef(){
+
+    return collection(
+        db,
+        "users",
+        currentUser.uid,
+        "operations"
+    );
+
+}
+
+
+function expensesRef(){
+
+    return collection(
+        db,
+        "users",
+        currentUser.uid,
+        "expenses"
+    );
+
+}
+
+
+function driversRef(){
+
+    return collection(
+        db,
+        "users",
+        currentUser.uid,
+        "drivers"
+    );
+
+}
+
+
+/* =========================
    LOGIN
-========================================================= */
+========================= */
 
-async function login(){
+window.login = async function(){
 
     const email =
-        normalizeEmail(
-            document.getElementById(
-                "loginUsername"
-            ).value
-        );
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
 
 
     const password =
-        document.getElementById(
-            "loginPassword"
-        ).value;
+        document
+        .getElementById("loginPassword")
+        .value;
 
 
-    hideLoginError();
+    const error =
+        document
+        .getElementById("loginError");
 
 
-    if(
-        !email ||
-        !password
-    ){
-
-        showLoginError(
-            "اكتب البريد الإلكتروني وكلمة المرور"
-        );
-
-        return;
-
-    }
+    error.textContent = "";
 
 
-    if(
-        !isValidEmail(email)
-    ){
+    if(!email || !password){
 
-        showLoginError(
-            "اكتب بريد إلكتروني صحيح مثل admin1@gmail.com"
-        );
+        error.textContent =
+            "اكتب البريد الإلكتروني وكلمة المرور";
 
         return;
-
     }
 
 
@@ -2196,109 +2111,371 @@ async function login(){
             password
         );
 
+    }catch(e){
 
-        showToast(
-            "تم تسجيل الدخول بنجاح ✅"
+        console.error(e);
+
+        error.textContent =
+            "البريد الإلكتروني أو كلمة المرور غير صحيحة";
+
+    }
+
+};
+
+
+window.forgotPassword = async function(){
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+
+    if(!email){
+
+        alert(
+            "اكتب البريد الإلكتروني الأول"
+        );
+
+        return;
+    }
+
+
+    try{
+
+        await sendPasswordResetEmail(
+            auth,
+            email
         );
 
 
-    }catch(error){
-
-        console.error(error);
-
-
-        /*
-          إنشاء حساب المدير لأول مرة
-          البريد:
-          admin1@gmail.com
-
-          كلمة المرور:
-          admin123456
-        */
-
-        if(
-            email === "admin1@gmail.com" &&
-            password === "admin123456"
-        ){
-
-            try{
-
-                const credential =
-                    await createUserWithEmailAndPassword(
-                        auth,
-                        email,
-                        password
-                    );
+        alert(
+            "تم إرسال رابط تغيير كلمة المرور إلى بريدك الإلكتروني"
+        );
 
 
-                await createInitialUserData(
-                    credential.user,
-                    email,
-                    "admin"
-                );
+    }catch(e){
 
+        console.error(e);
 
-                showToast(
-                    "تم إنشاء حساب المدير بنجاح 👑"
-                );
-
-
-                return;
-
-            }catch(createError){
-
-                console.error(
-                    createError
-                );
-
-
-                if(
-                    createError.code ===
-                    "auth/email-already-in-use"
-                ){
-
-                    showLoginError(
-                        "حساب admin1@gmail.com موجود بالفعل. تأكد من كلمة المرور."
-                    );
-
-                }else{
-
-                    showLoginError(
-                        friendlyFirebaseError(
-                            createError
-                        )
-                    );
-
-                }
-
-
-                return;
-
-            }
-
-        }
-
-
-        showLoginError(
-            friendlyFirebaseError(error)
+        alert(
+            "تعذر إرسال رسالة استعادة كلمة المرور"
         );
 
     }
 
-}
+};
 
 
-document.getElementById(
-    "loginPassword"
-)?.addEventListener(
-    "keydown",
-    function(e){
+window.logout = async function(){
 
-        if(
-            e.key === "Enter"
-        ){
+    await signOut(auth);
 
-            login();
+};
+
+
+/* =========================
+   AUTH
+========================= */
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+        console.clear();
+
+        console.log("====================================");
+        console.log("       DRIVEOPS AUTH DIAGNOSTIC");
+        console.log("====================================");
+
+        if (!user) {
+
+            console.log("❌ No authenticated user");
+
+            currentUser = null;
+            currentUserData = null;
+
+            document
+                .getElementById("loginPage")
+                .style.display = "flex";
+
+            document
+                .getElementById("app")
+                .style.display = "none";
+
+            return;
+        }
+
+        currentUser = user;
+
+        console.log("Firebase Auth UID:");
+        console.log(user.uid);
+
+        console.log("Firebase Auth Email:");
+        console.log(user.email);
+
+        console.log("------------------------------------");
+
+        const userRef = userDoc(user.uid);
+
+        try {
+
+            console.log("Expected Firestore Path:");
+            console.log(userRef.path);
+
+            const snap =
+                await getDocFromServer(userRef);
+
+            console.log("Firestore Document Exists:");
+            console.log(snap.exists());
+
+            console.log("Firestore Document ID:");
+            console.log(
+                snap.exists()
+                    ? snap.id
+                    : "NOT FOUND"
+            );
+
+            console.log("------------------------------------");
+
+            if (!snap.exists()) {
+
+                console.error(
+                    "❌ Firestore user document does not exist."
+                );
+
+                console.error(
+                    "Auth UID:",
+                    user.uid
+                );
+
+                console.error(
+                    "Expected Firestore Path:",
+                    `users/${user.uid}`
+                );
+
+                alert(
+                    "حساب Firebase موجود، لكن بيانات الحساب غير موجودة في Firestore.\n\n" +
+                    "Auth UID:\n" +
+                    user.uid +
+                    "\n\n" +
+                    "المسار المطلوب:\n" +
+                    `users/${user.uid}`
+                );
+
+                await signOut(auth);
+
+                return;
+            }
+
+            currentUserData =
+                snap.data();
+
+            console.log(
+                "Full currentUserData:"
+            );
+
+            console.log(
+                currentUserData
+            );
+
+            console.log("------------------------------------");
+
+            const rawRole =
+                currentUserData?.role;
+
+            const cleanRole =
+                String(
+                    rawRole ?? ""
+                )
+                .trim()
+                .toLowerCase();
+
+            console.log(
+                "Role RAW:"
+            );
+
+            console.log(
+                rawRole
+            );
+
+            console.log(
+                "Role CLEAN:"
+            );
+
+            console.log(
+                cleanRole
+            );
+
+            console.log("------------------------------------");
+
+            const authUID =
+                String(
+                    user.uid
+                )
+                .trim();
+
+            const firestoreUID =
+                String(
+                    snap.id
+                )
+                .trim();
+
+            console.log(
+                "Auth UID:"
+            );
+
+            console.log(
+                authUID
+            );
+
+            console.log(
+                "Firestore UID:"
+            );
+
+            console.log(
+                firestoreUID
+            );
+
+            console.log(
+                "UID MATCH:"
+            );
+
+            console.log(
+                authUID === firestoreUID
+            );
+
+            console.log("------------------------------------");
+
+            const isActive =
+                currentUserData?.active !== false;
+
+            console.log(
+                "Account Active:"
+            );
+
+            console.log(
+                isActive
+            );
+
+            const allowedRoles = [
+                "admin",
+                "manager",
+                "driver"
+            ];
+
+            const hasValidRole =
+                allowedRoles.includes(
+                    cleanRole
+                );
+
+            const isAdmin =
+                cleanRole === "admin";
+
+            const isManager =
+                cleanRole === "manager";
+
+            const isDriver =
+                cleanRole === "driver";
+
+            console.log(
+                "Is Admin:",
+                isAdmin
+            );
+
+            console.log(
+                "Is Manager:",
+                isManager
+            );
+
+            console.log(
+                "Is Driver:",
+                isDriver
+            );
+
+            console.log("====================================");
+
+            if (!isActive) {
+
+                console.error(
+                    "❌ ACCOUNT DISABLED"
+                );
+
+                alert(
+                    "هذا الحساب متوقف."
+                );
+
+                await signOut(auth);
+
+                return;
+            }
+
+            if (!hasValidRole) {
+
+                alert(
+                    "صلاحية الحساب غير صحيحة. تواصل مع المسؤول."
+                );
+
+                await signOut(auth);
+
+                return;
+            }
+
+            console.log(
+                "✅ ROLE CHECK PASSED:",
+                cleanRole
+            );
+
+            console.log(
+                "===================================="
+            );
+
+            await openApp();
+
+        } catch (e) {
+
+            console.error(
+                "===================================="
+            );
+
+            console.error(
+                "❌ DRIVEOPS AUTH ERROR"
+            );
+
+            console.error(
+                "===================================="
+            );
+
+            console.error(
+                "Error:",
+                e
+            );
+
+            console.error(
+                "Error Code:",
+                e?.code
+            );
+
+            console.error(
+                "Error Message:",
+                e?.message
+            );
+
+            console.error(
+                "Auth UID:",
+                user.uid
+            );
+
+            console.error(
+                "Auth Email:",
+                user.email
+            );
+
+            alert(
+                "حدث خطأ أثناء تحميل بيانات الحساب.\n\n" +
+                "افتح Console لمعرفة التفاصيل."
+            );
 
         }
 
@@ -2306,833 +2483,716 @@ document.getElementById(
 );
 
 
-/* =========================================================
-   CREATE USER DATA
-========================================================= */
+/* =========================
+   OPEN APP
+========================= */
 
-async function createInitialUserData(
-    user,
-    email,
-    role="driver"
-){
+async function openApp(){
 
-    const userRef =
-        doc(
-            db,
-            "users",
-            user.uid
+    document
+        .getElementById("loginPage")
+        .style.display = "none";
+
+
+    document
+        .getElementById("app")
+        .style.display = "block";
+
+
+    document
+        .getElementById("userInfo")
+        .textContent =
+            currentUserData.name ||
+            currentUser.email;
+
+
+    const roleNames = {
+        admin: "👑 مسؤول النظام",
+        manager: "👑 مدير التشغيل",
+        driver: "🚗 سواق"
+    };
+
+    document
+        .getElementById("roleLabel")
+        .textContent =
+            roleNames[
+                String(
+                    currentUserData.role || "driver"
+                ).toLowerCase()
+            ] || "DriveOps";
+
+    const adminMenu =
+        document.getElementById(
+            "menu-admin"
+        );
+
+    if(adminMenu)
+        adminMenu.classList.toggle(
+            "hidden",
+            String(
+                currentUserData.role || ""
+            ).toLowerCase() !== "admin"
         );
 
 
-    await setDoc(
-        userRef,
-        {
+    document
+        .getElementById("opDate")
+        .value =
+            today();
 
-            email:
-                normalizeEmail(email),
 
-            username:
-                normalizeEmail(email),
+    document
+        .getElementById("expenseDate")
+        .value =
+            today();
 
-            role:role,
 
-            car:{
-                name:"",
-                plate:""
-            },
+    document
+        .getElementById("reportMonth")
+        .value =
+            currentMonth();
 
-            createdAt:
-                serverTimestamp(),
 
-            updatedAt:
-                serverTimestamp()
+    await loadDrivers();
 
-        },
-        {
-            merge:true
-        }
-    );
+    await loadMyData();
+
+    showPage("dashboard");
 
 }
 
 
-/* =========================================================
-   LOAD USER DATA
-========================================================= */
+/* =========================
+   PAGE
+========================= */
 
-async function loadUserData(){
+window.showPage = async function(page){
 
-    if(!currentUser){
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            p=>p.classList.remove("active")
+        );
 
+
+    const target =
+        document.getElementById(
+            "page-"+page
+        );
+
+
+    if(!target)
         return;
 
-    }
+
+    target.classList.add("active");
 
 
-    const userRef =
-        doc(
-            db,
-            "users",
-            currentUser.uid
-        );
+    const titles = {
 
+        dashboard:
+            "لوحة التحكم",
 
-    let userSnap =
-        await getDoc(
-            userRef
-        );
+        operations:
+            "التشغيلات",
 
+        addOperation:
+            "إضافة تشغيل",
 
-    if(
-        !userSnap.exists()
-    ){
+        expenses:
+            "المصروفات",
 
-        await createInitialUserData(
-            currentUser,
-            currentUser.email ||
-            "user",
-            currentUser.email ===
-            "admin1@gmail.com"
-                ? "admin"
-                : "driver"
-        );
+        reports:
+            "التقارير",
 
-    }
+        drivers:
+            "السواقين",
 
+        backup:
+            "النسخة الاحتياطية",
 
-    const freshSnap =
-        await getDoc(
-            userRef
-        );
+        settings:
+            "الإعدادات",
 
-
-    const profile =
-        freshSnap.data() || {};
-
-
-    account = {
-
-        email:
-            currentUser.email || "",
-
-        username:
-            profile.email ||
-            currentUser.email ||
-            "user"
+        admin:
+            "إدارة المستخدمين"
 
     };
 
 
-    car = {
-
-        name:
-            profile.car?.name || "",
-
-        plate:
-            profile.car?.plate || ""
-
-    };
+    document
+        .getElementById("pageTitle")
+        .textContent =
+            titles[page] ||
+            "DriveOps";
 
 
-    const operationsSnap =
+    document
+        .querySelectorAll(".menu button")
+        .forEach(
+            b=>b.classList.remove("active")
+        );
+
+
+    const menu =
+        document.getElementById(
+            "menu-"+page
+        );
+
+
+    if(menu)
+        menu.classList.add("active");
+
+
+    if(page==="dashboard")
+        renderDashboard();
+
+
+    if(page==="operations")
+        renderOperations();
+
+
+    if(page==="expenses")
+        renderExpenses();
+
+
+    if(page==="reports")
+        await buildReport();
+
+
+    if(page==="drivers")
+        await loadDrivers();
+
+
+    if(page==="settings")
+        loadSettings();
+
+
+    if(page==="admin")
+        await loadAdminUsers();
+
+
+    if(page==="addOperation")
+        fillDriverSelect();
+
+};
+
+
+/* =========================
+   LOAD DATA
+========================= */
+
+async function loadMyData(){
+
+    operations = [];
+
+    expenses = [];
+
+    if(!currentUser)
+        return;
+
+
+    const opSnap =
         await getDocs(
-
-            collection(
-                db,
-                "users",
-                currentUser.uid,
-                "operations"
-            )
-
+            operationsRef()
         );
 
 
-    operations =
-        operationsSnap.docs.map(
-            d=>({
+    opSnap.forEach(d=>{
 
-                id:d.id,
+        operations.push({
 
-                ...d.data()
+            id:
+                d.id,
 
-            })
+            ...d.data()
+
+        });
+
+    });
+
+
+    const expSnap =
+        await getDocs(
+            expensesRef()
         );
+
+
+    expSnap.forEach(d=>{
+
+        expenses.push({
+
+            id:
+                d.id,
+
+            ...d.data()
+
+        });
+
+    });
 
 
     operations.sort(
         (a,b)=>
-
-            String(
-                b.createdAt ||
-                b.date ||
-                ""
-            ).localeCompare(
-
-                String(
-                    a.createdAt ||
-                    a.date ||
-                    ""
-                )
-
+            String(b.date||"")
+            .localeCompare(
+                String(a.date||"")
             )
     );
-
-
-    const expensesSnap =
-        await getDocs(
-
-            collection(
-                db,
-                "users",
-                currentUser.uid,
-                "expenses"
-            )
-
-        );
-
-
-    expenses =
-        expensesSnap.docs.map(
-            d=>({
-
-                id:d.id,
-
-                ...d.data()
-
-            })
-        );
 
 
     expenses.sort(
         (a,b)=>
+            String(b.date||"")
+            .localeCompare(
+                String(a.date||"")
+            )
+    );
 
-            String(
-                b.createdAt ||
-                b.date ||
-                ""
-            ).localeCompare(
 
-                String(
-                    a.createdAt ||
-                    a.date ||
-                    ""
+    renderDashboard();
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function renderDashboard(){
+
+    const revenue =
+        operations.reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    const exp =
+        expenses.reduce(
+            (sum,e)=>
+                sum+
+                Number(e.amount||0),
+            0
+        );
+
+
+    document
+        .getElementById("statOperations")
+        .textContent =
+            operations.length;
+
+
+    document
+        .getElementById("statRevenue")
+        .textContent =
+            money(revenue);
+
+
+    document
+        .getElementById("statExpenses")
+        .textContent =
+            money(exp);
+
+
+    document
+        .getElementById("statNet")
+        .textContent =
+            money(revenue-exp);
+
+
+    const tbody =
+        document
+        .getElementById(
+            "dashboardOperations"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    operations
+        .slice(0,10)
+        .forEach(o=>{
+
+            tbody.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${escapeHtml(o.date||"-")}
+                </td>
+
+                <td>
+                    ${escapeHtml(o.driverName||"-")}
+                </td>
+
+                <td>
+                    ${escapeHtml(o.client||"-")}
+                </td>
+
+                <td>
+                    ${escapeHtml(o.from||"-")}
+                </td>
+
+                <td>
+                    ${escapeHtml(o.to||"-")}
+                </td>
+
+                <td>
+                    ${money(o.price)}
+                </td>
+
+                <td>
+
+                    ${
+                        o.payment==="paid"
+                        ?
+                        `<span class="badge badge-paid">
+                            مدفوع
+                        </span>`
+                        :
+                        `<span class="badge badge-unpaid">
+                            غير مدفوع
+                        </span>`
+                    }
+
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+}
+
+
+/* =========================
+   OPERATIONS
+========================= */
+
+window.renderOperations = function(){
+
+    const search =
+        document
+        .getElementById(
+            "operationSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const from =
+        document
+        .getElementById(
+            "operationFrom"
+        )
+        .value;
+
+
+    const to =
+        document
+        .getElementById(
+            "operationTo"
+        )
+        .value;
+
+
+    const payment =
+        document
+        .getElementById(
+            "operationPaymentFilter"
+        )
+        .value;
+
+
+    let data =
+        operations.filter(o=>{
+
+            const text =
+                `${o.driverName||""}
+                 ${o.client||""}
+                 ${o.from||""}
+                 ${o.to||""}`
+                .toLowerCase();
+
+
+            if(
+                search &&
+                !text.includes(search)
+            )
+                return false;
+
+
+            if(
+                from &&
+                String(o.date||"") < from
+            )
+                return false;
+
+
+            if(
+                to &&
+                String(o.date||"") > to
+            )
+                return false;
+
+
+            if(
+                payment &&
+                o.payment !== payment
+            )
+                return false;
+
+
+            return true;
+
+        });
+
+
+    const tbody =
+        document
+        .getElementById(
+            "operationsTable"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    if(!data.length){
+
+        tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="9"
+                class="empty">
+
+                لا توجد تشغيلات
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    data.forEach(o=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>
+                ${escapeHtml(o.date||"-")}
+            </td>
+
+            <td>
+                ${escapeHtml(o.driverName||"-")}
+            </td>
+
+            <td>
+                ${escapeHtml(o.client||"-")}
+            </td>
+
+            <td>
+                ${escapeHtml(o.from||"-")}
+            </td>
+
+            <td>
+                ${escapeHtml(o.to||"-")}
+            </td>
+
+            <td>
+                ${escapeHtml(o.type||"-")}
+            </td>
+
+            <td>
+                ${money(o.price)}
+            </td>
+
+            <td>
+
+                ${
+                    o.payment==="paid"
+                    ?
+                    `<span class="badge badge-paid">
+                        مدفوع
+                    </span>`
+                    :
+                    `<span class="badge badge-unpaid">
+                        غير مدفوع
+                    </span>`
+                }
+
+            </td>
+
+            <td>
+
+                <button
+                    class="btn btn-warning"
+                    onclick="editOperation('${escapeAttr(o.id)}')">
+
+                    تعديل
+
+                </button>
+
+
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteOperation('${escapeAttr(o.id)}')">
+
+                    حذف
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+};
+
+
+/* =========================
+   SAVE OPERATION
+========================= */
+
+window.saveOperation = async function(){
+
+    const id =
+        document
+        .getElementById(
+            "operationId"
+        )
+        .value;
+
+
+    const driverId =
+        document
+        .getElementById(
+            "opDriver"
+        )
+        .value;
+
+
+    const driver =
+        drivers.find(
+            d=>d.id===driverId
+        );
+
+
+    const data = {
+
+        driverId:
+            driverId || "",
+
+        driverName:
+            driver
+            ? driver.name
+            : "",
+
+        date:
+            document
+            .getElementById(
+                "opDate"
+            )
+            .value,
+
+        client:
+            document
+            .getElementById(
+                "opClient"
+            )
+            .value
+            .trim(),
+
+        from:
+            document
+            .getElementById(
+                "opFrom"
+            )
+            .value
+            .trim(),
+
+        to:
+            document
+            .getElementById(
+                "opTo"
+            )
+            .value
+            .trim(),
+
+        type:
+            document
+            .getElementById(
+                "opType"
+            )
+            .value
+            .trim(),
+
+        price:
+            Number(
+                document
+                .getElementById(
+                    "opPrice"
                 )
+                .value || 0
+            ),
 
+        payment:
+            document
+            .getElementById(
+                "opPayment"
             )
-    );
-
-
-    await migrateOldLocalDataIfNeeded();
-
-}
-
-
-/* =========================================================
-   OLD LOCAL DATA MIGRATION
-========================================================= */
-
-async function migrateOldLocalDataIfNeeded(){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    const migrationKey =
-        `driveops_firebase_migrated_${currentUser.uid}`;
-
-
-    if(
-        localStorage.getItem(
-            migrationKey
-        ) === "1"
-    ){
-
-        return;
-
-    }
-
-
-    const oldOperations =
-        JSON.parse(
-            localStorage.getItem(
-                "drive_operations"
-            ) || "[]"
-        );
-
-
-    const oldExpenses =
-        JSON.parse(
-            localStorage.getItem(
-                "drive_expenses"
-            ) || "[]"
-        );
-
-
-    if(
-        oldOperations.length === 0 &&
-        oldExpenses.length === 0
-    ){
-
-        localStorage.setItem(
-            migrationKey,
-            "1"
-        );
-
-        return;
-
-    }
-
-
-    for(
-        const op of oldOperations
-    ){
-
-        const copy =
-            {...op};
-
-
-        delete copy.id;
-
-
-        const ref =
-            await addDoc(
-
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "operations"
-                ),
-
-                {
-
-                    ...copy,
-
-                    migratedFromLocalStorage:
-                        true,
-
-                    createdAt:
-                        copy.createdAt ||
-                        new Date().toISOString()
-
-                }
-
-            );
-
-
-        operations.push({
-
-            id:ref.id,
-
-            ...copy
-
-        });
-
-    }
-
-
-    for(
-        const expense of oldExpenses
-    ){
-
-        const copy =
-            {...expense};
-
-
-        delete copy.id;
-
-
-        const ref =
-            await addDoc(
-
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "expenses"
-                ),
-
-                {
-
-                    ...copy,
-
-                    migratedFromLocalStorage:
-                        true,
-
-                    createdAt:
-                        new Date().toISOString()
-
-                }
-
-            );
-
-
-        expenses.push({
-
-            id:ref.id,
-
-            ...copy
-
-        });
-
-    }
-
-
-    localStorage.setItem(
-        migrationKey,
-        "1"
-    );
-
-
-    showToast(
-        "تم نقل بياناتك القديمة إلى Firebase ☁️"
-    );
-
-}
-
-
-/* =========================================================
-   OPEN APP
-========================================================= */
-
-function openApp(){
-
-    document.getElementById(
-        "loginScreen"
-    ).style.display="none";
-
-
-    document.getElementById(
-        "app"
-    ).style.display="block";
-
-
-    const email =
-        currentUser?.email ||
-        account.email ||
-        "";
-
-
-    document.getElementById(
-        "topUsername"
-    ).textContent =
-        email;
-
-
-    document.getElementById(
-        "avatar"
-    ).textContent =
-        email
-        .charAt(0)
-        .toUpperCase();
-
-
-    loadSettings();
-
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-async function logout(){
-
-    try{
-
-        await signOut(auth);
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "تعذر تسجيل الخروج"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showPage(
-    pageId,
-    button=null
-){
-
-    document.querySelectorAll(
-        ".page"
-    ).forEach(
-        p=>
-            p.classList.remove(
-                "active"
+            .value,
+
+        notes:
+            document
+            .getElementById(
+                "opNotes"
             )
-    );
+            .value
+            .trim(),
 
-
-    const page =
-        document.getElementById(
-            pageId
-        );
-
-
-    if(page){
-
-        page.classList.add(
-            "active"
-        );
-
-    }
-
-
-    const titles={
-
-        dashboard:"لوحة التحكم",
-
-        operations:"التشغيلات",
-
-        expenses:"المصروفات",
-
-        reports:"التقارير",
-
-        settings:"الإعدادات"
+        updatedAt:
+            new Date()
+            .toISOString()
 
     };
 
 
-    document.getElementById(
-        "pageTitle"
-    ).textContent =
-        titles[pageId] ||
-        "DriveOps";
+    if(!data.driverId){
 
-
-    document.querySelectorAll(
-        ".nav-item"
-    ).forEach(
-        n=>
-            n.classList.remove(
-                "active"
-            )
-    );
-
-
-    if(button){
-
-        button.classList.add(
-            "active"
+        alert(
+            "اختار السواق"
         );
-
-    }
-
-
-    document.getElementById(
-        "sidebar"
-    ).classList.remove(
-        "open"
-    );
-
-
-    refreshAll();
-
-}
-
-
-function toggleSidebar(){
-
-    document.getElementById(
-        "sidebar"
-    ).classList.toggle(
-        "open"
-    );
-
-}
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-function setTodayDefaults(){
-
-    const today =
-        new Date()
-        .toISOString()
-        .split("T")[0];
-
-
-    [
-        "operationDate",
-        "expenseDate"
-    ].forEach(
-        id=>{
-
-            const el =
-                document.getElementById(
-                    id
-                );
-
-
-            if(el){
-
-                el.value =
-                    today;
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   OPERATION MODAL
-========================================================= */
-
-function openOperationModal(
-    id=null
-){
-
-    document.getElementById(
-        "operationModal"
-    ).classList.add(
-        "show"
-    );
-
-
-    if(id){
-
-        const op =
-            operations.find(
-                x=>x.id===id
-            );
-
-
-        if(!op){
-
-            return;
-
-        }
-
-
-        document.getElementById(
-            "operationModalTitle"
-        ).textContent =
-            "تعديل التشغيلة";
-
-
-        document.getElementById(
-            "operationId"
-        ).value =
-            op.id;
-
-
-        document.getElementById(
-            "operationDate"
-        ).value =
-            op.date;
-
-
-        document.getElementById(
-            "operationClient"
-        ).value =
-            op.client;
-
-
-        document.getElementById(
-            "operationFromPlace"
-        ).value =
-            op.from;
-
-
-        document.getElementById(
-            "operationToPlace"
-        ).value =
-            op.to;
-
-
-        document.getElementById(
-            "operationType"
-        ).value =
-            op.type;
-
-
-        document.getElementById(
-            "operationPrice"
-        ).value =
-            op.price;
-
-
-        document.getElementById(
-            "operationPayment"
-        ).value =
-            op.payment;
-
-
-        document.getElementById(
-            "operationNotes"
-        ).value =
-            op.notes || "";
-
-    }else{
-
-        resetOperationForm();
-
-    }
-
-}
-
-
-function closeOperationModal(){
-
-    document.getElementById(
-        "operationModal"
-    ).classList.remove(
-        "show"
-    );
-
-}
-
-
-function resetOperationForm(){
-
-    document.getElementById(
-        "operationModalTitle"
-    ).textContent =
-        "إضافة تشغيلة جديدة";
-
-
-    document.getElementById(
-        "operationId"
-    ).value="";
-
-
-    document.getElementById(
-        "operationClient"
-    ).value="";
-
-
-    document.getElementById(
-        "operationFromPlace"
-    ).value="";
-
-
-    document.getElementById(
-        "operationToPlace"
-    ).value="";
-
-
-    document.getElementById(
-        "operationType"
-    ).value="مشوار";
-
-
-    document.getElementById(
-        "operationPrice"
-    ).value="";
-
-
-    document.getElementById(
-        "operationPayment"
-    ).value="paid";
-
-
-    document.getElementById(
-        "operationNotes"
-    ).value="";
-
-
-    document.getElementById(
-        "operationDate"
-    ).value =
-        new Date()
-        .toISOString()
-        .split("T")[0];
-
-}
-
-
-/* =========================================================
-   SAVE OPERATION
-========================================================= */
-
-async function saveOperation(){
-
-    if(!currentUser){
 
         return;
 
     }
 
 
-    const date =
-        document.getElementById(
-            "operationDate"
-        ).value;
-
-
-    const client =
-        document.getElementById(
-            "operationClient"
-        ).value.trim();
-
-
-    const from =
-        document.getElementById(
-            "operationFromPlace"
-        ).value.trim();
-
-
-    const to =
-        document.getElementById(
-            "operationToPlace"
-        ).value.trim();
-
-
-    const type =
-        document.getElementById(
-            "operationType"
-        ).value;
-
-
-    const price =
-        Number(
-            document.getElementById(
-                "operationPrice"
-            ).value
-        );
-
-
-    const payment =
-        document.getElementById(
-            "operationPayment"
-        ).value;
-
-
-    const notes =
-        document.getElementById(
-            "operationNotes"
-        ).value.trim();
-
-
     if(
-        !date ||
-        !client ||
-        !from ||
-        !to ||
-        !price
+        !data.date ||
+        !data.client
     ){
 
         alert(
-            "من فضلك أكمل البيانات الأساسية"
+            "اكتب التاريخ واسم العميل"
         );
 
         return;
@@ -3142,37 +3202,7 @@ async function saveOperation(){
 
     try{
 
-        const id =
-            document.getElementById(
-                "operationId"
-            ).value;
-
-
         if(id){
-
-            const payload={
-
-                date,
-
-                client,
-
-                from,
-
-                to,
-
-                type,
-
-                price,
-
-                payment,
-
-                notes,
-
-                updatedAt:
-                    new Date().toISOString()
-
-            };
-
 
             await updateDoc(
 
@@ -3184,356 +3214,263 @@ async function saveOperation(){
                     id
                 ),
 
-                payload
+                data
 
-            );
-
-
-            const index =
-                operations.findIndex(
-                    x=>x.id===id
-                );
-
-
-            if(
-                index !== -1
-            ){
-
-                operations[index]={
-
-                    ...operations[index],
-
-                    ...payload
-
-                };
-
-            }
-
-
-            showToast(
-                "تم تعديل التشغيلة ✏️"
             );
 
         }else{
 
-            const payload={
-
-                date,
-
-                client,
-
-                from,
-
-                to,
-
-                type,
-
-                price,
-
-                payment,
-
-                notes,
-
-                createdAt:
-                    new Date().toISOString()
-
-            };
+            data.createdAt =
+                new Date()
+                .toISOString();
 
 
-            const ref =
-                await addDoc(
-
-                    collection(
-                        db,
-                        "users",
-                        currentUser.uid,
-                        "operations"
-                    ),
-
-                    payload
-
-                );
-
-
-            operations.unshift({
-
-                id:ref.id,
-
-                ...payload
-
-            });
-
-
-            showToast(
-                "تمت إضافة التشغيلة وحفظها أونلاين ☁️"
+            await addDoc(
+                operationsRef(),
+                data
             );
 
         }
 
 
-        closeOperationModal();
+        alert(
+            "تم حفظ التشغيل"
+        );
 
-        refreshAll();
 
-    }catch(error){
+        clearOperationForm();
 
-        console.error(error);
+        await loadMyData();
+
+        showPage("operations");
+
+
+    }catch(e){
+
+        console.error(
+            "SAVE OPERATION ERROR:",
+            e
+        );
 
         alert(
-            friendlyFirebaseError(
-                error
-            )
+            "حدث خطأ أثناء حفظ التشغيل\n\nCode: " +
+            (e.code || "") +
+            "\n\nMessage: " +
+            (e.message || "")
         );
 
     }
 
-}
+};
 
 
-/* =========================================================
-   RENDER OPERATIONS
-========================================================= */
+/* =========================
+   EDIT
+========================= */
 
-function renderOperations(){
+window.editOperation = function(id){
 
-    const tbody =
-        document.getElementById(
-            "operationsTable"
-        );
-
-
-    if(!tbody){
-
-        return;
-
-    }
-
-
-    const search =
-        (
-            document.getElementById(
-                "operationSearch"
-            )?.value || ""
-        ).toLowerCase();
-
-
-    const fromDate =
-        document.getElementById(
-            "operationFrom"
-        )?.value || "";
-
-
-    const toDate =
-        document.getElementById(
-            "operationTo"
-        )?.value || "";
-
-
-    const status =
-        document.getElementById(
-            "operationStatus"
-        )?.value || "";
-
-
-    const filtered =
-        operations.filter(
-            op=>{
-
-                const text =
-                    `${op.client} ${op.from} ${op.to} ${op.type} ${op.notes || ""}`
-                    .toLowerCase();
-
-
-                if(
-                    search &&
-                    !text.includes(search)
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    fromDate &&
-                    op.date < fromDate
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    toDate &&
-                    op.date > toDate
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    status &&
-                    op.payment !== status
-                ){
-
-                    return false;
-
-                }
-
-
-                return true;
-
-            }
-        );
-
-
-    if(
-        filtered.length === 0
-    ){
-
-        tbody.innerHTML=`
-
-            <tr>
-
-                <td colspan="9">
-
-                    <div class="empty">
-
-                        <div class="empty-icon">
-                            🚗
-                        </div>
-
-                        لا توجد تشغيلات
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    tbody.innerHTML =
-        filtered.map(
-            (op,index)=>`
-
-            <tr>
-
-                <td>${index+1}</td>
-
-                <td>
-                    ${formatDate(op.date)}
-                </td>
-
-                <td>
-                    <strong>
-                        ${escapeHTML(op.client)}
-                    </strong>
-                </td>
-
-                <td>
-                    ${escapeHTML(op.from)}
-                </td>
-
-                <td>
-                    ${escapeHTML(op.to)}
-                </td>
-
-                <td>
-                    ${escapeHTML(op.type)}
-                </td>
-
-                <td>
-                    <strong>
-                        ${money(op.price)}
-                    </strong>
-                </td>
-
-                <td>
-
-                    ${
-                        op.payment==="paid"
-
-                        ? `<span class="badge badge-success">
-                            مدفوع
-                           </span>`
-
-                        : `<span class="badge badge-warning">
-                            آجل
-                           </span>`
-                    }
-
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn btn-secondary"
-                            onclick="openOperationModal('${op.id}')"
-                        >
-                            ✏️
-                        </button>
-
-                        <button
-                            class="btn btn-danger"
-                            onclick="deleteOperation('${op.id}')"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `
-        ).join("");
-
-}
-
-
-/* =========================================================
-   DELETE OPERATION
-========================================================= */
-
-async function deleteOperation(id){
-
-    const op =
+    const o =
         operations.find(
             x=>x.id===id
         );
 
 
-    if(
-        !op ||
-        !currentUser
-    ){
-
+    if(!o)
         return;
 
-    }
 
+    document
+        .getElementById(
+            "operationId"
+        )
+        .value =
+            o.id;
+
+
+    document
+        .getElementById(
+            "opDriver"
+        )
+        .value =
+            o.driverId || "";
+
+
+    document
+        .getElementById(
+            "opDate"
+        )
+        .value =
+            o.date || "";
+
+
+    document
+        .getElementById(
+            "opClient"
+        )
+        .value =
+            o.client || "";
+
+
+    document
+        .getElementById(
+            "opFrom"
+        )
+        .value =
+            o.from || "";
+
+
+    document
+        .getElementById(
+            "opTo"
+        )
+        .value =
+            o.to || "";
+
+
+    document
+        .getElementById(
+            "opType"
+        )
+        .value =
+            o.type || "";
+
+
+    document
+        .getElementById(
+            "opPrice"
+        )
+        .value =
+            o.price || "";
+
+
+    document
+        .getElementById(
+            "opPayment"
+        )
+        .value =
+            o.payment || "paid";
+
+
+    document
+        .getElementById(
+            "opNotes"
+        )
+        .value =
+            o.notes || "";
+
+
+    document
+        .getElementById(
+            "operationFormTitle"
+        )
+        .textContent =
+            "تعديل التشغيل";
+
+
+    showPage(
+        "addOperation"
+    );
+
+};
+
+
+function clearOperationForm(){
+
+    document
+        .getElementById(
+            "operationId"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opDriver"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opDate"
+        )
+        .value =
+            today();
+
+
+    document
+        .getElementById(
+            "opClient"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opFrom"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opTo"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opType"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opPrice"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "opPayment"
+        )
+        .value =
+            "paid";
+
+
+    document
+        .getElementById(
+            "opNotes"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "operationFormTitle"
+        )
+        .textContent =
+            "إضافة تشغيل جديد";
+
+}
+
+
+/* =========================
+   DELETE OPERATION
+========================= */
+
+window.deleteOperation = async function(id){
 
     if(
         !confirm(
-            `هل تريد حذف تشغيلة ${op.client} بقيمة ${money(op.price)}؟`
+            "هل أنت متأكد من حذف التشغيل؟"
         )
-    ){
-
+    )
         return;
-
-    }
 
 
     try{
@@ -3551,114 +3488,81 @@ async function deleteOperation(id){
         );
 
 
-        operations =
-            operations.filter(
-                x=>x.id!==id
-            );
+        await loadMyData();
 
-
-        showToast(
-            "تم حذف التشغيلة 🗑️"
-        );
-
-
-        refreshAll();
-
-    }catch(error){
-
-        console.error(error);
 
         alert(
-            friendlyFirebaseError(
-                error
+            "تم حذف التشغيل"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر حذف التشغيل"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   EXPENSES
+========================= */
+
+window.saveExpense = async function(){
+
+    const data = {
+
+        date:
+            document
+            .getElementById(
+                "expenseDate"
             )
-        );
+            .value,
 
-    }
+        type:
+            document
+            .getElementById(
+                "expenseType"
+            )
+            .value
+            .trim(),
 
-}
+        description:
+            document
+            .getElementById(
+                "expenseDescription"
+            )
+            .value
+            .trim(),
 
+        amount:
+            Number(
+                document
+                .getElementById(
+                    "expenseAmount"
+                )
+                .value || 0
+            ),
 
-/* =========================================================
-   EXPENSE MODAL
-========================================================= */
+        createdAt:
+            new Date()
+            .toISOString()
 
-function openExpenseModal(){
-
-    document.getElementById(
-        "expenseModal"
-    ).classList.add(
-        "show"
-    );
-
-
-    document.getElementById(
-        "expenseDate"
-    ).value =
-        new Date()
-        .toISOString()
-        .split("T")[0];
-
-}
-
-
-function closeExpenseModal(){
-
-    document.getElementById(
-        "expenseModal"
-    ).classList.remove(
-        "show"
-    );
-
-}
-
-
-/* =========================================================
-   SAVE EXPENSE
-========================================================= */
-
-async function saveExpense(){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    const date =
-        document.getElementById(
-            "expenseDate"
-        ).value;
-
-
-    const type =
-        document.getElementById(
-            "expenseType"
-        ).value;
-
-
-    const description =
-        document.getElementById(
-            "expenseDescription"
-        ).value.trim();
-
-
-    const amount =
-        Number(
-            document.getElementById(
-                "expenseAmount"
-            ).value
-        );
+    };
 
 
     if(
-        !date ||
-        !amount
+        !data.date ||
+        !data.amount
     ){
 
         alert(
-            "من فضلك أدخل التاريخ والمبلغ"
+            "اكتب التاريخ والمبلغ"
         );
 
         return;
@@ -3668,123 +3572,81 @@ async function saveExpense(){
 
     try{
 
-        const payload={
-
-            date,
-
-            type,
-
-            description,
-
-            amount,
-
-            createdAt:
-                new Date().toISOString()
-
-        };
-
-
-        const ref =
-            await addDoc(
-
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "expenses"
-                ),
-
-                payload
-
-            );
-
-
-        expenses.unshift({
-
-            id:ref.id,
-
-            ...payload
-
-        });
-
-
-        document.getElementById(
-            "expenseDescription"
-        ).value="";
-
-
-        document.getElementById(
-            "expenseAmount"
-        ).value="";
-
-
-        closeExpenseModal();
-
-
-        showToast(
-            "تمت إضافة المصروف وحفظه أونلاين ☁️"
+        await addDoc(
+            expensesRef(),
+            data
         );
 
 
-        refreshAll();
+        document
+            .getElementById(
+                "expenseType"
+            )
+            .value = "";
 
-    }catch(error){
 
-        console.error(error);
+        document
+            .getElementById(
+                "expenseDescription"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "expenseAmount"
+            )
+            .value = "";
+
+
+        await loadMyData();
+
 
         alert(
-            friendlyFirebaseError(
-                error
-            )
+            "تم إضافة المصروف"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "حدث خطأ أثناء إضافة المصروف"
         );
 
     }
 
-}
+};
 
-
-/* =========================================================
-   RENDER EXPENSES
-========================================================= */
 
 function renderExpenses(){
 
     const tbody =
-        document.getElementById(
+        document
+        .getElementById(
             "expensesTable"
         );
 
 
-    if(!tbody){
-
-        return;
-
-    }
+    tbody.innerHTML = "";
 
 
-    if(
-        expenses.length === 0
-    ){
+    if(!expenses.length){
 
-        tbody.innerHTML=`
+        tbody.innerHTML = `
 
-            <tr>
+        <tr>
 
-                <td colspan="6">
+            <td
+                colspan="5"
+                class="empty">
 
-                    <div class="empty">
+                لا توجد مصروفات
 
-                        <div class="empty-icon">
-                            💸
-                        </div>
+            </td>
 
-                        لا توجد مصروفات
-
-                    </div>
-
-                </td>
-
-            </tr>
+        </tr>
 
         `;
 
@@ -3793,75 +3655,57 @@ function renderExpenses(){
     }
 
 
-    tbody.innerHTML =
-        expenses.map(
-            (expense,index)=>`
+    expenses.forEach(e=>{
 
-            <tr>
+        tbody.innerHTML += `
 
-                <td>${index+1}</td>
+        <tr>
 
-                <td>
-                    ${formatDate(expense.date)}
-                </td>
+            <td>
+                ${escapeHtml(e.date||"-")}
+            </td>
 
-                <td>
-                    ${escapeHTML(expense.type)}
-                </td>
+            <td>
+                ${escapeHtml(e.type||"-")}
+            </td>
 
-                <td>
-                    ${escapeHTML(
-                        expense.description || "-"
-                    )}
-                </td>
+            <td>
+                ${escapeHtml(e.description||"-")}
+            </td>
 
-                <td>
-                    <strong>
-                        ${money(expense.amount)}
-                    </strong>
-                </td>
+            <td>
+                ${money(e.amount)}
+            </td>
 
-                <td>
+            <td>
 
-                    <button
-                        class="btn btn-danger"
-                        onclick="deleteExpense('${expense.id}')"
-                    >
-                        🗑️ حذف
-                    </button>
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteExpense('${escapeAttr(e.id)}')">
 
-                </td>
+                    حذف
 
-            </tr>
+                </button>
 
-        `
-        ).join("");
+            </td>
+
+        </tr>
+
+        `;
+
+    });
 
 }
 
 
-/* =========================================================
-   DELETE EXPENSE
-========================================================= */
-
-async function deleteExpense(id){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
+window.deleteExpense = async function(id){
 
     if(
         !confirm(
-            "هل تريد حذف هذا المصروف؟"
+            "هل تريد حذف المصروف؟"
         )
-    ){
-
+    )
         return;
-
-    }
 
 
     try{
@@ -3879,121 +3723,93 @@ async function deleteExpense(id){
         );
 
 
-        expenses =
-            expenses.filter(
-                x=>x.id!==id
-            );
+        await loadMyData();
 
 
-        showToast(
+        alert(
             "تم حذف المصروف"
         );
 
 
-        refreshAll();
+    }catch(e){
 
-    }catch(error){
-
-        console.error(error);
+        console.error(e);
 
         alert(
-            friendlyFirebaseError(
-                error
-            )
+            "تعذر حذف المصروف"
         );
 
     }
 
+};
+
+
+/* =========================
+   DRIVERS
+========================= */
+
+async function loadDrivers(){
+
+    const snap =
+        await getDocs(
+            driversRef()
+        );
+
+
+    drivers = [];
+
+
+    snap.forEach(d=>{
+
+        drivers.push({
+
+            id:
+                d.id,
+
+            ...d.data()
+
+        });
+
+    });
+
+
+    drivers.sort(
+        (a,b)=>
+            String(a.name||"")
+            .localeCompare(
+                String(b.name||""),
+                "ar"
+            )
+    );
+
+
+    renderDrivers();
+
+    fillDriverSelect();
+
+    fillReportDriver();
+
 }
 
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
+function renderDrivers(){
 
-function renderDashboard(){
-
-    const totalIncome =
-        operations.reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
+    const container =
+        document
+        .getElementById(
+            "driversList"
         );
 
 
-    const totalExpenses =
-        expenses.reduce(
-            (sum,e)=>
-                sum +
-                Number(
-                    e.amount || 0
-                ),
-            0
-        );
+    if(!drivers.length){
 
+        container.innerHTML = `
 
-    const profit =
-        totalIncome -
-        totalExpenses;
+        <div class="empty">
 
+            لا يوجد سواقين حتى الآن
 
-    document.getElementById(
-        "statOperations"
-    ).textContent =
-        operations.length;
-
-
-    document.getElementById(
-        "statIncome"
-    ).textContent =
-        money(totalIncome);
-
-
-    document.getElementById(
-        "statExpenses"
-    ).textContent =
-        money(totalExpenses);
-
-
-    document.getElementById(
-        "statProfit"
-    ).textContent =
-        money(profit);
-
-
-    const recent =
-        document.getElementById(
-            "recentOperations"
-        );
-
-
-    const list =
-        operations.slice(
-            0,
-            7
-        );
-
-
-    if(
-        list.length === 0
-    ){
-
-        recent.innerHTML=`
-
-            <tr>
-
-                <td colspan="6">
-
-                    <div class="empty">
-                        لا توجد تشغيلات حتى الآن
-                    </div>
-
-                </td>
-
-            </tr>
+        </div>
 
         `;
 
@@ -4002,366 +3818,248 @@ function renderDashboard(){
     }
 
 
-    recent.innerHTML =
-        list.map(
-            op=>`
-
-        <tr>
-
-            <td>
-                ${formatDate(op.date)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.client)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.from)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.to)}
-            </td>
-
-            <td>
-                <strong>
-                    ${money(op.price)}
-                </strong>
-            </td>
-
-            <td>
-
-                ${
-                    op.payment==="paid"
-
-                    ? `<span class="badge badge-success">
-                        مدفوع
-                       </span>`
-
-                    : `<span class="badge badge-warning">
-                        آجل
-                       </span>`
-                }
-
-            </td>
-
-        </tr>
-
-    `
-        ).join("");
-
-}
+    container.innerHTML = "";
 
 
-/* =========================================================
-   REPORTS
-========================================================= */
+    drivers.forEach(d=>{
 
-function renderReports(){
-
-    const month =
-        document.getElementById(
-            "reportMonth"
-        )?.value || "";
-
-
-    let ops =
-        operations;
-
-
-    let exps =
-        expenses;
-
-
-    if(month){
-
-        ops =
+        const count =
             operations.filter(
-                op=>
-                    op.date.startsWith(
-                        month
-                    )
+                o=>o.driverId===d.id
+            ).length;
+
+
+        const revenue =
+            operations
+            .filter(
+                o=>o.driverId===d.id
+            )
+            .reduce(
+                (sum,o)=>
+                    sum+
+                    Number(o.price||0),
+                0
             );
 
 
-        exps =
-            expenses.filter(
-                e=>
-                    e.date.startsWith(
-                        month
-                    )
-            );
+        container.innerHTML += `
 
-    }
+        <div class="driver-card">
 
+            <h3>
 
-    const income =
-        ops.reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
+                🚗
+                ${escapeHtml(
+                    d.name||"بدون اسم"
+                )}
+
+            </h3>
 
 
-    const exp =
-        exps.reduce(
-            (sum,e)=>
-                sum +
-                Number(
-                    e.amount || 0
-                ),
-            0
-        );
+            <div
+                style="color:#6b7280;margin-bottom:12px">
+
+                عدد التشغيلات:
+                <strong>
+                    ${count}
+                </strong>
+
+                &nbsp; | &nbsp;
+
+                إجمالي:
+                <strong>
+                    ${money(revenue)}
+                </strong>
+
+            </div>
 
 
-    const paid =
-        ops
-        .filter(
-            op=>
-                op.payment === "paid"
-        )
-        .reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
+            <div class="actions">
 
 
-    const unpaid =
-        ops
-        .filter(
-            op=>
-                op.payment === "unpaid"
-        )
-        .reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
+                <button
+                    class="btn btn-primary"
+                    onclick="driverReport('${escapeAttr(d.id)}')">
+
+                    📊 تقرير السواق
+
+                </button>
 
 
-    document.getElementById(
-        "reportCount"
-    ).textContent =
-        ops.length;
+                <button
+                    class="btn btn-warning"
+                    onclick="renameDriver('${escapeAttr(d.id)}')">
+
+                    ✏️ تعديل الاسم
+
+                </button>
 
 
-    document.getElementById(
-        "reportIncome"
-    ).textContent =
-        money(income);
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteDriver('${escapeAttr(d.id)}')">
+
+                    🗑️ حذف
+
+                </button>
 
 
-    document.getElementById(
-        "reportExpenses"
-    ).textContent =
-        money(exp);
+            </div>
 
-
-    document.getElementById(
-        "reportPaid"
-    ).textContent =
-        money(paid);
-
-
-    document.getElementById(
-        "reportUnpaid"
-    ).textContent =
-        money(unpaid);
-
-
-    document.getElementById(
-        "reportProfit"
-    ).textContent =
-        money(
-            income-exp
-        );
-
-
-    const tbody =
-        document.getElementById(
-            "reportOperationsTable"
-        );
-
-
-    if(
-        ops.length === 0
-    ){
-
-        tbody.innerHTML=`
-
-            <tr>
-
-                <td colspan="5">
-
-                    <div class="empty">
-                        لا توجد بيانات في الفترة المحددة
-                    </div>
-
-                </td>
-
-            </tr>
+        </div>
 
         `;
 
-        return;
-
-    }
-
-
-    tbody.innerHTML =
-        ops.map(
-            op=>`
-
-        <tr>
-
-            <td>
-                ${formatDate(op.date)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.client)}
-            </td>
-
-            <td>
-
-                ${escapeHTML(op.from)}
-
-                →
-
-                ${escapeHTML(op.to)}
-
-            </td>
-
-            <td>
-
-                <strong>
-                    ${money(op.price)}
-                </strong>
-
-            </td>
-
-            <td>
-
-                ${
-                    op.payment==="paid"
-
-                    ? `<span class="badge badge-success">
-                        مدفوع
-                       </span>`
-
-                    : `<span class="badge badge-warning">
-                        آجل
-                       </span>`
-                }
-
-            </td>
-
-        </tr>
-
-    `
-        ).join("");
+    });
 
 }
 
 
-/* =========================================================
-   SETTINGS
-========================================================= */
+function fillDriverSelect(){
 
-function loadSettings(){
-
-    document.getElementById(
-        "settingsUsername"
-    ).value =
-        currentUser?.email ||
-        account.email ||
-        "";
+    const select =
+        document
+        .getElementById(
+            "opDriver"
+        );
 
 
-    document.getElementById(
-        "carName"
-    ).value =
-        car.name || "";
+    if(!select)
+        return;
 
 
-    document.getElementById(
-        "carPlate"
-    ).value =
-        car.plate || "";
+    select.innerHTML =
+        `<option value="">
+            اختر السواق
+        </option>`;
+
+
+    drivers.forEach(d=>{
+
+        select.innerHTML += `
+
+            <option
+                value="${escapeAttr(d.id)}">
+
+                ${escapeHtml(
+                    d.name||"بدون اسم"
+                )}
+
+            </option>
+
+        `;
+
+    });
 
 }
 
 
-async function saveAccountSettings(){
+function fillReportDriver(){
 
-    if(!currentUser){
+    const select =
+        document
+        .getElementById(
+            "reportDriver"
+        );
 
+
+    if(!select)
         return;
 
-    }
+
+    select.innerHTML =
+        `<option value="">
+            كل السواقين
+        </option>`;
 
 
-    const oldEmail =
-        currentUser.email;
+    drivers.forEach(d=>{
+
+        select.innerHTML += `
+
+            <option
+                value="${escapeAttr(d.id)}">
+
+                ${escapeHtml(
+                    d.name||"بدون اسم"
+                )}
+
+            </option>
+
+        `;
+
+    });
+
+}
 
 
-    const newEmail =
-        normalizeEmail(
-            document.getElementById(
-                "settingsUsername"
-            ).value
+/* =========================
+   ADD DRIVER
+========================= */
+
+window.showAddDriver = function(){
+
+    document
+        .getElementById(
+            "addDriverPanel"
+        )
+        .classList.remove("hidden");
+
+};
+
+
+window.hideAddDriver = function(){
+
+    document
+        .getElementById(
+            "addDriverPanel"
+        )
+        .classList.add("hidden");
+
+
+    document
+        .getElementById(
+            "newDriverName"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "driverMessage"
+        )
+        .textContent = "";
+
+};
+
+
+window.createDriver = async function(){
+
+    const name =
+        document
+        .getElementById(
+            "newDriverName"
+        )
+        .value
+        .trim();
+
+
+    const message =
+        document
+        .getElementById(
+            "driverMessage"
         );
 
 
-    const newPassword =
-        document.getElementById(
-            "settingsPassword"
-        ).value;
+    if(!name){
+
+        message.textContent =
+            "اكتب اسم السواق";
 
 
-    if(!newEmail){
+        message.style.color =
+            "#dc2626";
 
-        alert(
-            "البريد الإلكتروني مطلوب"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !isValidEmail(newEmail)
-    ){
-
-        alert(
-            "اكتب بريد إلكتروني صحيح مثل admin1@gmail.com"
-        );
-
-        return;
-
-    }
-
-
-    if(
-        newPassword &&
-        newPassword.length < 6
-    ){
-
-        alert(
-            "كلمة المرور يجب أن تكون 6 أحرف أو أكثر."
-        );
 
         return;
 
@@ -4370,576 +4068,2636 @@ async function saveAccountSettings(){
 
     try{
 
-        if(
-            newEmail !== oldEmail
-        ){
+        await addDoc(
 
-            await updateEmail(
-                currentUser,
-                newEmail
-            );
-
-        }
-
-
-        if(newPassword){
-
-            await updatePassword(
-                currentUser,
-                newPassword
-            );
-
-        }
-
-
-        account.email =
-            newEmail;
-
-
-        account.username =
-            newEmail;
-
-
-        await setDoc(
-
-            doc(
-                db,
-                "users",
-                currentUser.uid
-            ),
+            driversRef(),
 
             {
 
-                email:newEmail,
+                name:
+                    name,
 
-                username:newEmail,
+                createdAt:
+                    new Date()
+                    .toISOString()
 
-                updatedAt:
-                    serverTimestamp()
-
-            },
-
-            {
-                merge:true
             }
 
         );
 
 
-        document.getElementById(
-            "topUsername"
-        ).textContent =
-            newEmail;
+        message.textContent =
+            "تم إضافة السواق بنجاح";
 
 
-        document.getElementById(
-            "avatar"
-        ).textContent =
-            newEmail
-            .charAt(0)
-            .toUpperCase();
+        message.style.color =
+            "#16a34a";
 
 
-        document.getElementById(
-            "settingsPassword"
-        ).value="";
-
-
-        showToast(
-            "تم تحديث بيانات الحساب ✅"
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-
-        if(
-            error.code ===
-            "auth/requires-recent-login"
-        ){
-
-            alert(
-                "لأسباب أمنية، سجّل خروج ثم ادخل مرة أخرى وبعدها غيّر البريد أو كلمة المرور."
-            );
-
-        }else{
-
-            alert(
-                friendlyFirebaseError(
-                    error
-                )
-            );
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   BACKUP / RESTORE
-========================================================= */
-
-async function downloadBackup(){
-    if(!currentUser){ alert("سجّل الدخول أولاً"); return; }
-    try{
-        const payload={
-            app:"DriveOps", version:1, exportedAt:new Date().toISOString(),
-            account:{email:currentUser.email||"",username:account.username||currentUser.email||""},
-            car:car||{}, operations:operations||[], expenses:expenses||[]
-        };
-        const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});
-        const url=URL.createObjectURL(blob); const a=document.createElement("a");
-        a.href=url; a.download=`DriveOps_Backup_${new Date().toISOString().slice(0,10)}.json`;
-        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-        showToast("تم تنزيل النسخة الاحتياطية 💾");
-    }catch(error){ console.error(error); alert("تعذر إنشاء النسخة الاحتياطية"); }
-}
-
-async function restoreBackup(event){
-    const file=event.target.files?.[0]; event.target.value="";
-    if(!file||!currentUser) return;
-    try{
-        const data=JSON.parse(await file.text());
-        if(data.app!=="DriveOps"||!Array.isArray(data.operations)||!Array.isArray(data.expenses)) throw new Error("invalid-backup");
-        if(!confirm("سيتم إضافة بيانات النسخة الاحتياطية إلى حسابك. هل تريد المتابعة؟")) return;
-        if(data.car){
-            car={name:String(data.car.name||""),plate:String(data.car.plate||"")};
-            await setDoc(doc(db,"users",currentUser.uid),{car,updatedAt:serverTimestamp()},{merge:true});
-        }
-        for(const op of data.operations){ const copy={...op}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"operations"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); }
-        for(const expense of data.expenses){ const copy={...expense}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"expenses"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); }
-        await loadUserData(); loadSettings(); refreshAll();
-        showToast("تم استرجاع النسخة الاحتياطية بنجاح ♻️");
-    }catch(error){ console.error(error); alert("ملف النسخة الاحتياطية غير صحيح أو تعذر استرجاعه."); }
-}
-
-async function sendVerificationEmailNow(){
-    if(!currentUser) return;
-    try{ await sendEmailVerification(currentUser); showToast("تم إرسال رسالة تأكيد البريد الإلكتروني 📧"); }
-    catch(error){ console.error(error); alert(friendlyFirebaseError(error)); }
-}
-
-
-/* =========================================================
-   CAR SETTINGS
-========================================================= */
-
-async function saveCarSettings(){
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    car.name =
-        document.getElementById(
-            "carName"
-        ).value.trim();
-
-
-    car.plate =
-        document.getElementById(
-            "carPlate"
-        ).value.trim();
-
-
-    try{
-
-        await setDoc(
-
-            doc(
-                db,
-                "users",
-                currentUser.uid
-            ),
-
-            {
-
-                car,
-
-                updatedAt:
-                    serverTimestamp()
-
-            },
-
-            {
-                merge:true
-            }
-
-        );
-
-
-        showToast(
-            "تم حفظ بيانات العربية أونلاين 🚗☁️"
-        );
-
-    }catch(error){
-
-        console.error(error);
-
-        alert(
-            friendlyFirebaseError(
-                error
+        document
+            .getElementById(
+                "newDriverName"
             )
+            .value = "";
+
+
+        await loadDrivers();
+
+
+    }catch(e){
+
+        console.error(e);
+
+
+        message.textContent =
+            "تعذر إضافة السواق";
+
+
+        message.style.color =
+            "#dc2626";
+
+    }
+
+};
+
+
+/* =========================
+   RENAME DRIVER
+========================= */
+
+window.renameDriver = async function(driverId){
+
+    const driver =
+        drivers.find(
+            d=>d.id===driverId
         );
 
-    }
 
-}
-
-
-/* =========================================================
-   CLEAR DATA
-========================================================= */
-
-async function clearAllData(){
-
-    if(!currentUser){
-
+    if(!driver)
         return;
 
-    }
 
-
-    const answer =
+    const newName =
         prompt(
-            "اكتب DELETE لتأكيد حذف جميع التشغيلات والمصروفات"
+            "اكتب اسم السواق الجديد:",
+            driver.name || ""
         );
 
 
     if(
-        answer !== "DELETE"
-    ){
-
+        !newName ||
+        !newName.trim()
+    )
         return;
-
-    }
 
 
     try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "users",
+                currentUser.uid,
+                "drivers",
+                driverId
+            ),
+
+            {
+                name:
+                    newName.trim()
+            }
+
+        );
+
+
+        const related =
+            operations.filter(
+                o=>o.driverId===driverId
+            );
+
 
         for(
-            const op of operations
+            const operation
+            of related
         ){
 
-            await deleteDoc(
+            await updateDoc(
 
                 doc(
                     db,
                     "users",
                     currentUser.uid,
                     "operations",
-                    op.id
-                )
+                    operation.id
+                ),
+
+                {
+                    driverName:
+                        newName.trim()
+                }
 
             );
 
         }
 
 
-        for(
-            const expense of expenses
-        ){
+        await loadDrivers();
 
-            await deleteDoc(
-
-                doc(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "expenses",
-                    expense.id
-                )
-
-            );
-
-        }
+        await loadMyData();
 
 
-        operations=[];
-
-        expenses=[];
-
-
-        showToast(
-            "تم حذف جميع البيانات من Firebase"
+        alert(
+            "تم تعديل اسم السواق"
         );
 
 
-        refreshAll();
+    }catch(e){
 
-    }catch(error){
-
-        console.error(error);
+        console.error(e);
 
         alert(
-            friendlyFirebaseError(
-                error
-            )
+            "تعذر تعديل اسم السواق"
         );
 
     }
 
-}
+};
 
 
-/* =========================================================
-   REFRESH
-========================================================= */
+/* =========================
+   DELETE DRIVER
+========================= */
 
-function refreshAll(){
+window.deleteDriver = async function(driverId){
 
-    if(
-        !dataReady &&
-        !currentUser
-    ){
+    const driver =
+        drivers.find(
+            d=>d.id===driverId
+        );
+
+
+    if(!driver)
+        return;
+
+
+    const related =
+        operations.filter(
+            o=>o.driverId===driverId
+        );
+
+
+    if(related.length){
+
+        alert(
+
+            "لا يمكن حذف السواق لأن لديه "+
+            related.length+
+            " تشغيلات مسجلة.\n"+
+            "يمكنك تعديل اسمه بدلًا من حذفه."
+
+        );
 
         return;
 
     }
 
 
-    renderDashboard();
-
-    renderOperations();
-
-    renderExpenses();
-
-    renderReports();
-
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function money(value){
-
-    return Number(
-        value || 0
-    ).toLocaleString(
-        "ar-EG"
-    ) + " ج";
-
-}
-
-
-function formatDate(date){
-
-    if(!date){
-
-        return "-";
-
-    }
-
-
-    const parts =
-        date.split("-");
-
-
     if(
-        parts.length !== 3
-    ){
-
-        return date;
-
-    }
-
-
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-
-}
-
-
-function escapeHTML(value){
-
-    return String(
-        value ?? ""
+        !confirm(
+            "هل تريد حذف السواق "+
+            driver.name+
+            "؟"
+        )
     )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
+        return;
 
 
-function showToast(message){
+    try{
 
-    const toast =
-        document.getElementById(
-            "toast"
+        await deleteDoc(
+
+            doc(
+                db,
+                "users",
+                currentUser.uid,
+                "drivers",
+                driverId
+            )
+
         );
 
 
-    toast.textContent =
-        message;
+        await loadDrivers();
 
 
-    toast.classList.add(
-        "show"
+        alert(
+            "تم حذف السواق"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر حذف السواق"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   DRIVER REPORT
+========================= */
+
+window.driverReport = function(driverId){
+
+    document
+        .getElementById(
+            "reportDriver"
+        )
+        .value =
+            driverId;
+
+
+    showPage(
+        "reports"
     );
 
+};
 
-    setTimeout(
-        ()=>{
 
-            toast.classList.remove(
-                "show"
+/* =========================
+   REPORT
+========================= */
+
+window.buildReport = async function(){
+
+    const month =
+        document
+        .getElementById(
+            "reportMonth"
+        )
+        .value ||
+        currentMonth();
+
+
+    const selectedDriver =
+        document
+        .getElementById(
+            "reportDriver"
+        )
+        .value;
+
+
+    let data =
+        operations.filter(
+            o=>
+                String(
+                    o.date||""
+                ).startsWith(month)
+        );
+
+
+    if(selectedDriver){
+
+        data =
+            data.filter(
+                o=>
+                    o.driverId===
+                    selectedDriver
             );
 
-        },
-        2500
+    }
+
+
+    const reportExpenses =
+        expenses.filter(
+            e=>
+                String(
+                    e.date||""
+                ).startsWith(month)
+        );
+
+
+    const revenue =
+        data.reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    const exp =
+        reportExpenses.reduce(
+            (sum,e)=>
+                sum+
+                Number(e.amount||0),
+            0
+        );
+
+
+    const paid =
+        data
+        .filter(
+            o=>o.payment==="paid"
+        )
+        .reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    const unpaid =
+        data
+        .filter(
+            o=>o.payment==="unpaid"
+        )
+        .reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    document
+        .getElementById(
+            "reportOperations"
+        )
+        .textContent =
+            data.length;
+
+
+    document
+        .getElementById(
+            "reportRevenue"
+        )
+        .textContent =
+            money(revenue);
+
+
+    document
+        .getElementById(
+            "reportExpenses"
+        )
+        .textContent =
+            money(exp);
+
+
+    document
+        .getElementById(
+            "reportNet"
+        )
+        .textContent =
+            money(revenue-exp);
+
+
+    let driverName =
+        "كل السواقين";
+
+
+    if(selectedDriver){
+
+        const d =
+            drivers.find(
+                x=>x.id===
+                    selectedDriver
+            );
+
+
+        if(d)
+            driverName =
+                d.name;
+
+    }
+
+
+    const details =
+        document
+        .getElementById(
+            "reportDetails"
+        );
+
+
+    details.innerHTML = `
+
+        <div class="grid-4">
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    السواق
+                </div>
+
+                <div
+                    class="card-value"
+                    style="font-size:18px">
+
+                    ${escapeHtml(
+                        driverName
+                    )}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    مدفوع
+                </div>
+
+                <div
+                    class="card-value green">
+
+                    ${money(paid)}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    غير مدفوع
+                </div>
+
+                <div
+                    class="card-value red">
+
+                    ${money(unpaid)}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    الصافي
+                </div>
+
+                <div
+                    class="card-value orange">
+
+                    ${money(
+                        revenue-exp
+                    )}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <h3
+            style="margin:25px 0 12px">
+
+            التشغيلات
+
+        </h3>
+
+
+        <div class="table-wrap">
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+            <th>التاريخ</th>
+            <th>السواق</th>
+            <th>العميل</th>
+            <th>من</th>
+            <th>إلى</th>
+            <th>السعر</th>
+            <th>الدفع</th>
+
+        </tr>
+
+        </thead>
+
+
+        <tbody>
+
+        ${
+            data.length
+            ?
+            data.map(
+                o=>`
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(
+                            o.date||"-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            o.driverName||"-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            o.client||"-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            o.from||"-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            o.to||"-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${money(
+                            o.price
+                        )}
+                    </td>
+
+                    <td>
+
+                        ${
+                            o.payment==="paid"
+                            ?
+                            `<span class="badge badge-paid">
+                                مدفوع
+                            </span>`
+                            :
+                            `<span class="badge badge-unpaid">
+                                غير مدفوع
+                            </span>`
+                        }
+
+                    </td>
+
+                </tr>
+
+                `
+            ).join("")
+            :
+
+            `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty">
+
+                    لا توجد تشغيلات في هذا الشهر
+
+                </td>
+
+            </tr>
+
+            `
+        }
+
+        </tbody>
+
+        </table>
+
+        </div>
+
+    `;
+
+};
+
+
+/* =========================
+   REPORT SUM
+========================= */
+
+window.sumReport = function(){
+
+    const month =
+        document
+        .getElementById(
+            "reportMonth"
+        )
+        .value ||
+        currentMonth();
+
+
+    const selectedDriver =
+        document
+        .getElementById(
+            "reportDriver"
+        )
+        .value;
+
+
+    let data =
+        operations.filter(
+            o=>
+                String(
+                    o.date||""
+                ).startsWith(month)
+        );
+
+
+    if(selectedDriver){
+
+        data =
+            data.filter(
+                o=>
+                    o.driverId===
+                    selectedDriver
+            );
+
+    }
+
+
+    const total =
+        data.reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    alert(
+
+        "🧮 ملخص التقرير\n\n"+
+        "عدد التشغيلات: "+
+        data.length+
+        "\n\n"+
+        "إجمالي التشغيلات: "+
+        money(total)
+
     );
+
+};
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function loadSettings(){
+
+    document
+        .getElementById(
+            "settingsName"
+        )
+        .value =
+            currentUserData.name || "";
 
 }
 
 
-/* =========================================================
-   MODALS
-========================================================= */
+window.saveProfile = async function(){
 
-document.getElementById(
-    "operationModal"
-)
-.addEventListener(
-    "click",
-    function(e){
+    const name =
+        document
+        .getElementById(
+            "settingsName"
+        )
+        .value
+        .trim();
+
+
+    if(!name){
+
+        alert(
+            "اكتب الاسم"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await updateDoc(
+
+            userDoc(
+                currentUser.uid
+            ),
+
+            {
+                name:
+                    name
+            }
+
+        );
+
+
+        currentUserData.name =
+            name;
+
+
+        document
+            .getElementById(
+                "userInfo"
+            )
+            .textContent =
+                name;
+
+
+        alert(
+            "تم حفظ البيانات"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر حفظ البيانات"
+        );
+
+    }
+
+};
+
+
+window.sendPasswordResetForCurrentUser =
+async function(){
+
+    try{
+
+        await sendPasswordResetEmail(
+            auth,
+            currentUser.email
+        );
+
+
+        alert(
+            "تم إرسال رابط تغيير كلمة المرور إلى بريدك"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر إرسال الرابط"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   ADMIN
+========================= */
+
+let adminUsers = [];
+
+
+function isAdmin(){
+
+    return String(
+        currentUserData?.role || ""
+    ).toLowerCase() === "admin";
+
+}
+
+
+window.showCreateUserForm = function(){
+
+    if(!isAdmin())
+        return alert("غير مسموح");
+
+    document
+        .getElementById(
+            "createUserBox"
+        )
+        .classList
+        .remove("hidden");
+
+};
+
+
+window.hideCreateUserForm = function(){
+
+    const box =
+        document.getElementById(
+            "createUserBox"
+        );
+
+    if(box)
+        box.classList.add("hidden");
+
+};
+
+
+/* =========================
+   GET ALL USERS
+   مباشر من Firestore
+========================= */
+
+window.loadAdminUsers = async function(){
+
+    if(!isAdmin())
+        return;
+
+    try{
+
+        const snap =
+            await getDocs(
+                collection(
+                    db,
+                    "users"
+                )
+            );
+
+
+        adminUsers =
+            snap.docs.map(
+                docSnap => ({
+
+                    uid:
+                        docSnap.id,
+
+                    ...docSnap.data()
+
+                })
+            );
+
+
+        renderAdminUsers();
+
+
+    }catch(e){
+
+        console.error(
+            "ADMIN LOAD ERROR",
+            e
+        );
+
+
+        alert(
+            "تعذر تحميل المستخدمين:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+window.renderAdminUsers = function(){
+
+    const box =
+        document.getElementById(
+            "adminUsersList"
+        );
+
+
+    if(!box)
+        return;
+
+
+    const q =
+        (
+            document
+            .getElementById(
+                "adminUserSearch"
+            )
+            ?.value ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    const list =
+        adminUsers.filter(
+            u =>
+                `${u.name||""} ${u.email||""}`
+                .toLowerCase()
+                .includes(q)
+        );
+
+
+    if(!list.length){
+
+        box.innerHTML =
+            '<div class="empty">لا يوجد مستخدمين</div>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        list.map(
+            u=>{
+
+                const self =
+                    u.uid ===
+                    currentUser.uid;
+
+
+                const active =
+                    u.active !== false;
+
+
+                return `
+
+                <div class="driver-card">
+
+                    <h3>
+                        ${escapeHtml(
+                            u.name ||
+                            "بدون اسم"
+                        )}
+                    </h3>
+
+                    <p
+                        style="color:#6b7280;margin-bottom:10px">
+
+                        ${escapeHtml(
+                            u.email || ""
+                        )}
+
+                    </p>
+
+                    <p
+                        style="margin-bottom:12px">
+
+                        <strong>
+                            الصلاحية:
+                        </strong>
+
+                        ${escapeHtml(
+                            u.role ||
+                            "driver"
+                        )}
+
+                        &nbsp; | &nbsp;
+
+                        <strong>
+                            الحالة:
+                        </strong>
+
+                        ${
+                            active
+                            ?
+                            "🟢 فعال"
+                            :
+                            "🔴 متوقف"
+                        }
+
+                    </p>
+
+                    <div class="actions">
+
+                        <button
+                            class="btn btn-info"
+                            onclick="editAdminUser('${escapeAttr(u.uid)}')">
+
+                            ✏️ تعديل
+
+                        </button>
+
+                        <button
+                            class="btn btn-warning"
+                            onclick="adminChangePassword('${escapeAttr(u.uid)}')">
+
+                            🔑 كلمة المرور
+
+                        </button>
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="adminResetEmail('${escapeAttr(u.email||"")}')">
+
+                            📧 إرسال Reset
+
+                        </button>
+
+                        ${
+                            self
+                            ?
+                            ""
+                            :
+                            `<button
+                                class="btn ${active?"btn-danger":"btn-success"}"
+                                onclick="toggleAdminUser('${escapeAttr(u.uid)}',${active})">
+
+                                ${
+                                    active
+                                    ?
+                                    "⏸️ إيقاف"
+                                    :
+                                    "▶️ تفعيل"
+                                }
+
+                            </button>`
+                        }
+
+                        ${
+                            self
+                            ?
+                            ""
+                            :
+                            `<button
+                                class="btn btn-danger"
+                                onclick="removeAdminUser('${escapeAttr(u.uid)}')">
+
+                                🗑️ حذف
+
+                            </button>`
+                        }
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+};
+
+
+/* =========================
+   CREATE USER
+   باستخدام Secondary Auth
+========================= */
+
+window.createAdminUser = async function(){
+
+    if(!isAdmin())
+        return;
+
+
+    const name =
+        document
+        .getElementById(
+            "newUserName"
+        )
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById(
+            "newUserEmail"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document
+        .getElementById(
+            "newUserPassword"
+        )
+        .value;
+
+
+    const role =
+        document
+        .getElementById(
+            "newUserRole"
+        )
+        .value;
+
+
+    if(
+        !name ||
+        !email ||
+        password.length < 6
+    ){
+
+        return alert(
+            "اكتب الاسم والبريد وكلمة مرور 6 أحرف على الأقل"
+        );
+
+    }
+
+
+    try{
+
+        /*
+          إنشاء الحساب الجديد
+          على Auth ثانوي حتى لا
+          يتأثر حساب الأدمن الحالي
+        */
+
+        const credential =
+            await createUserWithEmailAndPassword(
+                secondaryAuth,
+                email,
+                password
+            );
+
+
+        const uid =
+            credential.user.uid;
+
+
+        /*
+          حفظ بروفايل المستخدم
+          في Firestore
+        */
+
+        await setDoc(
+
+            doc(
+                db,
+                "users",
+                uid
+            ),
+
+            {
+
+                name:
+                    name,
+
+                email:
+                    email,
+
+                role:
+                    role,
+
+                active:
+                    true,
+
+                createdAt:
+                    new Date()
+                    .toISOString()
+
+            }
+
+        );
+
+
+        /*
+          تسجيل خروج الحساب الجديد
+          من Auth الثانوي فقط
+        */
+
+        await signOut(
+            secondaryAuth
+        );
+
+
+        alert(
+            "تم إنشاء المستخدم بنجاح"
+        );
+
+
+        document
+            .getElementById(
+                "newUserName"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "newUserEmail"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "newUserPassword"
+            )
+            .value = "";
+
+
+        hideCreateUserForm();
+
+
+        await loadAdminUsers();
+
+
+    }catch(e){
+
+        console.error(
+            "CREATE USER ERROR:",
+            e
+        );
+
+
+        try{
+
+            await signOut(
+                secondaryAuth
+            );
+
+        }catch(_){}
+
+
+        alert(
+            "تعذر إنشاء المستخدم:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+/* =========================
+   EDIT USER
+========================= */
+
+window.editAdminUser = async function(uid){
+
+    if(!isAdmin())
+        return;
+
+
+    const u =
+        adminUsers.find(
+            x=>x.uid===uid
+        );
+
+
+    if(!u)
+        return;
+
+
+    const name =
+        prompt(
+            "الاسم الجديد:",
+            u.name || ""
+        );
+
+
+    if(name===null)
+        return;
+
+
+    const email =
+        prompt(
+            "البريد الإلكتروني الجديد:",
+            u.email || ""
+        );
+
+
+    if(email===null)
+        return;
+
+
+    const role =
+        prompt(
+            "الصلاحية: admin أو manager أو driver",
+            u.role || "driver"
+        );
+
+
+    if(role===null)
+        return;
+
+
+    const cleanRole =
+        role
+        .trim()
+        .toLowerCase();
+
+
+    if(
+        ![
+            "admin",
+            "manager",
+            "driver"
+        ].includes(cleanRole)
+    ){
+
+        return alert(
+            "الصلاحية غير صحيحة"
+        );
+
+    }
+
+
+    try{
+
+        await updateUserFn({
+
+            uid,
+
+            name:
+                name.trim(),
+
+            email:
+                email
+                .trim()
+                .toLowerCase(),
+
+            role:
+                cleanRole,
+
+            active:
+                u.active !== false
+
+        });
+
+
+        alert(
+            "تم تعديل المستخدم"
+        );
+
+
+        await loadAdminUsers();
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر تعديل المستخدم:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+/* =========================
+   CHANGE PASSWORD
+========================= */
+
+window.adminChangePassword = async function(uid){
+
+    if(!isAdmin())
+        return;
+
+
+    const p =
+        prompt(
+            "اكتب كلمة المرور الجديدة (6 أحرف على الأقل):"
+        );
+
+
+    if(p===null)
+        return;
+
+
+    if(p.length<6){
+
+        return alert(
+            "كلمة المرور يجب أن تكون 6 أحرف على الأقل"
+        );
+
+    }
+
+
+    try{
+
+        await changeUserPasswordFn({
+
+            uid,
+
+            password:
+                p
+
+        });
+
+
+        alert(
+            "تم تغيير كلمة المرور"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر تغيير كلمة المرور:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+/* =========================
+   TOGGLE USER
+========================= */
+
+window.toggleAdminUser = async function(uid,active){
+
+    if(!isAdmin())
+        return;
+
+
+    try{
+
+        await updateUserFn({
+
+            uid,
+
+            active:
+                !active
+
+        });
+
+
+        alert(
+            active
+            ?
+            "تم إيقاف الحساب"
+            :
+            "تم تفعيل الحساب"
+        );
+
+
+        await loadAdminUsers();
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر تغيير حالة الحساب:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+/* =========================
+   DELETE USER
+========================= */
+
+window.removeAdminUser = async function(uid){
+
+    if(!isAdmin())
+        return;
+
+
+    const u =
+        adminUsers.find(
+            x=>x.uid===uid
+        );
+
+
+    if(!u)
+        return;
+
+
+    if(
+        !confirm(
+            `سيتم حذف حساب ${u.email} وبياناته نهائياً. هل أنت متأكد؟`
+        )
+    )
+        return;
+
+
+    try{
+
+        await deleteUserFn({
+            uid
+        });
+
+
+        alert(
+            "تم حذف المستخدم وبياناته"
+        );
+
+
+        await loadAdminUsers();
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر حذف المستخدم:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+/* =========================
+   RESET PASSWORD EMAIL
+========================= */
+
+window.adminResetEmail = async function(email){
+
+    if(
+        !isAdmin() ||
+        !email
+    )
+        return;
+
+
+    try{
+
+        await sendPasswordResetEmail(
+            auth,
+            email
+        );
+
+
+        alert(
+            "تم إرسال رابط تغيير كلمة المرور إلى البريد"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر إرسال الرابط:\n" +
+            (
+                e.message ||
+                e.code ||
+                "خطأ"
+            )
+        );
+
+    }
+
+};
+
+
+/* =========================
+   BACKUP
+========================= */
+
+window.createBackup = async function(){
+
+    try{
+
+        await loadMyData();
+
+        await loadDrivers();
+
+
+        const backup = {
+
+            app:
+                "DriveOps",
+
+            version:
+                2,
+
+            createdAt:
+                new Date()
+                .toISOString(),
+
+            user:{
+
+                name:
+                    currentUserData.name || "",
+
+                email:
+                    currentUserData.email || "",
+
+                role:
+                    currentUserData.role ||
+                    "manager"
+
+            },
+
+            drivers:
+                drivers.map(
+                    d=>({
+
+                        id:
+                            d.id,
+
+                        name:
+                            d.name || "",
+
+                        createdAt:
+                            d.createdAt || ""
+
+                    })
+                ),
+
+            operations:
+                operations,
+
+            expenses:
+                expenses
+
+        };
+
+
+        const json =
+            JSON.stringify(
+                backup,
+                null,
+                2
+            );
+
+
+        const blob =
+            new Blob(
+                [json],
+                {
+                    type:
+                        "application/json"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const a =
+            document.createElement(
+                "a"
+            );
+
+
+        const date =
+            new Date()
+            .toISOString()
+            .slice(0,10);
+
+
+        a.href =
+            url;
+
+
+        a.download =
+            `DriveOps-Backup-${date}.json`;
+
+
+        document
+            .body
+            .appendChild(a);
+
+
+        a.click();
+
+        a.remove();
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+
+        alert(
+            "تم إنشاء النسخة الاحتياطية بنجاح"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر إنشاء النسخة الاحتياطية"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   RESTORE BACKUP
+========================= */
+
+window.restoreBackup = async function(){
+
+    const file =
+        document
+        .getElementById(
+            "backupFile"
+        )
+        .files[0];
+
+
+    if(!file){
+
+        alert(
+            "اختار ملف النسخة الاحتياطية أولًا"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+
+            "تنبيه:\n\n"+
+            "سيتم إضافة البيانات الموجودة في النسخة إلى حسابك الحالي.\n"+
+            "لن يتم حذف بيانات Firebase الحالية.\n\n"+
+            "هل تريد المتابعة؟"
+
+        )
+    )
+        return;
+
+
+    try{
+
+        const text =
+            await file.text();
+
+
+        const backup =
+            JSON.parse(text);
+
 
         if(
-            e.target === this
+
+            backup.app !== "DriveOps"
+
+            ||
+
+            !Array.isArray(
+                backup.drivers
+            )
+
+            ||
+
+            !Array.isArray(
+                backup.operations
+            )
+
+            ||
+
+            !Array.isArray(
+                backup.expenses
+            )
+
         ){
 
-            closeOperationModal();
+            alert(
+                "ملف النسخة الاحتياطية غير صحيح"
+            );
+
+            return;
 
         }
 
-    }
-);
+
+        let batch =
+            writeBatch(db);
 
 
-document.getElementById(
-    "expenseModal"
-)
-.addEventListener(
-    "click",
-    function(e){
+        let count =
+            0;
 
-        if(
-            e.target === this
+
+        for(
+            const d
+            of backup.drivers
         ){
 
-            closeExpenseModal();
+            const driverId =
+                d.id ||
+                crypto.randomUUID();
+
+
+            const ref =
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "drivers",
+                    driverId
+                );
+
+
+            batch.set(
+
+                ref,
+
+                {
+
+                    name:
+                        d.name || "",
+
+                    createdAt:
+                        d.createdAt ||
+                        new Date()
+                        .toISOString()
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+
+            count++;
+
+
+            if(count>=450){
+
+                await batch.commit();
+
+                batch =
+                    writeBatch(db);
+
+                count =
+                    0;
+
+            }
 
         }
 
-    }
-);
 
-
-/* =========================================================
-   ESC
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(
-            e.key === "Escape"
+        for(
+            const o
+            of backup.operations
         ){
 
-            closeOperationModal();
+            const operationId =
+                o.id ||
+                crypto.randomUUID();
 
-            closeExpenseModal();
+
+            const ref =
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "operations",
+                    operationId
+                );
+
+
+            const data =
+                {...o};
+
+
+            delete data.id;
+
+
+            batch.set(
+
+                ref,
+
+                data,
+
+                {
+                    merge:true
+                }
+
+            );
+
+
+            count++;
+
+
+            if(count>=450){
+
+                await batch.commit();
+
+                batch =
+                    writeBatch(db);
+
+                count =
+                    0;
+
+            }
 
         }
 
+
+        for(
+            const e
+            of backup.expenses
+        ){
+
+            const expenseId =
+                e.id ||
+                crypto.randomUUID();
+
+
+            const ref =
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid,
+                    "expenses",
+                    expenseId
+                );
+
+
+            const data =
+                {...e};
+
+
+            delete data.id;
+
+
+            batch.set(
+
+                ref,
+
+                data,
+
+                {
+                    merge:true
+                }
+
+            );
+
+
+            count++;
+
+
+            if(count>=450){
+
+                await batch.commit();
+
+                batch =
+                    writeBatch(db);
+
+                count =
+                    0;
+
+            }
+
+        }
+
+
+        if(count>0)
+            await batch.commit();
+
+
+        await loadDrivers();
+
+        await loadMyData();
+
+
+        alert(
+            "تم استرجاع النسخة الاحتياطية بنجاح"
+        );
+
+
+        document
+            .getElementById(
+                "backupFile"
+            )
+            .value = "";
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر استرجاع النسخة الاحتياطية. تأكد أن الملف صحيح."
+        );
+
     }
-);
+
+};
 
 
-/* =========================================================
-   GLOBAL FUNCTIONS
-========================================================= */
+/* =========================
+   SUM VISIBLE COLUMNS
+========================= */
 
-Object.assign(
-    window,
-    {
+window.sumVisibleColumns = function(){
 
-        login,
+    const search =
+        document
+        .getElementById(
+            "operationSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
-        logout,
 
-        showPage,
+    const from =
+        document
+        .getElementById(
+            "operationFrom"
+        )
+        .value;
 
-        toggleSidebar,
 
-        openOperationModal,
+    const to =
+        document
+        .getElementById(
+            "operationTo"
+        )
+        .value;
 
-        closeOperationModal,
 
-        saveOperation,
+    const payment =
+        document
+        .getElementById(
+            "operationPaymentFilter"
+        )
+        .value;
 
-        deleteOperation,
 
-        openExpenseModal,
+    const data =
+        operations.filter(o=>{
 
-        closeExpenseModal,
+            const text =
+                `${o.driverName||""}
+                 ${o.client||""}
+                 ${o.from||""}
+                 ${o.to||""}`
+                .toLowerCase();
 
-        saveExpense,
 
-        deleteExpense,
+            if(
+                search &&
+                !text.includes(search)
+            )
+                return false;
 
-        saveAccountSettings,
 
-        saveCarSettings,
+            if(
+                from &&
+                String(o.date||"") < from
+            )
+                return false;
 
-        forgotPassword,
 
-        downloadBackup,
+            if(
+                to &&
+                String(o.date||"") > to
+            )
+                return false;
 
-        restoreBackup,
 
-        sendVerificationEmailNow,
+            if(
+                payment &&
+                o.payment !== payment
+            )
+                return false;
 
-        clearAllData,
 
-        renderOperations,
+            return true;
 
-        renderReports
+        });
+
+
+    const totalPrice =
+        data.reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    const paid =
+        data
+        .filter(
+            o=>o.payment==="paid"
+        )
+        .reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    const unpaid =
+        data
+        .filter(
+            o=>o.payment==="unpaid"
+        )
+        .reduce(
+            (sum,o)=>
+                sum+
+                Number(o.price||0),
+            0
+        );
+
+
+    const summary =
+        document
+        .getElementById(
+            "operationsSummary"
+        );
+
+
+    summary.classList.remove(
+        "hidden"
+    );
+
+
+    summary.innerHTML = `
+
+        <h3
+            style="margin-bottom:15px">
+
+            🧮 إجمالي الأعمدة الظاهرة
+
+        </h3>
+
+
+        <div class="grid-4">
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    عدد التشغيلات
+                </div>
+
+                <div
+                    class="card-value blue">
+
+                    ${data.length}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    إجمالي السعر
+                </div>
+
+                <div
+                    class="card-value green">
+
+                    ${money(totalPrice)}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    إجمالي المدفوع
+                </div>
+
+                <div
+                    class="card-value green">
+
+                    ${money(paid)}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    إجمالي غير المدفوع
+                </div>
+
+                <div
+                    class="card-value red">
+
+                    ${money(unpaid)}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+};
+
+
+/* =========================
+   REFRESH
+========================= */
+
+window.refreshData = async function(){
+
+    try{
+
+        await loadDrivers();
+
+        await loadMyData();
+
+        renderOperations();
+
+        renderExpenses();
+
+        renderDashboard();
+
+
+        alert(
+            "🔄 تم تحديث البيانات بنجاح"
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+        alert(
+            "تعذر تحديث البيانات"
+        );
 
     }
-);
+
+};
+
+
+/* =========================
+   DELETE ALL DATA
+========================= */
+
+window.deleteAllData = async function(){
+
+    const firstConfirm =
+        confirm(
+
+            "⚠️ تحذير مهم جداً\n\n"+
+
+            "سيتم حذف جميع بيانات DriveOps الحالية:\n\n"+
+
+            "• كل التشغيلات\n"+
+
+            "• كل المصروفات\n"+
+
+            "• كل أسماء السواقين\n\n"+
+
+            "حساب تسجيل الدخول نفسه لن يتم حذفه.\n\n"+
+
+            "هل أنت متأكد من أنك تريد المتابعة؟"
+
+        );
+
+
+    if(!firstConfirm)
+        return;
+
+
+    const confirmation =
+        prompt(
+
+            "للتأكيد النهائي اكتب كلمة:\n\n"+
+            "DELETE\n\n"+
+            "ويجب كتابتها بالإنجليزية وبنفس الحروف."
+
+        );
+
+
+    if(
+        confirmation !==
+        "DELETE"
+    ){
+
+        alert(
+
+            "تم إلغاء الحذف.\n\n"+
+            "لم يتم حذف أي بيانات."
+
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        let totalDeleted =
+            0;
+
+
+        const operationsSnap =
+            await getDocs(
+                operationsRef()
+            );
+
+
+        let batch =
+            writeBatch(db);
+
+
+        let count =
+            0;
+
+
+        for(
+            const d
+            of operationsSnap.docs
+        ){
+
+            batch.delete(
+                d.ref
+            );
+
+
+            count++;
+
+            totalDeleted++;
+
+
+            if(count>=400){
+
+                await batch.commit();
+
+                batch =
+                    writeBatch(db);
+
+                count =
+                    0;
+
+            }
+
+        }
+
+
+        if(count>0){
+
+            await batch.commit();
+
+        }
+
+
+        const expensesSnap =
+            await getDocs(
+                expensesRef()
+            );
+
+
+        batch =
+            writeBatch(db);
+
+
+        count =
+            0;
+
+
+        for(
+            const d
+            of expensesSnap.docs
+        ){
+
+            batch.delete(
+                d.ref
+            );
+
+
+            count++;
+
+            totalDeleted++;
+
+
+            if(count>=400){
+
+                await batch.commit();
+
+                batch =
+                    writeBatch(db);
+
+                count =
+                    0;
+
+            }
+
+        }
+
+
+        if(count>0){
+
+            await batch.commit();
+
+        }
+
+
+        const driversSnap =
+            await getDocs(
+                driversRef()
+            );
+
+
+        batch =
+            writeBatch(db);
+
+
+        count =
+            0;
+
+
+        for(
+            const d
+            of driversSnap.docs
+        ){
+
+            batch.delete(
+                d.ref
+            );
+
+
+            count++;
+
+            totalDeleted++;
+
+
+            if(count>=400){
+
+                await batch.commit();
+
+                batch =
+                    writeBatch(db);
+
+                count =
+                    0;
+
+            }
+
+        }
+
+
+        if(count>0){
+
+            await batch.commit();
+
+        }
+
+
+        operations = [];
+
+        expenses = [];
+
+        drivers = [];
+
+
+        renderDashboard();
+
+        renderOperations();
+
+        renderExpenses();
+
+        renderDrivers();
+
+
+        const summary =
+            document
+            .getElementById(
+                "operationsSummary"
+            );
+
+
+        if(summary){
+
+            summary
+                .classList
+                .add("hidden");
+
+            summary.innerHTML =
+                "";
+
+        }
+
+
+        alert(
+
+            "✅ تم حذف جميع البيانات بنجاح.\n\n"+
+
+            "عدد المستندات المحذوفة: "+
+            totalDeleted+
+
+            "\n\n"+
+            "حساب تسجيل الدخول ما زال موجودًا."
+
+        );
+
+
+    }catch(e){
+
+        console.error(e);
+
+
+        alert(
+
+            "❌ حدث خطأ أثناء حذف البيانات.\n\n"+
+            "تأكد من صلاحيات Firestore."
+
+        );
+
+    }
+
+};
+
+
+/* =========================
+   SECURITY HELPERS
+========================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+function escapeAttr(value){
+
+    return escapeHtml(value)
+        .replaceAll(
+            "`",
+            "&#096;"
+        );
+
+}
+
 
 </script>
 
 </body>
 </html>
+```

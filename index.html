@@ -876,6 +876,14 @@ tr:hover td{
             <span>التقارير</span>
         </button>
 
+        <button
+            class="nav-item"
+            onclick="showPage('drivers',this)"
+        >
+            👤
+            <span>السواقين</span>
+        </button>
+
         <div class="nav-title">
             النظام
         </div>
@@ -958,6 +966,13 @@ tr:hover td{
 
                 </div>
 
+
+                <div class="panel" style="margin-bottom:18px">
+                    <div class="filters" style="margin-bottom:0">
+                        <div style="font-weight:800;display:flex;align-items:center;gap:8px">📅 شهر لوحة التحكم</div>
+                        <input id="dashboardMonth" type="month" class="form-control" onchange="renderDashboard()">
+                    </div>
+                </div>
 
                 <div class="stats-grid">
 
@@ -1164,6 +1179,14 @@ tr:hover td{
                         >
 
                         <select
+                            id="operationDriver"
+                            class="form-control"
+                            onchange="renderOperations()"
+                        >
+                            <option value="">كل السواقين</option>
+                        </select>
+
+                        <select
                             id="operationStatus"
                             class="form-control"
                             onchange="renderOperations()"
@@ -1189,6 +1212,7 @@ tr:hover td{
                                     <th>من</th>
                                     <th>إلى</th>
                                     <th>نوع التشغيل</th>
+                                    <th>السواق</th>
                                     <th>السعر</th>
                                     <th>الحالة</th>
                                     <th>إجراءات</th>
@@ -1290,6 +1314,14 @@ tr:hover td{
                             onchange="renderReports()"
                         >
 
+                        <select
+                            id="reportDriver"
+                            class="form-control"
+                            onchange="renderReports()"
+                        >
+                            <option value="">كل السواقين</option>
+                        </select>
+
                     </div>
 
 
@@ -1346,6 +1378,7 @@ tr:hover td{
                                     <th>التاريخ</th>
                                     <th>العميل</th>
                                     <th>الطريق</th>
+                                    <th>السواق</th>
                                     <th>السعر</th>
                                     <th>الحالة</th>
                                 </tr>
@@ -1358,6 +1391,61 @@ tr:hover td{
 
                     </div>
 
+                </div>
+
+            </section>
+
+
+            <section
+                id="drivers"
+                class="page"
+            >
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <div class="panel-title">إدارة السواقين</div>
+                            <div style="color:#94a3b8;font-size:12px;margin-top:4px">أضف السواقين وسيظهروا تلقائيًا عند تسجيل أي تشغيلة.</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="openDriverModal()">+ إضافة سواق</button>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>اسم السواق</th>
+                                    <th>رقم الهاتف</th>
+                                    <th>ملاحظات</th>
+                                    <th>إجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="driversTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <strong>Made with ❤️ by Engineer Thomas Malak</strong>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title" style="margin-bottom:18px">تقرير شهري لكل سواق</div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>السواق</th>
+                                    <th>عدد التشغيلات</th>
+                                    <th>الإجمالي</th>
+                                    <th>المدفوع</th>
+                                    <th>الآجل</th>
+                                </tr>
+                            </thead>
+                            <tbody id="driverMonthlySummary"></tbody>
+                        </table>
+                    </div>
                 </div>
 
             </section>
@@ -1651,6 +1739,20 @@ tr:hover td{
 
             <div class="form-group">
 
+                <label>السواق</label>
+
+                <select
+                    id="operationDriverSelect"
+                    class="form-control"
+                >
+                    <option value="">اختر السواق</option>
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
                 <label>السعر</label>
 
                 <input
@@ -1717,6 +1819,41 @@ tr:hover td{
 
     </div>
 
+</div>
+
+
+<div
+    class="modal"
+    id="driverModal"
+>
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="panel-title"><span id="driverModalTitle">إضافة سواق جديد</span></div>
+            <button class="close" onclick="closeDriverModal()">×</button>
+        </div>
+
+        <input type="hidden" id="driverId">
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>اسم السواق</label>
+                <input id="driverName" class="form-control" placeholder="اسم السواق">
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input id="driverPhone" class="form-control" placeholder="رقم الهاتف">
+            </div>
+            <div class="form-group full">
+                <label>ملاحظات</label>
+                <textarea id="driverNotes" class="form-control" rows="3" placeholder="أي ملاحظات..."></textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveDriver()">حفظ السواق</button>
+            <button class="btn btn-secondary" onclick="closeDriverModal()">إلغاء</button>
+        </div>
+    </div>
 </div>
 
 
@@ -1892,6 +2029,7 @@ const db = getFirestore(app);
 
 let operations = [];
 let expenses = [];
+let drivers = [];
 
 let account = {
     email:"",
@@ -1917,17 +2055,12 @@ document.addEventListener(
 
         setTodayDefaults();
 
-        const reportMonth =
-            document.getElementById("reportMonth");
+        const currentMonth = new Date().toISOString().slice(0,7);
+        const reportMonth = document.getElementById("reportMonth");
+        const dashboardMonth = document.getElementById("dashboardMonth");
 
-        if(reportMonth){
-
-            reportMonth.value =
-                new Date()
-                .toISOString()
-                .slice(0,7);
-
-        }
+        if(reportMonth) reportMonth.value = currentMonth;
+        if(dashboardMonth) dashboardMonth.value = currentMonth;
 
     }
 );
@@ -2522,6 +2655,13 @@ async function loadUserData(){
     );
 
 
+    const driversSnap = await getDocs(
+        collection(db,"users",currentUser.uid,"drivers")
+    );
+
+    drivers = driversSnap.docs.map(d=>({id:d.id,...d.data()}));
+    drivers.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),"ar"));
+
     await migrateOldLocalDataIfNeeded();
 
 }
@@ -2802,6 +2942,8 @@ function showPage(
 
         reports:"التقارير",
 
+        drivers:"السواقين",
+
         settings:"الإعدادات"
 
     };
@@ -2982,6 +3124,8 @@ function openOperationModal(
         ).value =
             op.notes || "";
 
+        document.getElementById("operationDriverSelect").value = op.driverId || "";
+
     }else{
 
         resetOperationForm();
@@ -3048,6 +3192,8 @@ function resetOperationForm(){
     document.getElementById(
         "operationNotes"
     ).value="";
+
+    document.getElementById("operationDriverSelect").value="";
 
 
     document.getElementById(
@@ -3122,6 +3268,9 @@ async function saveOperation(){
             "operationNotes"
         ).value.trim();
 
+    const driverId = document.getElementById("operationDriverSelect")?.value || "";
+    const driverName = driverId ? getDriverName(driverId) : "";
+
 
     if(
         !date ||
@@ -3167,6 +3316,9 @@ async function saveOperation(){
                 payment,
 
                 notes,
+
+                driverId,
+                driverName,
 
                 updatedAt:
                     new Date().toISOString()
@@ -3233,6 +3385,9 @@ async function saveOperation(){
                 payment,
 
                 notes,
+
+                driverId,
+                driverName,
 
                 createdAt:
                     new Date().toISOString()
@@ -3334,13 +3489,15 @@ function renderOperations(){
             "operationStatus"
         )?.value || "";
 
+    const driverFilter = document.getElementById("operationDriver")?.value || "";
+
 
     const filtered =
         operations.filter(
             op=>{
 
                 const text =
-                    `${op.client} ${op.from} ${op.to} ${op.type} ${op.notes || ""}`
+                    `${op.client} ${op.from} ${op.to} ${op.type} ${op.notes || ""} ${op.driverName || getDriverName(op.driverId) || ""}`
                     .toLowerCase();
 
 
@@ -3383,6 +3540,15 @@ function renderOperations(){
 
                 }
 
+                if(
+                    driverFilter &&
+                    op.driverId !== driverFilter
+                ){
+
+                    return false;
+
+                }
+
 
                 return true;
 
@@ -3398,7 +3564,7 @@ function renderOperations(){
 
             <tr>
 
-                <td colspan="9">
+                <td colspan="10">
 
                     <div class="empty">
 
@@ -3449,6 +3615,10 @@ function renderOperations(){
 
                 <td>
                     ${escapeHTML(op.type)}
+                </td>
+
+                <td>
+                    ${escapeHTML(op.driverName || getDriverName(op.driverId) || "-")}
                 </td>
 
                 <td>
@@ -3913,143 +4083,38 @@ async function deleteExpense(id){
 
 function renderDashboard(){
 
-    const totalIncome =
-        operations.reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
+    const month = document.getElementById("dashboardMonth")?.value || new Date().toISOString().slice(0,7);
 
+    const monthOps = operations.filter(op => !month || String(op.date || "").startsWith(month));
+    const monthExps = expenses.filter(e => !month || String(e.date || "").startsWith(month));
 
-    const totalExpenses =
-        expenses.reduce(
-            (sum,e)=>
-                sum +
-                Number(
-                    e.amount || 0
-                ),
-            0
-        );
+    const totalIncome = monthOps.reduce((sum,op)=>sum + Number(op.price || 0),0);
+    const totalExpenses = monthExps.reduce((sum,e)=>sum + Number(e.amount || 0),0);
+    const profit = totalIncome - totalExpenses;
 
+    document.getElementById("statOperations").textContent = monthOps.length;
+    document.getElementById("statIncome").textContent = money(totalIncome);
+    document.getElementById("statExpenses").textContent = money(totalExpenses);
+    document.getElementById("statProfit").textContent = money(profit);
 
-    const profit =
-        totalIncome -
-        totalExpenses;
+    const recent = document.getElementById("recentOperations");
+    const list = monthOps.slice(0,7);
 
-
-    document.getElementById(
-        "statOperations"
-    ).textContent =
-        operations.length;
-
-
-    document.getElementById(
-        "statIncome"
-    ).textContent =
-        money(totalIncome);
-
-
-    document.getElementById(
-        "statExpenses"
-    ).textContent =
-        money(totalExpenses);
-
-
-    document.getElementById(
-        "statProfit"
-    ).textContent =
-        money(profit);
-
-
-    const recent =
-        document.getElementById(
-            "recentOperations"
-        );
-
-
-    const list =
-        operations.slice(
-            0,
-            7
-        );
-
-
-    if(
-        list.length === 0
-    ){
-
-        recent.innerHTML=`
-
-            <tr>
-
-                <td colspan="6">
-
-                    <div class="empty">
-                        لا توجد تشغيلات حتى الآن
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
+    if(list.length === 0){
+        recent.innerHTML=`<tr><td colspan="6"><div class="empty"><div class="empty-icon">🚗</div>لا توجد تشغيلات في الشهر المحدد</div></td></tr>`;
         return;
-
     }
 
-
-    recent.innerHTML =
-        list.map(
-            op=>`
-
+    recent.innerHTML = list.map(op=>`
         <tr>
-
-            <td>
-                ${formatDate(op.date)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.client)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.from)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.to)}
-            </td>
-
-            <td>
-                <strong>
-                    ${money(op.price)}
-                </strong>
-            </td>
-
-            <td>
-
-                ${
-                    op.payment==="paid"
-
-                    ? `<span class="badge badge-success">
-                        مدفوع
-                       </span>`
-
-                    : `<span class="badge badge-warning">
-                        آجل
-                       </span>`
-                }
-
-            </td>
-
+            <td>${formatDate(op.date)}</td>
+            <td>${escapeHTML(op.client)}</td>
+            <td>${escapeHTML(op.from)}</td>
+            <td>${escapeHTML(op.to)}</td>
+            <td><strong>${money(op.price)}</strong></td>
+            <td>${op.payment==="paid" ? `<span class="badge badge-success">مدفوع</span>` : `<span class="badge badge-warning">آجل</span>`}</td>
         </tr>
-
-    `
-        ).join("");
+    `).join("");
 
 }
 
@@ -4060,217 +4125,51 @@ function renderDashboard(){
 
 function renderReports(){
 
-    const month =
-        document.getElementById(
-            "reportMonth"
-        )?.value || "";
+    const month = document.getElementById("reportMonth")?.value || "";
+    const driverId = document.getElementById("reportDriver")?.value || "";
 
+    let ops = operations.filter(op => (!month || String(op.date || "").startsWith(month)) && (!driverId || op.driverId === driverId));
+    let exps = expenses.filter(e => !month || String(e.date || "").startsWith(month));
 
-    let ops =
-        operations;
+    const income = ops.reduce((sum,op)=>sum + Number(op.price || 0),0);
+    const exp = exps.reduce((sum,e)=>sum + Number(e.amount || 0),0);
+    const paid = ops.filter(op=>op.payment === "paid").reduce((sum,op)=>sum + Number(op.price || 0),0);
+    const unpaid = ops.filter(op=>op.payment === "unpaid").reduce((sum,op)=>sum + Number(op.price || 0),0);
 
+    document.getElementById("reportCount").textContent = ops.length;
+    document.getElementById("reportIncome").textContent = money(income);
+    document.getElementById("reportExpenses").textContent = money(exp);
+    document.getElementById("reportPaid").textContent = money(paid);
+    document.getElementById("reportUnpaid").textContent = money(unpaid);
+    document.getElementById("reportProfit").textContent = money(income-exp);
 
-    let exps =
-        expenses;
-
-
-    if(month){
-
-        ops =
-            operations.filter(
-                op=>
-                    op.date.startsWith(
-                        month
-                    )
-            );
-
-
-        exps =
-            expenses.filter(
-                e=>
-                    e.date.startsWith(
-                        month
-                    )
-            );
-
-    }
-
-
-    const income =
-        ops.reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
-
-
-    const exp =
-        exps.reduce(
-            (sum,e)=>
-                sum +
-                Number(
-                    e.amount || 0
-                ),
-            0
-        );
-
-
-    const paid =
-        ops
-        .filter(
-            op=>
-                op.payment === "paid"
-        )
-        .reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
-
-
-    const unpaid =
-        ops
-        .filter(
-            op=>
-                op.payment === "unpaid"
-        )
-        .reduce(
-            (sum,op)=>
-                sum +
-                Number(
-                    op.price || 0
-                ),
-            0
-        );
-
-
-    document.getElementById(
-        "reportCount"
-    ).textContent =
-        ops.length;
-
-
-    document.getElementById(
-        "reportIncome"
-    ).textContent =
-        money(income);
-
-
-    document.getElementById(
-        "reportExpenses"
-    ).textContent =
-        money(exp);
-
-
-    document.getElementById(
-        "reportPaid"
-    ).textContent =
-        money(paid);
-
-
-    document.getElementById(
-        "reportUnpaid"
-    ).textContent =
-        money(unpaid);
-
-
-    document.getElementById(
-        "reportProfit"
-    ).textContent =
-        money(
-            income-exp
-        );
-
-
-    const tbody =
-        document.getElementById(
-            "reportOperationsTable"
-        );
-
-
-    if(
-        ops.length === 0
-    ){
-
-        tbody.innerHTML=`
-
+    const tbody = document.getElementById("reportOperationsTable");
+    if(ops.length === 0){
+        tbody.innerHTML=`<tr><td colspan="6"><div class="empty">لا توجد بيانات في الشهر/السواق المحدد</div></td></tr>`;
+    }else{
+        tbody.innerHTML = ops.map(op=>`
             <tr>
-
-                <td colspan="5">
-
-                    <div class="empty">
-                        لا توجد بيانات في الفترة المحددة
-                    </div>
-
-                </td>
-
+                <td>${formatDate(op.date)}</td>
+                <td>${escapeHTML(op.client)}</td>
+                <td>${escapeHTML(op.from)} → ${escapeHTML(op.to)}</td>
+                <td>${escapeHTML(op.driverName || getDriverName(op.driverId) || "-")}</td>
+                <td><strong>${money(op.price)}</strong></td>
+                <td>${op.payment==="paid" ? `<span class="badge badge-success">مدفوع</span>` : `<span class="badge badge-warning">آجل</span>`}</td>
             </tr>
-
-        `;
-
-        return;
-
+        `).join("");
     }
 
-
-    tbody.innerHTML =
-        ops.map(
-            op=>`
-
-        <tr>
-
-            <td>
-                ${formatDate(op.date)}
-            </td>
-
-            <td>
-                ${escapeHTML(op.client)}
-            </td>
-
-            <td>
-
-                ${escapeHTML(op.from)}
-
-                →
-
-                ${escapeHTML(op.to)}
-
-            </td>
-
-            <td>
-
-                <strong>
-                    ${money(op.price)}
-                </strong>
-
-            </td>
-
-            <td>
-
-                ${
-                    op.payment==="paid"
-
-                    ? `<span class="badge badge-success">
-                        مدفوع
-                       </span>`
-
-                    : `<span class="badge badge-warning">
-                        آجل
-                       </span>`
-                }
-
-            </td>
-
-        </tr>
-
-    `
-        ).join("");
+    const driverSummary = document.getElementById("driverMonthlySummary");
+    if(driverSummary){
+        const rows = drivers.map(driver=>{
+            const dOps = operations.filter(op => (!month || String(op.date || "").startsWith(month)) && op.driverId === driver.id);
+            const dIncome = dOps.reduce((sum,op)=>sum + Number(op.price || 0),0);
+            const dPaid = dOps.filter(op=>op.payment === "paid").reduce((sum,op)=>sum + Number(op.price || 0),0);
+            const dUnpaid = dOps.filter(op=>op.payment === "unpaid").reduce((sum,op)=>sum + Number(op.price || 0),0);
+            return `<tr><td>${escapeHTML(driver.name)}</td><td>${dOps.length}</td><td>${money(dIncome)}</td><td>${money(dPaid)}</td><td>${money(dUnpaid)}</td></tr>`;
+        });
+        driverSummary.innerHTML = rows.length ? rows.join("") : `<tr><td colspan="5"><div class="empty">لا يوجد سواقين مضافين</div></td></tr>`;
+    }
 
 }
 
@@ -4488,7 +4387,7 @@ async function downloadBackup(){
         const payload={
             app:"DriveOps", version:1, exportedAt:new Date().toISOString(),
             account:{email:currentUser.email||"",username:account.username||currentUser.email||""},
-            car:car||{}, operations:operations||[], expenses:expenses||[]
+            car:car||{}, drivers:drivers||[], operations:operations||[], expenses:expenses||[]
         };
         const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});
         const url=URL.createObjectURL(blob); const a=document.createElement("a");
@@ -4509,6 +4408,7 @@ async function restoreBackup(event){
             car={name:String(data.car.name||""),plate:String(data.car.plate||"")};
             await setDoc(doc(db,"users",currentUser.uid),{car,updatedAt:serverTimestamp()},{merge:true});
         }
+        if(Array.isArray(data.drivers)){ for(const driver of data.drivers){ const copy={...driver}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"drivers"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); } }
         for(const op of data.operations){ const copy={...op}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"operations"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); }
         for(const expense of data.expenses){ const copy={...expense}; delete copy.id; await addDoc(collection(db,"users",currentUser.uid,"expenses"),{...copy,restoredFromBackup:true,restoredAt:serverTimestamp()}); }
         await loadUserData(); loadSettings(); refreshAll();
@@ -4689,6 +4589,119 @@ async function clearAllData(){
 
 
 /* =========================================================
+   DRIVERS
+========================================================= */
+
+function getDriverName(id){
+    if(!id) return "";
+    const driver = drivers.find(d=>d.id===id);
+    return driver?.name || "";
+}
+
+function populateDriverSelects(){
+    const selects = [
+        document.getElementById("operationDriverSelect"),
+        document.getElementById("operationDriver"),
+        document.getElementById("reportDriver")
+    ];
+
+    selects.forEach(select=>{
+        if(!select) return;
+        const current = select.value;
+        const allLabel = select.id === "operationDriverSelect" ? "اختر السواق" : "كل السواقين";
+        select.innerHTML = `<option value="">${allLabel}</option>` + drivers.map(d=>`<option value="${escapeHTML(d.id)}">${escapeHTML(d.name)}</option>`).join("");
+        if(drivers.some(d=>d.id===current)) select.value=current;
+    });
+}
+
+function renderDrivers(){
+    const tbody=document.getElementById("driversTable");
+    if(!tbody) return;
+    if(!drivers.length){
+        tbody.innerHTML=`<tr><td colspan="5"><div class="empty"><div class="empty-icon">👤</div>لا يوجد سواقين مضافين</div></td></tr>`;
+        return;
+    }
+    tbody.innerHTML=drivers.map((d,i)=>`
+        <tr>
+            <td>${i+1}</td>
+            <td><strong>${escapeHTML(d.name)}</strong></td>
+            <td>${escapeHTML(d.phone || "-")}</td>
+            <td>${escapeHTML(d.notes || "-")}</td>
+            <td><div class="actions">
+                <button class="btn btn-secondary" onclick="openDriverModal('${d.id}')">✏️</button>
+                <button class="btn btn-danger" onclick="deleteDriver('${d.id}')">🗑️</button>
+            </div></td>
+        </tr>
+    `).join("");
+}
+
+function openDriverModal(id=null){
+    document.getElementById("driverModal").classList.add("show");
+    document.getElementById("driverId").value="";
+    document.getElementById("driverName").value="";
+    document.getElementById("driverPhone").value="";
+    document.getElementById("driverNotes").value="";
+    document.getElementById("driverModalTitle").textContent=id ? "تعديل السواق" : "إضافة سواق جديد";
+    if(id){
+        const d=drivers.find(x=>x.id===id);
+        if(d){
+            document.getElementById("driverId").value=d.id;
+            document.getElementById("driverName").value=d.name||"";
+            document.getElementById("driverPhone").value=d.phone||"";
+            document.getElementById("driverNotes").value=d.notes||"";
+        }
+    }
+}
+
+function closeDriverModal(){ document.getElementById("driverModal").classList.remove("show"); }
+
+async function saveDriver(){
+    if(!currentUser) return;
+    const id=document.getElementById("driverId").value;
+    const name=document.getElementById("driverName").value.trim();
+    const phone=document.getElementById("driverPhone").value.trim();
+    const notes=document.getElementById("driverNotes").value.trim();
+    if(!name){ alert("من فضلك اكتب اسم السواق"); return; }
+    try{
+        const payload={name,phone,notes,updatedAt:serverTimestamp()};
+        if(id){
+            await updateDoc(doc(db,"users",currentUser.uid,"drivers",id),payload);
+            const index=drivers.findIndex(d=>d.id===id);
+            if(index!==-1) drivers[index]={...drivers[index],name,phone,notes};
+            // Keep existing operation labels in sync with the renamed driver.
+            const related=operations.filter(op=>op.driverId===id);
+            for(const op of related){
+                await updateDoc(doc(db,"users",currentUser.uid,"operations",op.id),{driverName:name,updatedAt:new Date().toISOString()});
+                op.driverName=name;
+            }
+            showToast("تم تعديل بيانات السواق ✏️");
+        }else{
+            const ref=await addDoc(collection(db,"users",currentUser.uid,"drivers"),{name,phone,notes,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+            drivers.push({id:ref.id,name,phone,notes});
+            drivers.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||""),"ar"));
+            showToast("تمت إضافة السواق بنجاح 👤");
+        }
+        closeDriverModal();
+        refreshAll();
+    }catch(error){ console.error(error); alert(friendlyFirebaseError(error)); }
+}
+
+async function deleteDriver(id){
+    if(!currentUser) return;
+    const driver=drivers.find(d=>d.id===id);
+    if(!driver) return;
+    const used=operations.some(op=>op.driverId===id);
+    if(used){ alert("لا يمكن حذف السواق لأنه مرتبط بتشغيلات موجودة. عدّل التشغيلات أولاً أو اتركه محفوظًا للتقارير القديمة."); return; }
+    if(!confirm(`هل تريد حذف السواق ${driver.name}؟`)) return;
+    try{
+        await deleteDoc(doc(db,"users",currentUser.uid,"drivers",id));
+        drivers=drivers.filter(d=>d.id!==id);
+        showToast("تم حذف السواق");
+        refreshAll();
+    }catch(error){ console.error(error); alert(friendlyFirebaseError(error)); }
+}
+
+/* =========================================================
    REFRESH
 ========================================================= */
 
@@ -4704,12 +4717,11 @@ function refreshAll(){
     }
 
 
+    populateDriverSelects();
     renderDashboard();
-
     renderOperations();
-
     renderExpenses();
-
+    renderDrivers();
     renderReports();
 
 }
@@ -4846,6 +4858,14 @@ document.getElementById(
 
 
 document.getElementById(
+    "driverModal"
+)?.addEventListener(
+    "click",
+    function(e){ if(e.target===this) closeDriverModal(); }
+);
+
+
+document.getElementById(
     "expenseModal"
 )
 .addEventListener(
@@ -4879,6 +4899,8 @@ document.addEventListener(
             closeOperationModal();
 
             closeExpenseModal();
+
+            closeDriverModal();
 
         }
 
@@ -4934,7 +4956,13 @@ Object.assign(
 
         renderOperations,
 
-        renderReports
+        renderReports,
+
+        openDriverModal,
+        closeDriverModal,
+        saveDriver,
+        deleteDriver,
+        renderDrivers
 
     }
 );
